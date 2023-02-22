@@ -454,8 +454,8 @@ extension String {
         let hexSet = CharacterSet(charactersIn: "1234567890")
         let newSet = CharacterSet(charactersIn: self)
         return hexSet.isSuperset(of: newSet)
-      }
     }
+}
 
 
 //MARK: extension ViewController
@@ -465,24 +465,24 @@ extension ViewController: UITextFieldDelegate {
         switch textField {
         case self.lettersTextField:
             //TF1
-        
-//            var textFromTF: String = lettersTextField.text ?? ""
-//            func isValid(lettersTextField: String) -> Bool {
-//                return lettersTextField.range(
-//                    of: inputDigitRegex,
-//                    options: .regularExpression
-//                ) != nil
-//                return true
-//            }
-//            var result = isValid(lettersTextField: textFromTF)
-//            print(result)
-       
             
-//            func printing() {
-//                print("herr")
-//            }
-//            printing()
-
+            //            var textFromTF: String = lettersTextField.text ?? ""
+            //            func isValid(lettersTextField: String) -> Bool {
+            //                return lettersTextField.range(
+            //                    of: inputDigitRegex,
+            //                    options: .regularExpression
+            //                ) != nil
+            //                return true
+            //            }
+            //            var result = isValid(lettersTextField: textFromTF)
+            //            print(result)
+            
+            
+            //            func printing() {
+            //                print("herr")
+            //            }
+            //            printing()
+            
             self.limitTextField.becomeFirstResponder()
             print("tf1")
         case self.limitTextField:
@@ -505,11 +505,11 @@ extension ViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == lettersTextField {
+        if textField == lettersTextField {  //TF 1
             let allowedCharacters = CharacterSet.decimalDigits.inverted
             let charSet = CharacterSet(charactersIn: string)
             return allowedCharacters.isSuperset(of: charSet)
-        } else if textField == limitTextField {
+        } else if textField == limitTextField { //TF2
             let currentText = textField.text ?? ""
             guard let stringRange = Range(range, in: currentText) else { return false }
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
@@ -522,32 +522,75 @@ extension ViewController: UITextFieldDelegate {
                 charactersCounter.textColor = .red
                 return false
             }
-        } else if textField == maskTF {
-            asngasgnasg
-        } else if textField == linkTextField {
-            isValidLink()
-            sajgasknagshsa
+        } else if textField == characterTextField {  //TF3 - mask
+            print("tf3")
+//            guard let text = textField.text as NSString? else { return true }
+//            let newText = text.replacingCharacters(in: range, with: string)
+//
+//            let maskTextField = textField as! JMMaskTextField
+//            guard let unmaskedText = maskTextField.stringMask?.unmask(string: newText) else { return true }
+//
+//            if unmaskedText.count >= 11 {
+//                maskTextField.maskString = "(00) 0 0000-0000"
+//            } else {
+//                maskTextField.maskString = "(00) 0000-0000"
+//            }
+            
+            return true
+        } else if textField == linkTextField {  //TF4 - link
+            print("tf4")
+            //            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+            //                        print("didEndEditing")
+            //
+            //                        //        if textField == linkTextField {
+            //                        let inputLink: String = linkTextField.text ?? ""
+            //                        print("\(inputLink)")
+            //
+            //                        let delay : Double = 5.0    // 5 seconds here
+            //                        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            //
+            //                            func open(string: String){
+            //                                if let url = URL(string: inputLink) {
+            //                                    UIApplication.shared.open(url)
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //        }
+            //        return true
+        }  else if textField == passwordTextField {    //TF 5 - password
+            print("final")
+            //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+            //                    print("didEndEditing")
+            //
+            //                    let inputPassword: String = passwordTextField.text ?? ""
+            //
+            //                    print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
+            //                }
+            
         }
         return true
     }
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            self.switchBasedNextTextField(textField)
-            return true
-        }
 
 
-    //        textfield 1  DONE
-  
+
+
+func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.switchBasedNextTextField(textField)
+    return true
+}
+
+
+//        textfield 1  DONE
+
 //            func textField(_ textField: UITextField,
 //                           shouldChangeCharactersIn range: NSRange,
 //                           replacementString string: String) -> Bool {
 //                return (string.containsValidCharacter)
 //            }
 
-    
-    //    textfield 2  DONE
+
+//    textfield 2  DONE
 //            func textField(_ limitTextField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //                let currentText = limitTextField.text ?? ""
 //                guard let stringRange = Range(range, in: currentText) else { return false }
@@ -557,9 +600,9 @@ extension ViewController: UITextFieldDelegate {
 //                charactersCounter.text = "\(charCounter)/10"
 //                return updatedText.count < 10
 //            }
-    
-    
-    //    textfield 3 sample DONE
+
+
+//    textfield 3 sample DONE
 //                    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 //                        print("didEndEditing")
 //
@@ -573,9 +616,9 @@ extension ViewController: UITextFieldDelegate {
 //
 //                        print("Entered text -  \(isValidText(inputText: inputText))")
 //                    }
-    
-    
-    //  4 field 4  LINK DONE  TODO: сделать удобную клавиатуру с вводом текста
+
+
+//  4 field 4  LINK DONE  TODO: сделать удобную клавиатуру с вводом текста
 //                override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 //                    print("didEndEditing")
 //
@@ -593,9 +636,9 @@ extension ViewController: UITextFieldDelegate {
 //                        }
 //                    }
 //                }
-    
-    //  5 field 5  PASSWORD
-    
+
+//  5 field 5  PASSWORD
+
 //            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 //                print("didEndEditing")
 //
@@ -603,55 +646,55 @@ extension ViewController: UITextFieldDelegate {
 //
 //                print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
 //            }
-    
-    
-    //constants
-    enum Constants {
-        enum LabelsSettings {
-            static let lettersTextViewCornerRadius: CGFloat = 10
-        }
-        enum LabelsFonts {
-            static let mainLabelFont = UIFont(name: "Rubik", size: 34)
-            static let smallLabelFont = UIFont(name: "Rubik", size: 13)
-        }
-        enum LabelsTexts {
-            static let mainTitleLabeText = "Text Fields"
-            static let noDigitLabelText = "NO digit field"
-            static let inputLimitLabelText = "Input limit"
-            static let onlyCharectersLabelText = "Only characters"
-            static let linkLabelText = "Link"
-            static let validationLabelText = "Validation rules"
-            static let validationRulesLabelText = "Min length 8 characters.\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
-            static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
-            static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
-        }
-        enum LabelsBackgroundColors {
-            static let labelBackgoundColors = UIColor.white
-        }
-        enum TextFields {
-            static let lettersTextFieldPlaceholderText = "Type here"
-            static let onlyCharectersLabelPlaceholderText = "wwwww-ddddd"
-            static let linkTextFieldPlaceholderText = "www.example.com"
-            static let passwordTextFieldPlaceholderText = "Password"
-            
-            static let textFieldFont = UIFont(name: "Rubik", size: 17)
-            static let textFieldTextColor = UIColor(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
-            static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
-            static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
-        }
-    }
 
-    
-    //MARK: keyboard
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.activeTextField = textField
+
+//constants
+enum Constants {
+    enum LabelsSettings {
+        static let lettersTextViewCornerRadius: CGFloat = 10
     }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.activeTextField = nil
+    enum LabelsFonts {
+        static let mainLabelFont = UIFont(name: "Rubik", size: 34)
+        static let smallLabelFont = UIFont(name: "Rubik", size: 13)
     }
- 
-    
-    // MARK: Extension String
- 
+    enum LabelsTexts {
+        static let mainTitleLabeText = "Text Fields"
+        static let noDigitLabelText = "NO digit field"
+        static let inputLimitLabelText = "Input limit"
+        static let onlyCharectersLabelText = "Only characters"
+        static let linkLabelText = "Link"
+        static let validationLabelText = "Validation rules"
+        static let validationRulesLabelText = "Min length 8 characters.\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
+        static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
+        static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
+    }
+    enum LabelsBackgroundColors {
+        static let labelBackgoundColors = UIColor.white
+    }
+    enum TextFields {
+        static let lettersTextFieldPlaceholderText = "Type here"
+        static let onlyCharectersLabelPlaceholderText = "wwwww-ddddd"
+        static let linkTextFieldPlaceholderText = "www.example.com"
+        static let passwordTextFieldPlaceholderText = "Password"
+        
+        static let textFieldFont = UIFont(name: "Rubik", size: 17)
+        static let textFieldTextColor = UIColor(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
+        static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
+        static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
+    }
+}
+
+
+//MARK: keyboard
+
+func textFieldDidBeginEditing(_ textField: UITextField) {
+    self.activeTextField = textField
+}
+func textFieldDidEndEditing(_ textField: UITextField) {
+    self.activeTextField = nil
+}
+
+
+// MARK: Extension String
+
 }
