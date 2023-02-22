@@ -504,7 +504,32 @@ extension ViewController: UITextFieldDelegate {
         }
     }
     
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == lettersTextField {
+            let allowedCharacters = CharacterSet.decimalDigits.inverted
+            let charSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: charSet)
+        } else if textField == limitTextField {
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return false }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+            let lengthToAdd = updatedText.count
+            charactersCounter.text = "\(10 - lengthToAdd)/10"
+            if lengthToAdd <= 10 {
+                charactersCounter.textColor = .black
+                return true
+            } else {
+                charactersCounter.textColor = .red
+                return false
+            }
+        } else if textField == maskTF {
+            asngasgnasg
+        } else if textField == linkTextField {
+            isValidLink()
+            sajgasknagshsa
+        }
+        return true
+    }
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -630,6 +655,3 @@ extension ViewController: UITextFieldDelegate {
     // MARK: Extension String
  
 }
-
-
-
