@@ -1,0 +1,6 @@
+framework module Pods_V2_textFeilds_var_2_0 {
+  umbrella header "Pods-V2 textFeilds var 2.0-umbrella.h"
+
+  export *
+  module * { export * }
+}
