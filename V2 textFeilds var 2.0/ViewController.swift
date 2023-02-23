@@ -146,13 +146,18 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
         characterTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
         return characterTextView
     }()
-    let characterTextField: UITextField = {
-        let characterTextField = UITextField()
-        characterTextField.backgroundColor = Constants.TextFields.textFieldBackgroundColor
-        characterTextField.placeholder = Constants.TextFields.onlyCharectersLabelPlaceholderText
-        characterTextField.textColor = Constants.TextFields.textFieldTextColor
-        characterTextField.font = Constants.TextFields.textFieldFont
-        return characterTextField
+    let characterTextField: JMMaskTextField = {
+    let characterTextField = JMMaskTextField(frame:CGRect.zero)
+    characterTextField.maskString = "AAAAA-00000"
+    characterTextField.placeholder = "wwwww-ddddd"
+    return characterTextField
+//    let characterTextField: UITextField = {
+//        let characterTextField = UITextField()
+//        characterTextField.backgroundColor = Constants.TextFields.textFieldBackgroundColor
+//        characterTextField.placeholder = Constants.TextFields.onlyCharectersLabelPlaceholderText
+//        characterTextField.textColor = Constants.TextFields.textFieldTextColor
+//        characterTextField.font = Constants.TextFields.textFieldFont
+//        return characterTextField
     }()
     
     //MARK:  4 field 4  LINK
@@ -385,24 +390,24 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
             make.height.equalTo(88)
         }
         
-        contentView.addSubview(maskOnlyCharacterAndDigitsField)
-        maskOnlyCharacterAndDigitsField.snp.makeConstraints{ make in
-            make.leading.equalTo(characterTextView).inset(8)
-            make.top.equalTo(validationRulesLabel.snp.top).inset(7)
-//            make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
-            make.width.equalTo(200)  //123
-            make.height.equalTo(22)
-        }
+//        contentView.addSubview(maskOnlyCharacterAndDigitsField)
+//        maskOnlyCharacterAndDigitsField.snp.makeConstraints{ make in
+//            make.leading.equalTo(characterTextView).inset(8)
+//            make.top.equalTo(validationRulesLabel.snp.top).inset(7)
+////            make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
+//            make.width.equalTo(200)  //123
+//            make.height.equalTo(22)
+//        }
             
 
     }
     
-    let maskOnlyCharacterAndDigitsField: JMMaskTextField = {
-            let maskTextfield = JMMaskTextField(frame:CGRect.zero)
-            maskTextfield.maskString = "AAAAA-00000"
-            maskTextfield.placeholder = "wwwww-ddddd"
-            return maskTextfield
-        }()
+//    let maskOnlyCharacterAndDigitsField: JMMaskTextField = {
+//            let maskTextfield = JMMaskTextField(frame:CGRect.zero)
+//            maskTextfield.maskString = "AAAAA-00000"
+//            maskTextfield.placeholder = "wwwww-ddddd"
+//            return maskTextfield
+//        }()
     
     
     
