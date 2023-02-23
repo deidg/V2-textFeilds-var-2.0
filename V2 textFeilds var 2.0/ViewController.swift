@@ -543,95 +543,46 @@ extension ViewController: UITextFieldDelegate {
                 charactersCounter.textColor = .red
                 return false
             }
-        } else if textField == characterTextField {  //TF3 - mask
+//        } else if textField == characterTextField {  //TF3 - mask
 
-            
-            
-            
-//            var counter = 0
-//
-//            //for _ in 1...5 {
-//            while counter <= 5 {
-//                func control() -> Bool  {
-//                let allowedCharacters = CharacterSet.decimalDigits.inverted
-//                let charSet = CharacterSet(charactersIn: string)
-//                    //                counter = counter + 1
-//                    //                counter += 1
-//
-//                    //                print(counter)
-//                return allowedCharacters.isSuperset(of: charSet)
-//                }
-//                    control()
-//                    counter += 1
-//                    print(counter)
-//                    //                return //control()
-//                }
-            
-        
-        
-//            else {
-//                   print("enough")
-//                   break
-//                   return false
-//               }
-        
-//            var counter = 0
-//            for index in 1...5
-//            while counter < 5
-//               if counter <= 5
-//                        for _ in 1...5
-           
-            
-//        if textField == lettersTextField {  //TF 1
-//            let allowedCharacters = CharacterSet.decimalDigits.inverted
-//            let charSet = CharacterSet(charactersIn: string)
-//            return allowedCharacters.isSuperset(of: charSet)
-//        } else if textField == limitTextField { //TF2
-//            let currentText = textField.text ?? ""
-//            guard let stringRange = Range(range, in: currentText) else { return false }
-//            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-//            let lengthToAdd = updatedText.count
-//            charactersCounter.text = "\(10 - lengthToAdd)/10"
-//            if lengthToAdd <= 10 {
-              
-            
-            
-            
-//            guard let text = textField.text as NSString? else { return true }
-//            let newText = text.replacingCharacters(in: range, with: string)
-//
-//            let maskTextField = textField as! JMMaskTextField
-//            guard let unmaskedText = maskTextField.stringMask?.unmask(string: newText) else { return true }
-//
-//            if unmaskedText.count >= 11 {
-//                maskTextField.maskString = "(00) 0 0000-0000"
-//            } else {
-//                maskTextField.maskString = "(00) 0000-0000"
-//            }
-            
-//            return true
+
         } else if textField == linkTextField {  //TF4 - link
             print("tf4")
-            //            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            //                        print("didEndEditing")
-            //
-            //                        //        if textField == linkTextField {
-            //                        let inputLink: String = linkTextField.text ?? ""
-            //                        print("\(inputLink)")
-            //
-            //                        let delay : Double = 5.0    // 5 seconds here
-            //                        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            //
-            //                            func open(string: String){
-            //                                if let url = URL(string: inputLink) {
-            //                                    UIApplication.shared.open(url)
-            //                                }
-            //                            }
-            //                        }
-            //                    }
-            //        }
-            //        return true
-        }  else if textField == passwordTextField {    //TF 5 - password
+//
+            
+        настроить этот код
+            
+            func verifyUrl (urlString: String?) -> Bool {
+                if let urlString = urlString {
+                    if let url = NSURL(string: urlString) {
+                        return UIApplication.shared.canOpenURL(url as URL)
+                    }
+                }
+                return false
+            }
+            
+            
+            
+            
+//            if let urlString = self.linkTextField.text ?? "" {
+//                let url: URL?
+//                if urlString.hasPrefix("http://") {
+//                    url = URL(string: urlString)
+//                } else {
+//                    url = URL(string: "http://" + urlString)
+//                }
+//                if let url = url {
+//                    let sfViewController = SFSafariViewController(url: url)
+//                    self.present(sfViewController, animated: true, completion: nil)
+//                    print ("Now browsing in SFSafariViewController")
+//                }
+//            }
+        }
+            
+            
+            
+                    
+         else if textField == passwordTextField {    //TF 5 - password
             print("final")
             //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
             //                    print("didEndEditing")
