@@ -397,13 +397,13 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
     
     
     //TF 3
-    //        func isValidText(inputText: String) -> Bool {
-    //                    return inputText.range(
-    //                        of: inputTextRegex,
-    //                        options: .regularExpression
-    //                    ) != nil
-    //                    return true
-    //                }
+            func isValidText(inputText: String) -> Bool {
+                        return inputText.range(
+                            of: inputTextRegex,
+                            options: .regularExpression
+                        ) != nil
+                        return true
+                    }
     //
     
     //             TF 5
@@ -505,17 +505,17 @@ extension ViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == lettersTextField {  //TF 1
-            let allowedCharacters = CharacterSet.decimalDigits.inverted
-            let charSet = CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: charSet)
-        } else if textField == limitTextField { //TF2
-            let currentText = textField.text ?? ""
-            guard let stringRange = Range(range, in: currentText) else { return false }
-            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-            let lengthToAdd = updatedText.count
-            charactersCounter.text = "\(10 - lengthToAdd)/10"
-            if lengthToAdd <= 10 {
+        if textField == lettersTextField { // если вводимый тексфилд - это lettersTextField, то ...
+            let allowedCharacters = CharacterSet.decimalDigits.inverted // то создаем переменную, которая является Множеством состоящим из десятичных цифр в обратном порядке.
+            let charSet = CharacterSet(charactersIn: string) // создаем множество из вводимый в текстфилд строки
+            return allowedCharacters.isSuperset(of: charSet)   // возвращаем результат проверки что обратное Множество allowedCharacters содержит в себе элементы другого множества. ТАкая змейка которая проверяет себя с хвоста
+        } else if textField == limitTextField {  // если введенный текстфилд есть - limitTextField, то
+            let currentText = textField.text ?? "" // создаем переменную из введенного текста (и проверяем на опциональность)
+            guard let stringRange = Range(range, in: currentText) else { return false } // создаем переменную stringRange из переменной  currentText и если получается ее инициализровать  а если нет, то возвращаем false
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: string) //определяем новую переменную которая возникает после перестановки текста в переменной currentText
+            let lengthToAdd = updatedText.count // затем считаем числа в этой updatedText и передаем в новую переменную lengthToAdd
+            charactersCounter.text = "\(10 - lengthToAdd)/10" // присваиваем счётчику новое значение
+            if lengthToAdd <= 10 {  // если значение это й переменной меньше 10, то цвет еще черный, как только больше 10 - цвет красим в красный и выходим из цикла.
                 charactersCounter.textColor = .black
                 return true
             } else {
@@ -523,7 +523,25 @@ extension ViewController: UITextFieldDelegate {
                 return false
             }
         } else if textField == characterTextField {  //TF3 - mask
-            print("tf3")
+            переписать код на основе первых двух функций.   38мин
+            
+        
+        
+//        if textField == lettersTextField {  //TF 1
+//            let allowedCharacters = CharacterSet.decimalDigits.inverted
+//            let charSet = CharacterSet(charactersIn: string)
+//            return allowedCharacters.isSuperset(of: charSet)
+//        } else if textField == limitTextField { //TF2
+//            let currentText = textField.text ?? ""
+//            guard let stringRange = Range(range, in: currentText) else { return false }
+//            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+//            let lengthToAdd = updatedText.count
+//            charactersCounter.text = "\(10 - lengthToAdd)/10"
+//            if lengthToAdd <= 10 {
+              
+            
+            
+            
 //            guard let text = textField.text as NSString? else { return true }
 //            let newText = text.replacingCharacters(in: range, with: string)
 //
