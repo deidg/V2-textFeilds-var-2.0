@@ -316,7 +316,6 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
         characterTextView.addSubview(characterTextField)
         characterTextField.snp.makeConstraints{ make in
             make.leading.equalTo(characterTextView).inset(8)
-            //            make.trailing.equalTo(characterFieldView).inset(260)
             make.top.equalTo(characterTextView.snp.top).inset(7)
             make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
             make.width.equalTo(200)  //123
@@ -385,9 +384,25 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
             make.width.equalTo(160)
             make.height.equalTo(88)
         }
+        
+        contentView.addSubview(maskOnlyCharacterAndDigitsField)
+        maskOnlyCharacterAndDigitsField.snp.makeConstraints{ make in
+            make.leading.equalTo(characterTextView).inset(8)
+            make.top.equalTo(validationRulesLabel.snp.top).inset(7)
+//            make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
+            make.width.equalTo(200)  //123
+            make.height.equalTo(22)
+        }
+            
+
     }
     
-    
+    let maskOnlyCharacterAndDigitsField: JMMaskTextField = {
+            let maskTextfield = JMMaskTextField(frame:CGRect.zero)
+            maskTextfield.maskString = "AAAAA-00000"
+            maskTextfield.placeholder = "wwwww-ddddd"
+            return maskTextfield
+        }()
     
     
     
@@ -397,13 +412,13 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
     
     
     //TF 3
-            func isValidText(inputText: String) -> Bool {
-                        return inputText.range(
-                            of: inputTextRegex,
-                            options: .regularExpression
-                        ) != nil
-                        return true
-                    }
+//            func isValidText(inputText: String) -> Bool {
+//                        return inputText.range(
+//                            of: inputTextRegex,
+//                            options: .regularExpression
+//                        ) != nil
+//                        return true
+//                    }
     //
     
     //             TF 5
@@ -505,6 +520,7 @@ extension ViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        var counter = 0
         if textField == lettersTextField { // если вводимый тексфилд - это lettersTextField, то ...
             let allowedCharacters = CharacterSet.decimalDigits.inverted // то создаем переменную, которая является Множеством состоящим из десятичных цифр в обратном порядке.
             let charSet = CharacterSet(charactersIn: string) // создаем множество из вводимый в текстфилд строки
@@ -523,10 +539,44 @@ extension ViewController: UITextFieldDelegate {
                 return false
             }
         } else if textField == characterTextField {  //TF3 - mask
-            переписать код на основе первых двух функций.   38мин
+
+            
+            
+            
+//            var counter = 0
+//
+//            //for _ in 1...5 {
+//            while counter <= 5 {
+//                func control() -> Bool  {
+//                let allowedCharacters = CharacterSet.decimalDigits.inverted
+//                let charSet = CharacterSet(charactersIn: string)
+//                    //                counter = counter + 1
+//                    //                counter += 1
+//
+//                    //                print(counter)
+//                return allowedCharacters.isSuperset(of: charSet)
+//                }
+//                    control()
+//                    counter += 1
+//                    print(counter)
+//                    //                return //control()
+//                }
             
         
         
+//            else {
+//                   print("enough")
+//                   break
+//                   return false
+//               }
+        
+//            var counter = 0
+//            for index in 1...5
+//            while counter < 5
+//               if counter <= 5
+//                        for _ in 1...5
+           
+            
 //        if textField == lettersTextField {  //TF 1
 //            let allowedCharacters = CharacterSet.decimalDigits.inverted
 //            let charSet = CharacterSet(charactersIn: string)
@@ -554,7 +604,7 @@ extension ViewController: UITextFieldDelegate {
 //                maskTextField.maskString = "(00) 0000-0000"
 //            }
             
-            return true
+//            return true
         } else if textField == linkTextField {  //TF4 - link
             print("tf4")
             //            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
