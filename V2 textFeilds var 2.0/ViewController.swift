@@ -387,7 +387,7 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
             //            make.trailing.equalToSuperview().inset(213)
             //            make.trailing.equalToSuperview().inset(213)
             make.width.equalTo(160)
-            make.height.equalTo(88)
+            make.height.equalTo(120)
         }
         
 //        contentView.addSubview(maskOnlyCharacterAndDigitsField)
@@ -549,19 +549,24 @@ extension ViewController: UITextFieldDelegate {
         //    }
         else if textField == passwordTextField {
             
-            func isValid(inputPassword: String) -> Bool {
-                return inputPassword.range(
-                    of: passwordRegex,
-                    options: .regularExpression
-                ) != nil
-                return true
+            let password = passwordTextField.text ?? ""
+            
+            func isPasswordValid(_ password : String) -> Bool {
+                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+//                validationRulesLabel.textColor = .green
+                
+                return passwordTest.evaluate(with: password)
             }
+//            validationRulesLabel.textColor = .green
             return true
+//            dsf3#qs
         }
         return true
     }
 
-        
+//    let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+    
+    
 //        let inputPassword: String = passwordTextField.text ?? ""
 //
 //        print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
@@ -731,7 +736,7 @@ enum Constants {
         static let onlyCharectersLabelText = "Only characters"
         static let linkLabelText = "Link"
         static let validationLabelText = "Validation rules"
-        static let validationRulesLabelText = "Min length 8 characters.\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
+        static let validationRulesLabelText = "Min length 8 characters,\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
         static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
         static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
     }
