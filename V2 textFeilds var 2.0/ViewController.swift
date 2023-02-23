@@ -525,7 +525,7 @@ extension ViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        var counter = 0
+        //        var counter = 0
         if textField == lettersTextField { // если вводимый тексфилд - это lettersTextField, то ...
             let allowedCharacters = CharacterSet.decimalDigits.inverted // то создаем переменную, которая является Множеством состоящим из десятичных цифр в обратном порядке.
             let charSet = CharacterSet(charactersIn: string) // создаем множество из вводимый в текстфилд строки
@@ -543,28 +543,31 @@ extension ViewController: UITextFieldDelegate {
                 charactersCounter.textColor = .red
                 return false
             }
+        }
+        return true
+    }
 //        } else if textField == characterTextField {  //TF3 - mask
 
 
-        } else if textField == linkTextField {  //TF4 - link
-            print("tf4")
-            func verifyUrl (urlString: String?) -> Bool {
-                if let urlString = urlString {
-                    if let url = NSURL(string: urlString) {
-                        return UIApplication.shared.canOpenURL(url as URL)
-                    }
-                }
-                return false
-            }
-            
-            var urlString: String = linkTextField.text ?? ""
-            if urlString.hasPrefix("www.") {
-                let urlStringUpdated = "https://"+urlString
-                print("urlStringUpdated \(urlStringUpdated)")
-                print(verifyUrl(urlString: urlStringUpdated))
-            } else
-            {print("great")}
-
+//        } else if textField == linkTextField {  //TF4 - link
+//            print("tf4")
+//            func verifyUrl (urlString: String?) -> Bool {
+//                if let urlString = urlString {
+//                    if let url = NSURL(string: urlString) {
+//                        return UIApplication.shared.canOpenURL(url as URL)
+//                    }
+//                }
+//                return false
+//            }
+//
+//            var urlString: String = linkTextField.text ?? ""
+//            if urlString.hasPrefix("www.") {
+//                let urlStringUpdated = "https://"+urlString
+//                print("urlStringUpdated \(urlStringUpdated)")
+//                print(verifyUrl(urlString: urlStringUpdated))
+//            } else
+//            {print("great")}
+//
 
             
             
@@ -585,24 +588,24 @@ extension ViewController: UITextFieldDelegate {
 //                    print ("Now browsing in SFSafariViewController")
 //                }
 //            }
-        }
+//        }
             
             
             
-                    
-         else if textField == passwordTextField {    //TF 5 - password
-            print("final")
-            //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            //                    print("didEndEditing")
-            //
-            //                    let inputPassword: String = passwordTextField.text ?? ""
-            //
-            //                    print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
-            //                }
-            
-        }
-        return true
-    }
+//
+//         else if textField == passwordTextField {    //TF 5 - password
+//            print("final")
+//            //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//            //                    print("didEndEditing")
+//            //
+//            //                    let inputPassword: String = passwordTextField.text ?? ""
+//            //
+//            //                    print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
+//            //                }
+//
+//        }
+//        return true
+//    }
 
 
 
