@@ -427,13 +427,13 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
     //
     
     //             TF 5
-    //                func isValid(inputPassword: String) -> Bool {
-    //                    return inputPassword.range(
-    //                        of: passwordRegex,
-    //                        options: .regularExpression
-    //                    ) != nil
-    //                    return true
-    //                }
+//                    func isValid(inputPassword: String) -> Bool {
+//                        return inputPassword.range(
+//                            of: passwordRegex,
+//                            options: .regularExpression
+//                        ) != nil
+//                        return true
+//                    }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         
@@ -543,9 +543,36 @@ extension ViewController: UITextFieldDelegate {
                 charactersCounter.textColor = .red
                 return false
             }
+            //            return true
+            
+        }
+        //    }
+        else if textField == passwordTextField {
+            
+            func isValid(inputPassword: String) -> Bool {
+                return inputPassword.range(
+                    of: passwordRegex,
+                    options: .regularExpression
+                ) != nil
+                return true
+            }
+            return true
         }
         return true
     }
+
+        
+//        let inputPassword: String = passwordTextField.text ?? ""
+//
+//        print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
+        
+        
+//    }
+    
+    
+    
+    
+    
 //        } else if textField == characterTextField {  //TF3 - mask
 
 
@@ -657,17 +684,22 @@ func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //                override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 //                    print("didEndEditing")
 //
-//                    //        if textField == linkTextField {
-//                    let inputLink: String = linkTextField.text ?? ""
-//                    print("\(inputLink)")
+////                    func checkTF3() -> Bool {
+////                    if textField == linkTextField {
+//                        let inputLink: String = linkTextField.text ?? ""
+//                        print("\(inputLink)")
 //
-//                    let delay : Double = 5.0    // 5 seconds here
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+//                        let delay : Double = 5.0    // 5 seconds here
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
 //
-//                        func open(string: String){
-//                            if let url = URL(string: inputLink) {
-//                                UIApplication.shared.open(url)
+//                            func open(string: String) -> Bool{
+//                                if let url = URL(string: string) {
+//                                    UIApplication.shared.open(url)
+//                                }
+//                                return true
 //                            }
+//                            print(open(string: inputLink))
+//
 //                        }
 //                    }
 //                }
