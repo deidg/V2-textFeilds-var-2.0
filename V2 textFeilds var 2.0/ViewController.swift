@@ -552,14 +552,22 @@ extension ViewController: UITextFieldDelegate {
             let password = passwordTextField.text ?? ""
             
             func isPasswordValid(_ password : String) -> Bool {
-                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-//                validationRulesLabel.textColor = .green
-                
+               let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
                 return passwordTest.evaluate(with: password)
             }
+            let result = isPasswordValid(password)
+            print(result)
+            
+//            if isPasswordValid == true {
+//                validationRulesLabel.textColor = .green
+//
+//            } else {
+//                validationRulesLabel.textColor = .red
+//            }
+//            print("NOO")
 //            validationRulesLabel.textColor = .green
-            return true
-//            dsf3#qs
+//            return true
+//            dsf4#Qs8
         }
         return true
     }
