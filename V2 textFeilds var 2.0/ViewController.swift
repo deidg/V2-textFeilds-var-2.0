@@ -548,8 +548,6 @@ extension ViewController: UITextFieldDelegate {
 
         } else if textField == linkTextField {  //TF4 - link
             print("tf4")
-            var urlString: String = linkTextField.text ?? ""
-            
             func verifyUrl (urlString: String?) -> Bool {
                 if let urlString = urlString {
                     if let url = NSURL(string: urlString) {
@@ -558,7 +556,18 @@ extension ViewController: UITextFieldDelegate {
                 }
                 return false
             }
-            print(verifyUrl(urlString: urlString))
+            
+            var urlString: String = linkTextField.text ?? ""
+            if urlString.hasPrefix("www.") {
+                let urlStringUpdated = "https://"+urlString
+                print("urlStringUpdated \(urlStringUpdated)")
+                print(verifyUrl(urlString: urlStringUpdated))
+            } else
+            {print("great")}
+
+
+            
+            
             
             
             
