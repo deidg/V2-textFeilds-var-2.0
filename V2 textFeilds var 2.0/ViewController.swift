@@ -548,9 +548,7 @@ extension ViewController: UITextFieldDelegate {
 
         } else if textField == linkTextField {  //TF4 - link
             print("tf4")
-//
-            
-        настроить этот код
+            var urlString: String = linkTextField.text ?? ""
             
             func verifyUrl (urlString: String?) -> Bool {
                 if let urlString = urlString {
@@ -560,6 +558,7 @@ extension ViewController: UITextFieldDelegate {
                 }
                 return false
             }
+            print(verifyUrl(urlString: urlString))
             
             
             
