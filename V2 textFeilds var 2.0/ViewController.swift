@@ -17,7 +17,7 @@ final class ViewController: UIViewController {
     var activeTextField : UITextField? = nil
     
     let inputDigitRegex: String = "^([0-9]){5}$"
-    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}" //(?=.*[$@$!%*?&#])   !$@$!%*?&#
+    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
     let inputTextRegex: String = "^([a-zA-Z]{5})[-]([\\d]{5})$"
     
     override func viewDidLoad() {
@@ -33,8 +33,6 @@ final class ViewController: UIViewController {
     }
     
     //MARK: additional views
-    //    let scrollView = UIScrollView()
-    //    let contentView = UIView()
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.frame = view.bounds
@@ -49,10 +47,7 @@ final class ViewController: UIViewController {
     private var contentSize: CGSize {
         CGSize(width: view.frame.width, height: view.frame.height + 100)
     }
-    
-    
-    
-    
+
     let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = Constants.LabelsTexts.mainTitleLabeText
@@ -154,7 +149,6 @@ final class ViewController: UIViewController {
         linkLabel.font = Constants.LabelsFonts.smallLabelFont
         return linkLabel
     }()
-    
     let linkTextView: UIView = {
         let linkTextView = UIView()
         linkTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
@@ -211,7 +205,7 @@ final class ViewController: UIViewController {
         }
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { make in
-            make.top.width.height.equalTo(scrollView) //equalToSuperview()
+            make.top.width.height.equalTo(scrollView)
         }
         
         //  Textlabel
@@ -233,7 +227,6 @@ final class ViewController: UIViewController {
         lettersTextView.snp.makeConstraints{make in
             make.top.equalTo(noDigitLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(16)
-//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         lettersTextView.addSubview(lettersTextField)
@@ -243,7 +236,6 @@ final class ViewController: UIViewController {
             make.bottom.equalTo(lettersTextView.snp.bottom).inset(7)
             make.height.equalTo(22)
         }
-        
         // 2 field 2
         contentView.addSubview(inputLimitLabel)
         inputLimitLabel.snp.makeConstraints{ make in
@@ -263,7 +255,6 @@ final class ViewController: UIViewController {
         limitTextView.snp.makeConstraints{ make in
             make.top.equalTo(lettersTextView.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(16)
-//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         limitTextView.addSubview(limitTextField)
@@ -272,7 +263,6 @@ final class ViewController: UIViewController {
             make.top.equalTo(limitTextView.snp.top).inset(7)
             make.bottom.equalTo(limitTextView.snp.bottom).inset(7)
         }
-        
         // 3 field 3
         contentView.addSubview(onlyCharectersLabel)
         onlyCharectersLabel.snp.makeConstraints{ make in
@@ -285,7 +275,6 @@ final class ViewController: UIViewController {
         characterTextView.snp.makeConstraints{ make in
             make.top.equalTo(limitTextView.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(16)
-//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         characterTextView.addSubview(characterTextField)
@@ -309,7 +298,6 @@ final class ViewController: UIViewController {
         linkTextView.snp.makeConstraints{ make in
             make.top.equalTo(characterTextView.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(16)
-//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         linkTextView.addSubview(linkTextField)
@@ -320,7 +308,6 @@ final class ViewController: UIViewController {
             make.width.equalTo(200)
             make.height.equalTo(22)
         }
-    
         // 5 field 5  PASSWORDS
         contentView.addSubview(validationLabel)
         validationLabel.snp.makeConstraints{ make in
@@ -333,7 +320,6 @@ final class ViewController: UIViewController {
         passwordTextView.snp.makeConstraints{ make in
             make.top.equalTo(linkTextField.snp.bottom).offset(53)
             make.leading.trailing.equalToSuperview().inset(16)
-//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         passwordTextView.addSubview(passwordTextField)
@@ -348,7 +334,6 @@ final class ViewController: UIViewController {
         validationRulesLabel.snp.makeConstraints{ make in
             make.top.equalTo(passwordTextView.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(24)
-//            make.width.equalTo(160)
             make.height.equalTo(120)
         }
     }
@@ -414,7 +399,7 @@ extension ViewController: UITextFieldDelegate {
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
             let lengthToAdd = updatedText.count
             charactersCounter.text = "\(lengthToAdd)/10"
-            if lengthToAdd <= 10 {
+            if lengthToAdd < 11 {
                 charactersCounter.textColor = .black
                 return true
             } else {
