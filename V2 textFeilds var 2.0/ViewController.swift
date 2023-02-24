@@ -16,10 +16,6 @@ final class ViewController: UIViewController {
     
     var activeTextField : UITextField? = nil
     
-    var digitCounter: Int = 0
-    var charCounter: Int = 0
-    private let maxСharacterNumber = 10
-    
     let inputDigitRegex: String = "^([0-9]){5}$"
     let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&#])[a-zA-z\\d!$@$!%*?&#]{8,25}"
     let inputTextRegex: String = "^([a-zA-Z]{5})[-]([\\d]{5})$"
@@ -39,7 +35,6 @@ final class ViewController: UIViewController {
         self.view.addGestureRecognizer(tapGestureRecognizer)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = 7.0
@@ -64,7 +59,7 @@ final class ViewController: UIViewController {
     //MARK: 1 field 1
     let noDigitLabel: UILabel = {
         let noDigitLabel = UILabel()
-        noDigitLabel.text = Constants.LabelsTexts.noDigitLabelText // больше буквы какие то. В нижнем лейбле - смотряться ок.
+        noDigitLabel.text = Constants.LabelsTexts.noDigitLabelText
         noDigitLabel.backgroundColor = Constants.LabelsBackgroundColors.labelBackgoundColors
         noDigitLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
         noDigitLabel.font = Constants.LabelsFonts.smallLabelFont
@@ -91,7 +86,6 @@ final class ViewController: UIViewController {
     }()
     
     //MARK:  2 field 2
-    //    https://stackoverflow.com/questions/31363216/set-the-maximum-character-length-of-a-uitextfield-in-swift
     let inputLimitLabel: UILabel = {
         let inputLimitLabel = UILabel()
         inputLimitLabel.text = Constants.LabelsTexts.inputLimitLabelText
@@ -107,7 +101,6 @@ final class ViewController: UIViewController {
         charactersCounter.textColor = Constants.LabelsTexts.smallLabelTextColor
         charactersCounter.font = Constants.LabelsFonts.smallLabelFont
         charactersCounter.text = Constants.LabelsTexts.charactersCounterText
-//        charactersCounter.isHidden = false
         return charactersCounter
     }()
     let limitTextView: UIView = {
@@ -125,7 +118,6 @@ final class ViewController: UIViewController {
         limitTextField.font = Constants.TextFields.textFieldFont
         return limitTextField
     }()
-    
     
     //MARK:  3 field 3
     let onlyCharectersLabel: UILabel = {
@@ -147,13 +139,6 @@ final class ViewController: UIViewController {
     characterTextField.maskString = "AAAAA-00000"
     characterTextField.placeholder = "wwwww-ddddd"
     return characterTextField
-//    let characterTextField: UITextField = {
-//        let characterTextField = UITextField()
-//        characterTextField.backgroundColor = Constants.TextFields.textFieldBackgroundColor
-//        characterTextField.placeholder = Constants.TextFields.onlyCharectersLabelPlaceholderText
-//        characterTextField.textColor = Constants.TextFields.textFieldTextColor
-//        characterTextField.font = Constants.TextFields.textFieldFont
-//        return characterTextField
     }()
     
     //MARK:  4 field 4  LINK
@@ -202,8 +187,6 @@ final class ViewController: UIViewController {
         passwordTextField.placeholder = Constants.TextFields.passwordTextFieldPlaceholderText
         passwordTextField.textColor = Constants.TextFields.textFieldTextColor
         passwordTextField.font = Constants.TextFields.textFieldFont
-        //        passwordTextField.becomeFirstResponder()
-        
         return passwordTextField
     }()
     let validationRulesLabel: UILabel = {
@@ -253,7 +236,6 @@ final class ViewController: UIViewController {
         }
         lettersTextView.addSubview(lettersTextField)
         lettersTextField.snp.makeConstraints{ make in
-            //            make.top.equalTo(titleLabel.snp.bottom).offset(54)
             make.leading.equalTo(lettersTextView).inset(8)
             make.trailing.equalTo(lettersTextView).inset(260)
             make.top.equalTo(lettersTextView.snp.top).inset(7)
@@ -292,8 +274,6 @@ final class ViewController: UIViewController {
             make.trailing.equalTo(limitTextView).inset(260)
             make.top.equalTo(limitTextView.snp.top).inset(7)
             make.bottom.equalTo(limitTextView.snp.bottom).inset(7)
-            //            make.width.equalTo(75)
-            //            make.height.equalTo(22)
         }
         
         // 3 field 3
@@ -342,7 +322,6 @@ final class ViewController: UIViewController {
         linkTextView.addSubview(linkTextField)
         linkTextField.snp.makeConstraints{ make in
             make.leading.equalTo(linkTextView).inset(8)
-            //            make.trailing.equalTo(linkTextView).inset(260)
             make.top.equalTo(linkTextView.snp.top).inset(7)
             make.bottom.equalTo(linkTextView.snp.bottom).inset(7)
             make.width.equalTo(200) //144
@@ -367,7 +346,6 @@ final class ViewController: UIViewController {
         passwordTextView.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints{ make in
             make.leading.equalTo(passwordTextView).inset(8)
-            //            make.trailing.equalTo(passwordTextView).inset(260)
             make.top.equalTo(passwordTextView.snp.top).inset(7)
             make.bottom.equalTo(passwordTextView.snp.bottom).inset(7)
             make.width.equalTo(200) //144
@@ -377,66 +355,22 @@ final class ViewController: UIViewController {
         validationRulesLabel.snp.makeConstraints{ make in
             make.top.equalTo(passwordTextView.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(24)
-            //            make.trailing.equalToSuperview().inset(213)
-            //            make.trailing.equalToSuperview().inset(213)
             make.width.equalTo(160)
             make.height.equalTo(120)
         }
-        
-//        contentView.addSubview(maskOnlyCharacterAndDigitsField)
-//        maskOnlyCharacterAndDigitsField.snp.makeConstraints{ make in
-//            make.leading.equalTo(characterTextView).inset(8)
-//            make.top.equalTo(validationRulesLabel.snp.top).inset(7)
-////            make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
-//            make.width.equalTo(200)  //123
-//            make.height.equalTo(22)
-//        }
-            
-
     }
-    
-//    let maskOnlyCharacterAndDigitsField: JMMaskTextField = {
-//            let maskTextfield = JMMaskTextField(frame:CGRect.zero)
-//            maskTextfield.maskString = "AAAAA-00000"
-//            maskTextfield.placeholder = "wwwww-ddddd"
-//            return maskTextfield
-//        }()
-    
-    
-    
+
     func defaultConfiguration() {
         self.view.backgroundColor = .white
     }
     
-    
-    //TF 3
-//            func isValidText(inputText: String) -> Bool {
-//                        return inputText.range(
-//                            of: inputTextRegex,
-//                            options: .regularExpression
-//                        ) != nil
-//                        return true
-//                    }
-    //
-    
-    //             TF 5
-//                    func isValid(inputPassword: String) -> Bool {
-//                        return inputPassword.range(
-//                            of: passwordRegex,
-//                            options: .regularExpression
-//                        ) != nil
-//                        return true
-//                    }
-    
     @objc func keyboardWillShow(notification: NSNotification) {
         
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            // if keyboard size is not available for some reason, dont do anything
             return
         }
         
         var shouldMoveViewUp = false
-        // if active text field is not nil
         if let activeTextField = activeTextField {
             let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY;
             let topOfKeyboard = self.view.frame.height - keyboardSize.height
@@ -452,16 +386,11 @@ final class ViewController: UIViewController {
         self.view.frame.origin.y = 0
     }
     @objc func backgroundTap(_ sender: UITapGestureRecognizer) {
-        // go through all of the textfield inside the view, and end editing thus resigning first responder
-        // ie. it will trigger a keyboardWillHide notification
         self.view.endEditing(true)
     }
-    
 }
 
 extension String {
-    
-    
     var containsValidCharacter: Bool {
         guard self != "" else { return true }
         let hexSet = CharacterSet(charactersIn: "1234567890")
@@ -470,258 +399,42 @@ extension String {
     }
 }
 
-
 //MARK: extension ViewController
 extension ViewController: UITextFieldDelegate {
-    
-    private func switchBasedNextTextField(_ textField: UITextField) {
-        switch textField {
-        case self.lettersTextField:
-            //TF1
-            
-            //            var textFromTF: String = lettersTextField.text ?? ""
-            //            func isValid(lettersTextField: String) -> Bool {
-            //                return lettersTextField.range(
-            //                    of: inputDigitRegex,
-            //                    options: .regularExpression
-            //                ) != nil
-            //                return true
-            //            }
-            //            var result = isValid(lettersTextField: textFromTF)
-            //            print(result)
-            
-            
-            //            func printing() {
-            //                print("herr")
-            //            }
-            //            printing()
-            
-            self.limitTextField.becomeFirstResponder()
-            print("tf1")
-        case self.limitTextField:
-            //TF2
-            self.characterTextField.becomeFirstResponder()
-            print("tf2")
-        case self.characterTextField:
-            //TF3
-            self.linkTextField.becomeFirstResponder()
-            print("tf3")
-        case self.linkTextField:
-            //TF4
-            self.passwordTextField.becomeFirstResponder()
-            print("tf4")
-        default:
-            //TF5
-            self.passwordTextField.resignFirstResponder()
-            print("final")
-        }
-    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        //        var counter = 0
-        if textField == lettersTextField { // если вводимый тексфилд - это lettersTextField, то ...
-            let allowedCharacters = CharacterSet.decimalDigits.inverted // то создаем переменную, которая является Множеством состоящим из десятичных цифр в обратном порядке.
-            let charSet = CharacterSet(charactersIn: string) // создаем множество из вводимый в текстфилд строки
-            return allowedCharacters.isSuperset(of: charSet)   // возвращаем результат проверки что обратное Множество allowedCharacters содержит в себе элементы другого множества. ТАкая змейка которая проверяет себя с хвоста
-        } else if textField == limitTextField {  // если введенный текстфилд есть - limitTextField, то
-            let currentText = textField.text ?? "" // создаем переменную из введенного текста (и проверяем на опциональность)
-            guard let stringRange = Range(range, in: currentText) else { return false } // создаем переменную stringRange из переменной  currentText и если получается ее инициализровать  а если нет, то возвращаем false
-            let updatedText = currentText.replacingCharacters(in: stringRange, with: string) //определяем новую переменную которая возникает после перестановки текста в переменной currentText
-            let lengthToAdd = updatedText.count // затем считаем числа в этой updatedText и передаем в новую переменную lengthToAdd
-            charactersCounter.text = "\(lengthToAdd)/10" // присваиваем счётчику новое значение
-            if lengthToAdd <= 9 {  // если значение это й переменной меньше 10, то цвет еще черный, как только больше 10 - цвет красим в красный и выходим из цикла.
-                charactersCounter.textColor = .black   //\(10 - lengthToAdd)
+        if textField == lettersTextField {
+            let allowedCharacters = CharacterSet.decimalDigits.inverted
+            let charSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: charSet)
+        } else if textField == limitTextField {
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return false }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+            let lengthToAdd = updatedText.count
+            charactersCounter.text = "\(lengthToAdd)/10"
+            if lengthToAdd <= 9 {
+                charactersCounter.textColor = .black
                 return true
             } else {
                 charactersCounter.textColor = .red
                 return false
             }
-            //            return true
-            
         }
-        //    }
         else if textField == passwordTextField {
-            
             let password = passwordTextField.text ?? ""
-            
             func isPasswordValid(_ password : String) -> Bool {
                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
                 return passwordTest.evaluate(with: password)
             }
             let result = isPasswordValid(password)
             print(result)
-            
-//            if isPasswordValid == true {
-//                validationRulesLabel.textColor = .green
-//
-//            } else {
-//                validationRulesLabel.textColor = .red
-//            }
-//            print("NOO")
-//            validationRulesLabel.textColor = .green
-//            return true
+
 //            dsf4#Qs8
         }
         return true
     }
 
-//    let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
-    
-    
-//        let inputPassword: String = passwordTextField.text ?? ""
-//
-//        print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
-        
-        
-//    }
-    
-    
-    
-    
-    
-//        } else if textField == characterTextField {  //TF3 - mask
-
-
-//        } else if textField == linkTextField {  //TF4 - link
-//            print("tf4")
-//            func verifyUrl (urlString: String?) -> Bool {
-//                if let urlString = urlString {
-//                    if let url = NSURL(string: urlString) {
-//                        return UIApplication.shared.canOpenURL(url as URL)
-//                    }
-//                }
-//                return false
-//            }
-//
-//            var urlString: String = linkTextField.text ?? ""
-//            if urlString.hasPrefix("www.") {
-//                let urlStringUpdated = "https://"+urlString
-//                print("urlStringUpdated \(urlStringUpdated)")
-//                print(verifyUrl(urlString: urlStringUpdated))
-//            } else
-//            {print("great")}
-//
-
-            
-            
-            
-            
-            
-            
-//            if let urlString = self.linkTextField.text ?? "" {
-//                let url: URL?
-//                if urlString.hasPrefix("http://") {
-//                    url = URL(string: urlString)
-//                } else {
-//                    url = URL(string: "http://" + urlString)
-//                }
-//                if let url = url {
-//                    let sfViewController = SFSafariViewController(url: url)
-//                    self.present(sfViewController, animated: true, completion: nil)
-//                    print ("Now browsing in SFSafariViewController")
-//                }
-//            }
-//        }
-            
-            
-            
-//
-//         else if textField == passwordTextField {    //TF 5 - password
-//            print("final")
-//            //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//            //                    print("didEndEditing")
-//            //
-//            //                    let inputPassword: String = passwordTextField.text ?? ""
-//            //
-//            //                    print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
-//            //                }
-//
-//        }
-//        return true
-//    }
-
-
-
-
-func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    self.switchBasedNextTextField(textField)
-    return true
-}
-
-
-//        textfield 1  DONE
-
-//            func textField(_ textField: UITextField,
-//                           shouldChangeCharactersIn range: NSRange,
-//                           replacementString string: String) -> Bool {
-//                return (string.containsValidCharacter)
-//            }
-
-
-//    textfield 2  DONE
-//            func textField(_ limitTextField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//                let currentText = limitTextField.text ?? ""
-//                guard let stringRange = Range(range, in: currentText) else { return false }
-//
-//                let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-//                charCounter = updatedText.count
-//                charactersCounter.text = "\(charCounter)/10"
-//                return updatedText.count < 10
-//            }
-
-
-//    textfield 3 sample DONE
-//                    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//                        print("didEndEditing")
-//
-//                        let inputText: String = characterTextField.text ?? ""
-//                         //str 437
-//                        if isValidText(inputText: inputText) == true {
-//                            onlyCharectersLabel.textColor = .green
-//                        } else {
-//                            onlyCharectersLabel.textColor = .red
-//                        }
-//
-//                        print("Entered text -  \(isValidText(inputText: inputText))")
-//                    }
-
-
-//  4 field 4  LINK DONE  TODO: сделать удобную клавиатуру с вводом текста
-//                override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//                    print("didEndEditing")
-//
-////                    func checkTF3() -> Bool {
-////                    if textField == linkTextField {
-//                        let inputLink: String = linkTextField.text ?? ""
-//                        print("\(inputLink)")
-//
-//                        let delay : Double = 5.0    // 5 seconds here
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-//
-//                            func open(string: String) -> Bool{
-//                                if let url = URL(string: string) {
-//                                    UIApplication.shared.open(url)
-//                                }
-//                                return true
-//                            }
-//                            print(open(string: inputLink))
-//
-//                        }
-//                    }
-//                }
-
-//  5 field 5  PASSWORD
-
-//            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//                print("didEndEditing")
-//
-//                let inputPassword: String = passwordTextField.text ?? ""
-//
-//                print("Entered password \(isValid(inputPassword: inputPassword))")   //str  446
-//            }
-
-
-//constants
+//MARK: constants
 enum Constants {
     enum LabelsSettings {
         static let lettersTextViewCornerRadius: CGFloat = 10
@@ -758,9 +471,7 @@ enum Constants {
     }
 }
 
-
 //MARK: keyboard
-
 func textFieldDidBeginEditing(_ textField: UITextField) {
     self.activeTextField = textField
 }
@@ -768,7 +479,5 @@ func textFieldDidEndEditing(_ textField: UITextField) {
     self.activeTextField = nil
 }
 
-
-// MARK: Extension String
 
 }
