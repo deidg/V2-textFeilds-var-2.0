@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5495ABF8CAB3A5F1387A3B05 /* Pods_V2_textFeilds_var_2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6B914AA3558B9735265236 /* Pods_V2_textFeilds_var_2_0.framework */; };
+		FAAA6DB029A9161C00720EC5 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAA6DAE29A9161C00720EC5 /* Rubik-Regular.ttf */; };
+		FAAA6DB129A9161C00720EC5 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAA6DAF29A9161C00720EC5 /* Rubik-SemiBold.ttf */; };
 		FAEE741E29A669DA0082B95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEE741D29A669DA0082B95F /* AppDelegate.swift */; };
 		FAEE742029A669DA0082B95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEE741F29A669DA0082B95F /* SceneDelegate.swift */; };
 		FAEE742229A669DA0082B95F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEE742129A669DA0082B95F /* ViewController.swift */; };
@@ -39,6 +41,8 @@
 		36D4285B9673D4D25929CAD8 /* Pods-V2 textFeilds var 2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-V2 textFeilds var 2.0.release.xcconfig"; path = "Target Support Files/Pods-V2 textFeilds var 2.0/Pods-V2 textFeilds var 2.0.release.xcconfig"; sourceTree = "<group>"; };
 		4D6B914AA3558B9735265236 /* Pods_V2_textFeilds_var_2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_V2_textFeilds_var_2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82EC8055BC01B2B982F972A9 /* Pods-V2 textFeilds var 2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-V2 textFeilds var 2.0.debug.xcconfig"; path = "Target Support Files/Pods-V2 textFeilds var 2.0/Pods-V2 textFeilds var 2.0.debug.xcconfig"; sourceTree = "<group>"; };
+		FAAA6DAE29A9161C00720EC5 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		FAAA6DAF29A9161C00720EC5 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
 		FAEE741A29A669DA0082B95F /* V2 textFeilds var 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "V2 textFeilds var 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEE741D29A669DA0082B95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAEE741F29A669DA0082B95F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,7 +89,6 @@
 				82EC8055BC01B2B982F972A9 /* Pods-V2 textFeilds var 2.0.debug.xcconfig */,
 				36D4285B9673D4D25929CAD8 /* Pods-V2 textFeilds var 2.0.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -95,6 +98,16 @@
 				4D6B914AA3558B9735265236 /* Pods_V2_textFeilds_var_2_0.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAAA6DAD29A915F500720EC5 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FAAA6DAE29A9161C00720EC5 /* Rubik-Regular.ttf */,
+				FAAA6DAF29A9161C00720EC5 /* Rubik-SemiBold.ttf */,
+			);
+			name = fonts;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		FAEE741129A669DA0082B95F = {
@@ -122,6 +135,7 @@
 		FAEE741C29A669DA0082B95F /* V2 textFeilds var 2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				FAAA6DAD29A915F500720EC5 /* fonts */,
 				FAEE741D29A669DA0082B95F /* AppDelegate.swift */,
 				FAEE741F29A669DA0082B95F /* SceneDelegate.swift */,
 				FAEE742129A669DA0082B95F /* ViewController.swift */,
@@ -256,7 +270,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAEE742A29A669DC0082B95F /* LaunchScreen.storyboard in Resources */,
+				FAAA6DB029A9161C00720EC5 /* Rubik-Regular.ttf in Resources */,
 				FAEE742729A669DC0082B95F /* Assets.xcassets in Resources */,
+				FAAA6DB129A9161C00720EC5 /* Rubik-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
