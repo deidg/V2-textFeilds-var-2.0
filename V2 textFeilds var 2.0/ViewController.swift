@@ -17,7 +17,7 @@ final class ViewController: UIViewController {
     var activeTextField : UITextField? = nil
     
     let inputDigitRegex: String = "^([0-9]){5}$"
-    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&#])[a-zA-z\\d!$@$!%*?&#]{8,25}"
+    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&#])[a-zA-z\\d!$@$!%*?&#]{7,25}"
     let inputTextRegex: String = "^([a-zA-Z]{5})[-]([\\d]{5})$"
     
     override func viewDidLoad() {
@@ -224,7 +224,7 @@ final class ViewController: UIViewController {
         noDigitLabel.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(163)
             make.leading.equalToSuperview().inset(16)
-            make.width.equalTo(100)  //78
+            make.width.equalTo(100)
             make.height.equalTo(20)
         }
         contentView.addSubview(lettersTextView)
@@ -297,7 +297,7 @@ final class ViewController: UIViewController {
             make.leading.equalTo(characterTextView).inset(8)
             make.top.equalTo(characterTextView.snp.top).inset(7)
             make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
-            make.width.equalTo(200)  //123
+            make.width.equalTo(200)
             make.height.equalTo(22)
         }
         
@@ -324,7 +324,7 @@ final class ViewController: UIViewController {
             make.leading.equalTo(linkTextView).inset(8)
             make.top.equalTo(linkTextView.snp.top).inset(7)
             make.bottom.equalTo(linkTextView.snp.bottom).inset(7)
-            make.width.equalTo(200) //144
+            make.width.equalTo(200)
             make.height.equalTo(22)
         }
         
@@ -348,7 +348,7 @@ final class ViewController: UIViewController {
             make.leading.equalTo(passwordTextView).inset(8)
             make.top.equalTo(passwordTextView.snp.top).inset(7)
             make.bottom.equalTo(passwordTextView.snp.bottom).inset(7)
-            make.width.equalTo(200) //144
+            make.width.equalTo(200)
             make.height.equalTo(22)
         }
         contentView.addSubview(validationRulesLabel)
@@ -426,9 +426,15 @@ extension ViewController: UITextFieldDelegate {
                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
                 return passwordTest.evaluate(with: password)
             }
+            if isPasswordValid(password) == true {
+                validationRulesLabel.textColor = .green
+            } else {
+                validationRulesLabel.textColor = .red
+            }
+            
             let result = isPasswordValid(password)
             print(result)
-
+        
 //            dsf4#Qs8
         }
         return true
