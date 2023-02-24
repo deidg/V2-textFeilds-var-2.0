@@ -30,17 +30,6 @@ final class ViewController: UIViewController {
         characterTextField.delegate = self
         linkTextField.delegate = self
         passwordTextField.delegate = self
-                
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.backgroundTap))
-        self.view.addGestureRecognizer(tapGestureRecognizer)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineSpacing = 7.0
-        let attributedString = NSMutableAttributedString(string: "Min length 8 characters.\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n")
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraph, range: NSMakeRange(0, attributedString.length))
-        validationRulesLabel.attributedText = attributedString
     }
     
     //MARK: additional views
@@ -135,10 +124,10 @@ final class ViewController: UIViewController {
         return characterTextView
     }()
     let characterTextField: JMMaskTextField = {
-    let characterTextField = JMMaskTextField(frame:CGRect.zero)
-    characterTextField.maskString = "AAAAA-00000"
-    characterTextField.placeholder = "wwwww-ddddd"
-    return characterTextField
+        let characterTextField = JMMaskTextField(frame:CGRect.zero)
+        characterTextField.maskString = "AAAAA-00000"
+        characterTextField.placeholder = "wwwww-ddddd"
+        return characterTextField
     }()
     
     //MARK:  4 field 4  LINK
@@ -291,7 +280,6 @@ final class ViewController: UIViewController {
             make.width.equalTo(343)
             make.height.equalTo(36)
         }
-        
         characterTextView.addSubview(characterTextField)
         characterTextField.snp.makeConstraints{ make in
             make.leading.equalTo(characterTextView).inset(8)
@@ -310,7 +298,6 @@ final class ViewController: UIViewController {
             make.leading.equalToSuperview().inset(16)
             make.trailing.equalToSuperview().inset(335)
         }
-        
         contentView.addSubview(linkTextView)
         linkTextView.snp.makeConstraints{ make in
             make.top.equalTo(characterTextView.snp.bottom).offset(54)
@@ -318,7 +305,6 @@ final class ViewController: UIViewController {
             make.width.equalTo(343)
             make.height.equalTo(36)
         }
-        
         linkTextView.addSubview(linkTextField)
         linkTextField.snp.makeConstraints{ make in
             make.leading.equalTo(linkTextView).inset(8)
@@ -327,7 +313,7 @@ final class ViewController: UIViewController {
             make.width.equalTo(200)
             make.height.equalTo(22)
         }
-        
+    
         // 5 field 5  PASSWORDS
         contentView.addSubview(validationLabel)
         validationLabel.snp.makeConstraints{ make in
@@ -359,17 +345,26 @@ final class ViewController: UIViewController {
             make.height.equalTo(120)
         }
     }
-
+    
     func defaultConfiguration() {
         self.view.backgroundColor = .white
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.backgroundTap))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineSpacing = 7.0
+        let attributedString = NSMutableAttributedString(string: "Min length 8 characters.\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n")
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraph, range: NSMakeRange(0, attributedString.length))
+        validationRulesLabel.attributedText = attributedString
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        
         var shouldMoveViewUp = false
         if let activeTextField = activeTextField {
             let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY;
@@ -423,7 +418,7 @@ extension ViewController: UITextFieldDelegate {
         else if textField == passwordTextField {
             let password = passwordTextField.text ?? ""
             func isPasswordValid(_ password : String) -> Bool {
-               let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
                 return passwordTest.evaluate(with: password)
             }
             if isPasswordValid(password) == true {
@@ -431,59 +426,52 @@ extension ViewController: UITextFieldDelegate {
             } else {
                 validationRulesLabel.textColor = .red
             }
-            
-            let result = isPasswordValid(password)
-            print(result)
-        
-//            dsf4#Qs8
         }
         return true
     }
-
-//MARK: constants
-enum Constants {
-    enum LabelsSettings {
-        static let lettersTextViewCornerRadius: CGFloat = 10
+    
+    //MARK: constants
+    enum Constants {
+        enum LabelsSettings {
+            static let lettersTextViewCornerRadius: CGFloat = 10
+        }
+        enum LabelsFonts {
+            static let mainLabelFont = UIFont(name: "Rubik", size: 34)
+            static let smallLabelFont = UIFont(name: "Rubik", size: 13)
+        }
+        enum LabelsTexts {
+            static let mainTitleLabeText = "Text Fields"
+            static let noDigitLabelText = "NO digit field"
+            static let inputLimitLabelText = "Input limit"
+            static let charactersCounterText = "0/10"
+            static let onlyCharectersLabelText = "Only characters"
+            static let linkLabelText = "Link"
+            static let validationLabelText = "Validation rules"
+            static let validationRulesLabelText = "Min length 8 characters,\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
+            static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
+            static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
+        }
+        enum LabelsBackgroundColors {
+            static let labelBackgoundColors = UIColor.white
+        }
+        enum TextFields {
+            static let lettersTextFieldPlaceholderText = "Type here"
+            static let onlyCharectersLabelPlaceholderText = "wwwww-ddddd"
+            static let linkTextFieldPlaceholderText = "www.example.com"
+            static let passwordTextFieldPlaceholderText = "Password"
+            static let textFieldFont = UIFont(name: "Rubik", size: 17)
+            static let textFieldTextColor = UIColor(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
+            static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
+            static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
+        }
     }
-    enum LabelsFonts {
-        static let mainLabelFont = UIFont(name: "Rubik", size: 34)
-        static let smallLabelFont = UIFont(name: "Rubik", size: 13)
+    
+    //MARK: keyboard
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
     }
-    enum LabelsTexts {
-        static let mainTitleLabeText = "Text Fields"
-        static let noDigitLabelText = "NO digit field"
-        static let inputLimitLabelText = "Input limit"
-        static let charactersCounterText = "0/10"
-        static let onlyCharectersLabelText = "Only characters"
-        static let linkLabelText = "Link"
-        static let validationLabelText = "Validation rules"
-        static let validationRulesLabelText = "Min length 8 characters,\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
-        static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
-        static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeTextField = nil
     }
-    enum LabelsBackgroundColors {
-        static let labelBackgoundColors = UIColor.white
-    }
-    enum TextFields {
-        static let lettersTextFieldPlaceholderText = "Type here"
-        static let onlyCharectersLabelPlaceholderText = "wwwww-ddddd"
-        static let linkTextFieldPlaceholderText = "www.example.com"
-        static let passwordTextFieldPlaceholderText = "Password"
-        
-        static let textFieldFont = UIFont(name: "Rubik", size: 17)
-        static let textFieldTextColor = UIColor(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
-        static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
-        static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
-    }
-}
-
-//MARK: keyboard
-func textFieldDidBeginEditing(_ textField: UITextField) {
-    self.activeTextField = textField
-}
-func textFieldDidEndEditing(_ textField: UITextField) {
-    self.activeTextField = nil
-}
-
-
+    
 }
