@@ -12,16 +12,12 @@ import SnapKit
 import SafariServices
 import JMMaskTextField_Swift
 
-//import MaskedFormatter
-//import MaskedUITextField
-//import Veil
-
-final class ViewController: UIViewController {//,UITextFieldDelegate {
+final class ViewController: UIViewController {
     
     var activeTextField : UITextField? = nil
     
-    var digitCounter: Int = 0  //TODO: private?
-    var charCounter: Int = 0   //TODO: private?
+    var digitCounter: Int = 0
+    var charCounter: Int = 0
     private let maxСharacterNumber = 10
     
     let inputDigitRegex: String = "^([0-9]){5}$"
@@ -38,9 +34,7 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
         characterTextField.delegate = self
         linkTextField.delegate = self
         passwordTextField.delegate = self
-        
-        //        switchBasedNextTextField(lettersTextField)
-        
+                
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.backgroundTap))
         self.view.addGestureRecognizer(tapGestureRecognizer)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -112,6 +106,8 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
         charactersCounter.textAlignment = .right
         charactersCounter.textColor = Constants.LabelsTexts.smallLabelTextColor
         charactersCounter.font = Constants.LabelsFonts.smallLabelFont
+        charactersCounter.text = Constants.LabelsTexts.charactersCounterText
+//        charactersCounter.isHidden = false
         return charactersCounter
     }()
     let limitTextView: UIView = {
@@ -245,8 +241,7 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
         noDigitLabel.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(163)
             make.leading.equalToSuperview().inset(16)
-            make.trailing.equalToSuperview().inset(281)
-            make.width.equalTo(78)
+            make.width.equalTo(100)  //78
             make.height.equalTo(20)
         }
         contentView.addSubview(lettersTextView)
@@ -304,11 +299,10 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
         // 3 field 3
         contentView.addSubview(onlyCharectersLabel)
         onlyCharectersLabel.snp.makeConstraints{ make in
-            make.width.equalTo(90)
+            make.width.equalTo(130)
             make.height.equalTo(20)
             make.top.equalTo(limitTextField.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(16)
-            make.trailing.equalToSuperview().inset(269)
         }
         contentView.addSubview(characterTextView)
         characterTextView.snp.makeConstraints{ make in
@@ -358,11 +352,10 @@ final class ViewController: UIViewController {//,UITextFieldDelegate {
         // 5 field 5  PASSWORDS
         contentView.addSubview(validationLabel)
         validationLabel.snp.makeConstraints{ make in
-            make.width.equalTo(87)
+            make.width.equalTo(120)
             make.height.equalTo(20)
             make.top.equalTo(linkTextField.snp.bottom).offset(29)
             make.leading.equalToSuperview().inset(16)
-            make.trailing.equalToSuperview().inset(272)
         }
         contentView.addSubview(passwordTextView)
         passwordTextView.snp.makeConstraints{ make in
@@ -535,9 +528,9 @@ extension ViewController: UITextFieldDelegate {
             guard let stringRange = Range(range, in: currentText) else { return false } // создаем переменную stringRange из переменной  currentText и если получается ее инициализровать  а если нет, то возвращаем false
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string) //определяем новую переменную которая возникает после перестановки текста в переменной currentText
             let lengthToAdd = updatedText.count // затем считаем числа в этой updatedText и передаем в новую переменную lengthToAdd
-            charactersCounter.text = "\(10 - lengthToAdd)/10" // присваиваем счётчику новое значение
-            if lengthToAdd <= 10 {  // если значение это й переменной меньше 10, то цвет еще черный, как только больше 10 - цвет красим в красный и выходим из цикла.
-                charactersCounter.textColor = .black
+            charactersCounter.text = "\(lengthToAdd)/10" // присваиваем счётчику новое значение
+            if lengthToAdd <= 9 {  // если значение это й переменной меньше 10, то цвет еще черный, как только больше 10 - цвет красим в красный и выходим из цикла.
+                charactersCounter.textColor = .black   //\(10 - lengthToAdd)
                 return true
             } else {
                 charactersCounter.textColor = .red
@@ -741,6 +734,7 @@ enum Constants {
         static let mainTitleLabeText = "Text Fields"
         static let noDigitLabelText = "NO digit field"
         static let inputLimitLabelText = "Input limit"
+        static let charactersCounterText = "0/10"
         static let onlyCharectersLabelText = "Only characters"
         static let linkLabelText = "Link"
         static let validationLabelText = "Validation rules"
