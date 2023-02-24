@@ -421,8 +421,28 @@ extension ViewController: UITextFieldDelegate {
                 charactersCounter.textColor = .red
                 return false
             }
-        }
-        else if textField == passwordTextField {
+        } else if textField == linkTextField {
+            let delay : Double = 5.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                
+                func startBrowser(_ sender: Any) {
+                    if let urlString = self.linkTextField.text {
+                        let url: URL?
+                        if urlString.hasPrefix("http://") {
+                            url = URL(string: urlString)
+                        } else {
+                            url = URL(string: "http://" + urlString)
+                        }
+                        if let url = url {
+                            let sfViewController = SFSafariViewController(url: url)
+                            self.present(sfViewController, animated: true, completion: nil)
+                            print ("Now browsing in SFSafariViewController")
+                        }
+                    }
+                }
+                startBrowser(self.linkTextField)
+            }
+        } else if textField == passwordTextField {
             let password = passwordTextField.text ?? ""
             func isPasswordValid(_ password : String) -> Bool {
                 let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
