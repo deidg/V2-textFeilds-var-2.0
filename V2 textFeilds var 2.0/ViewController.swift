@@ -268,7 +268,7 @@ final class ViewController: UIViewController {
         onlyCharectersLabel.snp.makeConstraints{ make in
             make.width.equalTo(130)
             make.height.equalTo(20)
-            make.top.equalTo(limitTextField.snp.bottom).offset(30)
+            make.top.equalTo(limitTextView.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(16)
         }
         contentView.addSubview(characterTextView)
@@ -313,12 +313,12 @@ final class ViewController: UIViewController {
         validationLabel.snp.makeConstraints{ make in
             make.width.equalTo(120)
             make.height.equalTo(20)
-            make.top.equalTo(linkTextField.snp.bottom).offset(29)
+            make.top.equalTo(linkTextView.snp.bottom).offset(29)
             make.leading.equalToSuperview().inset(16)
         }
         contentView.addSubview(passwordTextView)
         passwordTextView.snp.makeConstraints{ make in
-            make.top.equalTo(linkTextField.snp.bottom).offset(53)
+            make.top.equalTo(linkTextView.snp.bottom).offset(53)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(36)
         }
