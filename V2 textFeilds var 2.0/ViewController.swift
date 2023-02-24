@@ -216,16 +216,14 @@ final class ViewController: UIViewController {
         lettersTextView.snp.makeConstraints{make in
             make.top.equalTo(noDigitLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.width.equalTo(343)
+//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         lettersTextView.addSubview(lettersTextField)
         lettersTextField.snp.makeConstraints{ make in
             make.leading.equalTo(lettersTextView).inset(8)
-//            make.trailing.equalTo(lettersTextView).inset(260)
             make.top.equalTo(lettersTextView.snp.top).inset(7)
             make.bottom.equalTo(lettersTextView.snp.bottom).inset(7)
-//            make.width.equalTo(75)
             make.height.equalTo(22)
         }
         
@@ -239,7 +237,7 @@ final class ViewController: UIViewController {
         }
         contentView.addSubview(charactersCounter)
         charactersCounter.snp.makeConstraints{ make in
-            make.width.equalTo(35)
+            make.width.equalTo(45)
             make.height.equalTo(22)
             make.top.equalTo(lettersTextView.snp.bottom).offset(25)
             make.trailing.equalToSuperview().inset(16)
@@ -248,7 +246,7 @@ final class ViewController: UIViewController {
         limitTextView.snp.makeConstraints{ make in
             make.top.equalTo(lettersTextView.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.width.equalTo(343)
+//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         limitTextView.addSubview(limitTextField)
@@ -270,7 +268,7 @@ final class ViewController: UIViewController {
         characterTextView.snp.makeConstraints{ make in
             make.top.equalTo(limitTextView.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.width.equalTo(343)
+//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         characterTextView.addSubview(characterTextField)
@@ -289,13 +287,12 @@ final class ViewController: UIViewController {
             make.height.equalTo(20)
             make.top.equalTo(characterTextView.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(16)
-//            make.trailing.equalToSuperview().inset(335)
         }
         contentView.addSubview(linkTextView)
         linkTextView.snp.makeConstraints{ make in
             make.top.equalTo(characterTextView.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.width.equalTo(343)
+//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         linkTextView.addSubview(linkTextField)
@@ -319,7 +316,7 @@ final class ViewController: UIViewController {
         passwordTextView.snp.makeConstraints{ make in
             make.top.equalTo(linkTextField.snp.bottom).offset(53)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.width.equalTo(343)
+//            make.width.equalTo(343)
             make.height.equalTo(36)
         }
         passwordTextView.addSubview(passwordTextField)
@@ -334,7 +331,7 @@ final class ViewController: UIViewController {
         validationRulesLabel.snp.makeConstraints{ make in
             make.top.equalTo(passwordTextView.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(24)
-            make.width.equalTo(160)
+//            make.width.equalTo(160)
             make.height.equalTo(120)
         }
     }
@@ -400,7 +397,7 @@ extension ViewController: UITextFieldDelegate {
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
             let lengthToAdd = updatedText.count
             charactersCounter.text = "\(lengthToAdd)/10"
-            if lengthToAdd <= 9 {
+            if lengthToAdd <= 10 {
                 charactersCounter.textColor = .black
                 return true
             } else {
