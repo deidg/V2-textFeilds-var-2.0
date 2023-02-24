@@ -66,7 +66,6 @@ final class ViewController: UIViewController {
         let lettersTextField = UITextField()
         lettersTextField.placeholder = Constants.TextFields.lettersTextFieldPlaceholderText
         lettersTextField.textColor = Constants.TextFields.textFieldTextColor
-        lettersTextField.backgroundColor = Constants.TextFields.textFieldBackgroundColor
         lettersTextField.font = Constants.TextFields.textFieldFont
         lettersTextField.isEnabled = true
         lettersTextField.keyboardType = .alphabet
@@ -101,7 +100,6 @@ final class ViewController: UIViewController {
     }()
     let limitTextField: UITextField = {
         let limitTextField = UITextField()
-        limitTextField.backgroundColor = Constants.TextFields.textFieldBackgroundColor
         limitTextField.placeholder = Constants.TextFields.lettersTextFieldPlaceholderText
         limitTextField.textColor = Constants.TextFields.textFieldTextColor
         limitTextField.font = Constants.TextFields.textFieldFont
@@ -148,7 +146,6 @@ final class ViewController: UIViewController {
     }()
     let linkTextField: UITextField = {
         let linkTextField = UITextField()
-        linkTextField.backgroundColor = Constants.TextFields.textFieldBackgroundColor
         linkTextField.placeholder = Constants.TextFields.linkTextFieldPlaceholderText
         linkTextField.textColor = Constants.TextFields.textFieldTextColor
         linkTextField.font = Constants.TextFields.textFieldFont
@@ -172,7 +169,6 @@ final class ViewController: UIViewController {
     }()
     let passwordTextField: UITextField = {
         let passwordTextField = UITextField()
-        passwordTextField.backgroundColor = Constants.TextFields.textFieldBackgroundColor
         passwordTextField.placeholder = Constants.TextFields.passwordTextFieldPlaceholderText
         passwordTextField.textColor = Constants.TextFields.textFieldTextColor
         passwordTextField.font = Constants.TextFields.textFieldFont
@@ -236,19 +232,18 @@ final class ViewController: UIViewController {
         // 2 field 2
         contentView.addSubview(inputLimitLabel)
         inputLimitLabel.snp.makeConstraints{ make in
-            make.width.equalTo(58)
+            make.width.equalTo(78)
             make.height.equalTo(20)
             make.top.equalTo(lettersTextView.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(16)
-            make.trailing.equalToSuperview().inset(301)
         }
         contentView.addSubview(charactersCounter)
         charactersCounter.snp.makeConstraints{ make in
-            make.width.equalTo(25)
+            make.width.equalTo(35)
             make.height.equalTo(22)
             make.top.equalTo(lettersTextView.snp.bottom).offset(25)
             make.trailing.equalToSuperview().inset(16)
-            make.leading.equalToSuperview().inset(334)
+//            make.leading.equalToSuperview().inset(334)
         }
         contentView.addSubview(limitTextView)
         limitTextView.snp.makeConstraints{ make in
@@ -292,11 +287,11 @@ final class ViewController: UIViewController {
         // 4 field 4 LINK
         contentView.addSubview(linkLabel)
         linkLabel.snp.makeConstraints{ make in
-            make.width.equalTo(24)
+            make.width.equalTo(34)
             make.height.equalTo(20)
             make.top.equalTo(characterTextView.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(16)
-            make.trailing.equalToSuperview().inset(335)
+//            make.trailing.equalToSuperview().inset(335)
         }
         contentView.addSubview(linkTextView)
         linkTextView.snp.makeConstraints{ make in
