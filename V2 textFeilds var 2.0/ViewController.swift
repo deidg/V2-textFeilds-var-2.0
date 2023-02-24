@@ -33,8 +33,25 @@ final class ViewController: UIViewController {
     }
     
     //MARK: additional views
-    let scrollView = UIScrollView()
-    let contentView = UIView()
+    //    let scrollView = UIScrollView()
+    //    let contentView = UIView()
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.frame = view.bounds
+        scrollView.contentSize = contentSize
+        return scrollView
+    }()
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.frame.size = contentSize
+        return contentView
+    }()
+    private var contentSize: CGSize {
+        CGSize(width: view.frame.width, height: view.frame.height + 100)
+    }
+    
+    
+    
     
     let titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -194,7 +211,7 @@ final class ViewController: UIViewController {
         }
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { make in
-            make.bottom.top.width.height.equalToSuperview()
+            make.top.width.height.equalTo(scrollView) //equalToSuperview()
         }
         
         //  Textlabel
