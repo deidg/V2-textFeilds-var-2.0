@@ -222,10 +222,10 @@ final class ViewController: UIViewController {
         lettersTextView.addSubview(lettersTextField)
         lettersTextField.snp.makeConstraints{ make in
             make.leading.equalTo(lettersTextView).inset(8)
-            make.trailing.equalTo(lettersTextView).inset(260)
+//            make.trailing.equalTo(lettersTextView).inset(260)
             make.top.equalTo(lettersTextView.snp.top).inset(7)
             make.bottom.equalTo(lettersTextView.snp.bottom).inset(7)
-            make.width.equalTo(75)
+//            make.width.equalTo(75)
             make.height.equalTo(22)
         }
         
@@ -243,7 +243,6 @@ final class ViewController: UIViewController {
             make.height.equalTo(22)
             make.top.equalTo(lettersTextView.snp.bottom).offset(25)
             make.trailing.equalToSuperview().inset(16)
-//            make.leading.equalToSuperview().inset(334)
         }
         contentView.addSubview(limitTextView)
         limitTextView.snp.makeConstraints{ make in
@@ -255,7 +254,6 @@ final class ViewController: UIViewController {
         limitTextView.addSubview(limitTextField)
         limitTextField.snp.makeConstraints{ make in
             make.leading.equalTo(limitTextView).inset(8)
-            make.trailing.equalTo(limitTextView).inset(260)
             make.top.equalTo(limitTextView.snp.top).inset(7)
             make.bottom.equalTo(limitTextView.snp.bottom).inset(7)
         }
