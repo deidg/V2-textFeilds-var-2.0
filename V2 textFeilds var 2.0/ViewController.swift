@@ -17,7 +17,7 @@ final class ViewController: UIViewController {
     var activeTextField : UITextField? = nil
     
     let inputDigitRegex: String = "^([0-9]){5}$"
-    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&#])[a-zA-z\\d!$@$!%*?&#]{7,25}"
+    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}" //(?=.*[$@$!%*?&#])   !$@$!%*?&#
     let inputTextRegex: String = "^([a-zA-Z]{5})[-]([\\d]{5})$"
     
     override func viewDidLoad() {
@@ -424,7 +424,6 @@ extension ViewController: UITextFieldDelegate {
         } else if textField == linkTextField {
             let delay : Double = 5.0
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                
                 func startBrowser(_ sender: Any) {
                     if let urlString = self.linkTextField.text {
                         let url: URL?
