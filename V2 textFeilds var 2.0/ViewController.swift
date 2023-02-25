@@ -467,7 +467,7 @@ extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == linkTextField {
             
-//            func linkValidation(textField: UITextField) -> Bool {
+            
                 let link = linkTextField.text ?? ""
                 func isLinkValid(_ link : String) -> Bool {
                     let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
@@ -475,16 +475,35 @@ extension ViewController: UITextFieldDelegate {
                 }
                 if isLinkValid(link) {
                     print("its valid LINK")
+                    
+//                    открывает окно через 5 сек
+                                let delay : Double = 2.0 // 5.0 
+                                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                                    func startBrowser(_ sender: Any) {
+                                        if let urlString = self.linkTextField.text {
+                                            let url: URL?
+                                            if urlString.hasPrefix("http://") {
+                                                url = URL(string: urlString)
+                                            } else {
+                                                url = URL(string: "http://" + urlString)
+                                            }
+                                            if let url = url {
+                                                let sfViewController = SFSafariViewController(url: url)
+                                                self.present(sfViewController, animated: true, completion: nil)
+                                                print ("Now browsing in SFSafariViewController")
+                                            }
+                                        }
+                                    }
+                                    startBrowser(self.linkTextField)
+                                }
                 } else {
                     print("NOT valid link")
                 }
-//            }
-            //                return true
-            //            }
-            //
-            //        }
-            //        return true
         }
+        
+        
+        
+        
         return true
     }
     
