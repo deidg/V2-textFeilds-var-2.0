@@ -463,24 +463,29 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
     
-    //TODO: change keyboard type
+    //TODO: проверить варианты ссылки с www.  и без.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == linkTextField {
             
-            func linkValidation(textField: UITextField) {
-                
+//            func linkValidation(textField: UITextField) -> Bool {
                 let link = linkTextField.text ?? ""
-                
                 func isLinkValid(_ link : String) -> Bool {
                     let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
                     return linkTest.evaluate(with: link)
                 }
-                print(isLinkValid(link))
-            }
-            linkValidation(textField: linkTextField)
+                if isLinkValid(link) {
+                    print("its valid LINK")
+                } else {
+                    print("NOT valid link")
+                }
+//            }
+            //                return true
+            //            }
+            //
+            //        }
+            //        return true
         }
         return true
-        
     }
     
     //открывает окно через 5 сек
