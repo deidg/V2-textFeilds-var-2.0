@@ -17,6 +17,10 @@ final class ViewController: UIViewController {
     var activeTextField : UITextField? = nil
     
     let inputDigitRegex: String = "^([0-9]){5}$"
+    let linkRegex: String = "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
+    
+    
+    //    "^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
     let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
     let inputTextRegex: String = "^([a-zA-Z]{5})[-]([\\d]{5})$"
     
@@ -47,7 +51,7 @@ final class ViewController: UIViewController {
     private var contentSize: CGSize {
         CGSize(width: view.frame.width, height: view.frame.height + 100)
     }
-
+    
     let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = Constants.LabelsTexts.mainTitleLabeText
@@ -160,6 +164,7 @@ final class ViewController: UIViewController {
         linkTextField.placeholder = Constants.TextFields.linkTextFieldPlaceholderText
         linkTextField.textColor = Constants.TextFields.textFieldTextColor
         linkTextField.font = Constants.TextFields.textFieldFont
+        linkTextField.keyboardType = .URL
         return linkTextField
     }()
     
@@ -376,7 +381,7 @@ final class ViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-   
+    
     
 }
 
@@ -409,33 +414,39 @@ extension ViewController: UITextFieldDelegate {
                 charactersCounter.text = "10/10"
             }
             return lengthToAdd <= 10
-        } else if textField == linkTextField {
+            //} else if textField == linkTextField {
             // как вариант можно сделать маску для www.  а дальше как угодно.   Затем введеный текст проверяется на валидность. и открывается.  Причем тогдап можно и вторую точку проверить.
-            
-            
-            
-            
-            
-            //открывает окно через 5 сек
-//            let delay : Double = 5.0
-//            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-//                func startBrowser(_ sender: Any) {
-//                    if let urlString = self.linkTextField.text {
-//                        let url: URL?
-//                        if urlString.hasPrefix("http://") {
-//                            url = URL(string: urlString)
-//                        } else {
-//                            url = URL(string: "http://" + urlString)
-//                        }
-//                        if let url = url {
-//                            let sfViewController = SFSafariViewController(url: url)
-//                            self.present(sfViewController, animated: true, completion: nil)
-//                            print ("Now browsing in SFSafariViewController")
-//                        }
-//                    }
-//                }
-//                startBrowser(self.linkTextField)
-//            }
+            //
+            //            let link = linkTextField.text ?? ""
+            //
+            //            func isLinkValid(_ link : String) -> Bool {
+            //                let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
+            //                return linkTest.evaluate(with: link)
+            //            }
+            //            print(isLinkValid(link))
+            //
+            //
+            //
+            //            //открывает окно через 5 сек
+            ////            let delay : Double = 5.0
+            ////            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            ////                func startBrowser(_ sender: Any) {
+            ////                    if let urlString = self.linkTextField.text {
+            ////                        let url: URL?
+            ////                        if urlString.hasPrefix("http://") {
+            ////                            url = URL(string: urlString)
+            ////                        } else {
+            ////                            url = URL(string: "http://" + urlString)
+            ////                        }
+            ////                        if let url = url {
+            ////                            let sfViewController = SFSafariViewController(url: url)
+            ////                            self.present(sfViewController, animated: true, completion: nil)
+            ////                            print ("Now browsing in SFSafariViewController")
+            ////                        }
+            ////                    }
+            ////                }
+            ////                startBrowser(self.linkTextField)
+            ////            }
             //============
         } else if textField == passwordTextField {
             let password = passwordTextField.text ?? ""
@@ -451,6 +462,49 @@ extension ViewController: UITextFieldDelegate {
         }
         return true
     }
+    
+    //TODO: change keyboard type
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == linkTextField {
+            
+            func linkValidation(textField: UITextField) {
+                
+                let link = linkTextField.text ?? ""
+                
+                func isLinkValid(_ link : String) -> Bool {
+                    let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
+                    return linkTest.evaluate(with: link)
+                }
+                print(isLinkValid(link))
+            }
+            linkValidation(textField: linkTextField)
+        }
+        return true
+        
+    }
+    
+    //открывает окно через 5 сек
+    //            let delay : Double = 5.0
+    //            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+    //                func startBrowser(_ sender: Any) {
+    //                    if let urlString = self.linkTextField.text {
+    //                        let url: URL?
+    //                        if urlString.hasPrefix("http://") {
+    //                            url = URL(string: urlString)
+    //                        } else {
+    //                            url = URL(string: "http://" + urlString)
+    //                        }
+    //                        if let url = url {
+    //                            let sfViewController = SFSafariViewController(url: url)
+    //                            self.present(sfViewController, animated: true, completion: nil)
+    //                            print ("Now browsing in SFSafariViewController")
+    //                        }
+    //                    }
+    //                }
+    //                startBrowser(self.linkTextField)
+    //            }
+    //    }
+    
     
     //MARK: constants
     enum Constants {
@@ -496,10 +550,10 @@ extension ViewController: UITextFieldDelegate {
         self.activeTextField = nil
     }
     
-    func validateUrl() -> Bool {
-      let urlRegEx = "((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
-      return NSPredicate(format: "SELF MATCHES %@", urlRegEx).evaluate(with: self)
-    }
+    //    func validateUrl() -> Bool {
+    //      let urlRegEx = "((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
+    //      return NSPredicate(format: "SELF MATCHES %@", urlRegEx).evaluate(with: self)
+    //    }
 }
 
 
