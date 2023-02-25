@@ -375,6 +375,9 @@ final class ViewController: UIViewController {
     @objc func backgroundTap(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
+    
+   
+    
 }
 
 extension String {
@@ -399,33 +402,41 @@ extension ViewController: UITextFieldDelegate {
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
             let lengthToAdd = updatedText.count
             charactersCounter.text = "\(lengthToAdd)/10"
-            if lengthToAdd < 11 {
+            if lengthToAdd <= 10 {
                 charactersCounter.textColor = .black
-                return true
             } else {
                 charactersCounter.textColor = .red
-                return false
+                charactersCounter.text = "10/10"
             }
+            return lengthToAdd <= 10
         } else if textField == linkTextField {
-            let delay : Double = 5.0
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                func startBrowser(_ sender: Any) {
-                    if let urlString = self.linkTextField.text {
-                        let url: URL?
-                        if urlString.hasPrefix("http://") {
-                            url = URL(string: urlString)
-                        } else {
-                            url = URL(string: "http://" + urlString)
-                        }
-                        if let url = url {
-                            let sfViewController = SFSafariViewController(url: url)
-                            self.present(sfViewController, animated: true, completion: nil)
-                            print ("Now browsing in SFSafariViewController")
-                        }
-                    }
-                }
-                startBrowser(self.linkTextField)
-            }
+            // как вариант можно сделать маску для www.  а дальше как угодно.   Затем введеный текст проверяется на валидность. и открывается.  Причем тогдап можно и вторую точку проверить.
+            
+            
+            
+            
+            
+            //открывает окно через 5 сек
+//            let delay : Double = 5.0
+//            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+//                func startBrowser(_ sender: Any) {
+//                    if let urlString = self.linkTextField.text {
+//                        let url: URL?
+//                        if urlString.hasPrefix("http://") {
+//                            url = URL(string: urlString)
+//                        } else {
+//                            url = URL(string: "http://" + urlString)
+//                        }
+//                        if let url = url {
+//                            let sfViewController = SFSafariViewController(url: url)
+//                            self.present(sfViewController, animated: true, completion: nil)
+//                            print ("Now browsing in SFSafariViewController")
+//                        }
+//                    }
+//                }
+//                startBrowser(self.linkTextField)
+//            }
+            //============
         } else if textField == passwordTextField {
             let password = passwordTextField.text ?? ""
             func isPasswordValid(_ password : String) -> Bool {
@@ -485,4 +496,10 @@ extension ViewController: UITextFieldDelegate {
         self.activeTextField = nil
     }
     
+    func validateUrl() -> Bool {
+      let urlRegEx = "((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
+      return NSPredicate(format: "SELF MATCHES %@", urlRegEx).evaluate(with: self)
+    }
 }
+
+
