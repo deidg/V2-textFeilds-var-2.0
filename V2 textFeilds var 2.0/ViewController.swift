@@ -17,10 +17,7 @@ final class ViewController: UIViewController {
     var activeTextField : UITextField? = nil
     
     let inputDigitRegex: String = "^([0-9]){5}$"
-    let linkRegex: String = "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
-    
-    
-    //    "^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+    let linkRegex: String = "((?:http|https)://)?(?:www\\.)?(?:Www\\.)?(?:WWW\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
     let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
     let inputTextRegex: String = "^([a-zA-Z]{5})[-]([\\d]{5})$"
     
@@ -467,67 +464,40 @@ extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == linkTextField {
             
-            
-                let link = linkTextField.text ?? ""
-                func isLinkValid(_ link : String) -> Bool {
-                    let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
-                    return linkTest.evaluate(with: link)
+            let link = linkTextField.text ?? ""
+            func isLinkValid(_ link : String) -> Bool {
+                let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
+                return linkTest.evaluate(with: link)
+            }
+            if isLinkValid(link) {
+                print("its valid LINK")
+                
+                let delay : Double = 2.0 // 5.0
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    func startBrowser(_ sender: Any) {
+                        if let urlString = self.linkTextField.text {
+                            let url: URL?
+                            if urlString.hasPrefix("http://") {
+                                url = URL(string: urlString)
+                            } else {
+                                url = URL(string: "http://" + urlString)
+                            }
+                            if let url = url {
+                                let sfViewController = SFSafariViewController(url: url)
+                                self.present(sfViewController, animated: true, completion: nil)
+                                print ("Now browsing in SFSafariViewController")
+                            }
+                        }
+                    }
+                    startBrowser(self.linkTextField)
                 }
-                if isLinkValid(link) {
-                    print("its valid LINK")
-                    
-//                    открывает окно через 5 сек
-                                let delay : Double = 2.0 // 5.0 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                                    func startBrowser(_ sender: Any) {
-                                        if let urlString = self.linkTextField.text {
-                                            let url: URL?
-                                            if urlString.hasPrefix("http://") {
-                                                url = URL(string: urlString)
-                                            } else {
-                                                url = URL(string: "http://" + urlString)
-                                            }
-                                            if let url = url {
-                                                let sfViewController = SFSafariViewController(url: url)
-                                                self.present(sfViewController, animated: true, completion: nil)
-                                                print ("Now browsing in SFSafariViewController")
-                                            }
-                                        }
-                                    }
-                                    startBrowser(self.linkTextField)
-                                }
-                } else {
-                    print("NOT valid link")
-                }
+            } else {
+                print("NOT valid link")
+            }
         }
-        
-        
-        
-        
         return true
     }
     
-    //открывает окно через 5 сек
-    //            let delay : Double = 5.0
-    //            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-    //                func startBrowser(_ sender: Any) {
-    //                    if let urlString = self.linkTextField.text {
-    //                        let url: URL?
-    //                        if urlString.hasPrefix("http://") {
-    //                            url = URL(string: urlString)
-    //                        } else {
-    //                            url = URL(string: "http://" + urlString)
-    //                        }
-    //                        if let url = url {
-    //                            let sfViewController = SFSafariViewController(url: url)
-    //                            self.present(sfViewController, animated: true, completion: nil)
-    //                            print ("Now browsing in SFSafariViewController")
-    //                        }
-    //                    }
-    //                }
-    //                startBrowser(self.linkTextField)
-    //            }
-    //    }
     
     
     //MARK: constants
