@@ -426,7 +426,7 @@ final class ViewController: UIViewController {
     }
     
     func containsMinimumLetters(_ value: String) -> Bool {
-        let reqularExpression = "[a-zA-z\\d]{8,25}$" //"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{8,25}$" 
+        let reqularExpression = "[a-zA-z\\d]{8,25}$" //"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{8,25}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
         return predicate.evaluate(with: value)
     }
@@ -554,38 +554,35 @@ extension ViewController: UITextFieldDelegate {
                let textRange = Range(range, in: value) {
                 let updatedText = value.replacingCharacters(in: textRange, with: string)
                 
-                
-                let passwordContainMinimumLetters = containsMinimumLetters(updatedText)
-                if passwordContainMinimumLetters == true {
-                    validationMinLengthLabel.textColor = .green
-                } else {
-                    print("Enter 8 characters!")
-                }
-                
-                
                 let passwordContainDigit = containsDigit(updatedText)
-                if passwordContainDigit == true {
+                let passwordContainLowerCase = containsLowerCase(updatedText)
+                let passwordContainCapitals = containsCapitalCase(updatedText)
+                let passwordContainMinimumLetters = containsMinimumLetters(updatedText)
+
+
+          
+                if  passwordContainDigit == true {
                     validationDigitLabel.textColor = .green
                 } else {
-                    print("Enter digit!")
+                    validationDigitLabel.textColor = .black
                 }
                 
-                
-                
-                let passwordContainLowerCase = containsLowerCase(updatedText)
                 if passwordContainLowerCase == true {
                     validationLowerCaseLabel.textColor = .green
                 } else {
-                    print("Enter any capital letter!")
+                    validationLowerCaseLabel.textColor = .black
                 }
                 
-                
-                
-                let passwordContainCapitals = containsCapitalCase(updatedText)
                 if passwordContainCapitals == true {
                     validationCapitalCaseLabel.textColor = .green
                 } else {
-                    print("Enter any capital letter!")
+                    validationCapitalCaseLabel.textColor = .black
+                }
+                
+                if  passwordContainMinimumLetters == true {
+                    validationMinLengthLabel.textColor = .green
+                } else {
+                    validationMinLengthLabel.textColor = .black
                 }
                 
             }
