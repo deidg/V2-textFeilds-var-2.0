@@ -425,6 +425,18 @@ final class ViewController: UIViewController {
         //        validationRulesLabel.attributedText = attributedString
     }
     
+    func containsDigit(_ value: String) -> Bool {
+        let reqularExpression = "^([0-9])$" //".*[0-9]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        return predicate.evaluate(with: value)
+    }
+    
+    
+    
+    
+    
+    
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
@@ -516,181 +528,207 @@ extension ViewController: UITextFieldDelegate {
             ////            }
             //============
         } else if textField == passwordTextField {
-            //TODO: Upper case  и CapitalCase - объединить
+            //TODO: Upper case  и CapitalCase - объединить (разные наименования)
             //===
             
-            var value = passwordTextField.text ?? ""
-            func invalidPassword(_ value: String) -> String?
-            {
-                if value.count < 8
-                {
-                    validationMinLengthLabel.backgroundColor = .red
-                    return "Password must be at least 8 characters"
-                }
-                if containsDigit(value)
-                {
-                    validationDigitLabel.backgroundColor = .green
-                    return "Password must contain at least 1 digit"
-                }
-                if containsLowerCase(value)
-                {
-                    validationLowerCaseLabel.backgroundColor = .green
-                    return "Password must contain at least 1 lowercase character"
-                }
-                if containsUpperCase(value)
-                {
-                    validationCapitalCaseLabel.backgroundColor = .green
-                    return "Password must contain at least 1 uppercase character"
-                }
-                return nil
-            }
-            
-            func containsDigit(_ value: String) -> Bool
-            {
-                let reqularExpression = ".*[0-9]+.*"
-                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-                return !predicate.evaluate(with: value)
-            }
-            
-            func containsLowerCase(_ value: String) -> Bool
-            {
-                let reqularExpression = ".*[a-z]+.*"
-                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-                return !predicate.evaluate(with: value)
-            }
-            
-            func containsUpperCase(_ value: String) -> Bool
-            {
-                let reqularExpression = ".*[A-Z]+.*"
-                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-                return !predicate.evaluate(with: value)
-            }
-            
-            
-            
-            
-            
-            
-            
-            ////===
+            if let value = passwordTextField.text,
+               let textRange = Range(range, in: value) {
+                let updatedText = value.replacingCharacters(in: textRange, with: string)
             
             //            return true
+            //        }
+            
+            let digitYes = containsDigit(updatedText)
+            if digitYes == true {
+                validationDigitLabel.textColor = .green
+            } else {
+                print("fuck!")
+            }
+            }
         }
-        
-        //            let result = validatePassword(password)
-        //    }
         return true
     }
+    //
+    //    }
+    //}
+    
+    //            func invalidPassword(_ value: String) {// -> String?
+    //                if value.count < 8 {
+    //                    validationMinLengthLabel.textColor = .red
+    ////                    return "Password must be at least 8 characters"
+    //                } else if containsDigit(value) {
+    //                    validationDigitLabel.textColor = .green
+    ////                    return "Password must contain at least 1 digit"
+    //                } else if containsLowerCase(value) {
+    //                    validationLowerCaseLabel.textColor = .green
+    ////                    return "Password must contain at least 1 lowercase character"
+    //                } else if containsUpperCase(value) {
+    //                    validationCapitalCaseLabel.textColor = .green
+    ////                    return "Password must contain at least 1 uppercase character"
+    //                }
+    ////                return nil
+    //            }
+    //            var result = invalidPassword(value)
+    
+    
+    
+    
+    //            func containsLowerCase(_ value: String) -> Bool
+    //            {
+    //                let reqularExpression = ".*[a-z]+.*"
+    //                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+    //                return !predicate.evaluate(with: value)
+    //            }
+    ////            containsLowerCase(value)
+    //
+    //            func containsUpperCase(_ value: String) -> Bool
+    //            {
+    //                let reqularExpression = ".*[A-Z]+.*"
+    //                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+    //                return !predicate.evaluate(with: value)
+    //            }
+    ////            containsLowerCase(value)
+    
+    //            switch value {
+    //            case value.count < 8: //{
+    //                    validationMinLengthLabel.textColor = .red
+    ////                    return "Password must be at least 8 characters"
+    //            case digitYes: //{
+    //                    validationDigitLabel.textColor = .green
+    ////                    return "Password must contain at least 1 digit"
+    //            case containsLowerCase(value): //{
+    //                    validationLowerCaseLabel.textColor = .green
+    ////                    return "Password must contain at least 1 lowercase character"
+    //            case containsUpperCase(value): //{
+    //                    validationCapitalCaseLabel.textColor = .green
+    //                    return "Password must contain at least 1 uppercase character"
+    //                }
+    //                return nil
+    //            }
+    
+    
+    
+    
+    ////===
+    //
+    //                        return true
+    //        }
+    
+    //            let result = validatePassword(password)
+    //    }
+    //        return true
+    //    }
+    //}
+    
+    
+    //рабочий код для ТФ5
+    //            let password = passwordTextField.text ?? ""
+    //            func isPasswordValid(_ password : String) -> Bool {
+    //                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+    //                return passwordTest.evaluate(with: password)
+    //            }
+    //            if isPasswordValid(password) == true {
+    //                validationRulesLabel.textColor = .green
+    //            } else {
+    //                validationRulesLabel.textColor = .red
+    //            }
+    //        }
+    //        return true
+    //    }
+    
+    //TODO: проверить варианты ссылки с www.  и без.  ВАЛИДНЫЙ КОД НИЖЕ для ТФ4
+    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //        if textField == linkTextField {
+    //
+    //            let link = linkTextField.text ?? ""
+    //            func isLinkValid(_ link : String) -> Bool {
+    //                let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
+    //                return linkTest.evaluate(with: link)
+    //            }
+    //            if isLinkValid(link) {
+    //                print("its valid LINK")
+    //
+    //                let delay : Double = 2.0 // 5.0
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+    //                    func startBrowser(_ sender: Any) {
+    //                        if let urlString = self.linkTextField.text {
+    //                            let url: URL?
+    //                            if urlString.hasPrefix("http://") {
+    //                                url = URL(string: urlString)
+    //                            } else {
+    //                                url = URL(string: "http://" + urlString)
+    //                            }
+    //                            if let url = url {
+    //                                let sfViewController = SFSafariViewController(url: url)
+    //                                self.present(sfViewController, animated: true, completion: nil)
+    //                                print ("Now browsing in SFSafariViewController")
+    //                            }
+    //                        }
+    //                    }
+    //                    startBrowser(self.linkTextField)
+    //                }
+    //            } else {
+    //                print("NOT valid link")
+    //            }
+    //        }
+    //        return true
+    //    }
+    
+    
+    
+    //MARK: constants
+    enum Constants {
+        enum LabelsSettings {
+            static let lettersTextViewCornerRadius: CGFloat = 10
+        }
+        enum LabelsFonts {
+            static let mainLabelFont = UIFont(name: "Rubik", size: 34)
+            static let smallLabelFont = UIFont(name: "Rubik", size: 13)
+        }
+        enum LabelsTexts {
+            static let mainTitleLabeText = "Text Fields"
+            static let noDigitLabelText = "NO digit field"
+            static let inputLimitLabelText = "Input limit"
+            static let charactersCounterText = "0/10"
+            static let onlyCharectersLabelText = "Only characters"
+            static let linkLabelText = "Link"
+            static let validationLabelText = "Validation rules"
+            //            static let validationRulesLabelText = "Min length 8 characters,\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
+            
+            static let validationMinLengthLabelText = "Min length 8 characters,"
+            static let validationDigitLabelText = "Min 1 digit,"
+            static let validationLowerCaseLabelText = "Min 1 lowercase,"
+            static let validationCapitalCaseLabelText = "Min 1 capital required.\n"
+            
+            
+            
+            
+            static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
+            static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
+        }
+        enum LabelsBackgroundColors {
+            static let labelBackgoundColors = UIColor.white
+        }
+        enum TextFields {
+            static let lettersTextFieldPlaceholderText = "Type here"
+            static let onlyCharectersLabelPlaceholderText = "wwwww-ddddd"
+            static let linkTextFieldPlaceholderText = "www.example.com"
+            static let passwordTextFieldPlaceholderText = "Password"
+            static let textFieldFont = UIFont(name: "Rubik", size: 17)
+            static let textFieldTextColor = UIColor(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
+            static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
+            static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
+        }
+    }
+    
+    //MARK: keyboard    - валидный код ниже
+    //    func textFieldDidBeginEditing(_ textField: UITextField) {
+    //        self.activeTextField = textField
+    //    }
+    //    func textFieldDidEndEditing(_ textField: UITextField) {
+    //        self.activeTextField = nil
+    //    }
+    //}
+    
+    
 }
-
-
-//рабочий код для ТФ5
-//            let password = passwordTextField.text ?? ""
-//            func isPasswordValid(_ password : String) -> Bool {
-//                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-//                return passwordTest.evaluate(with: password)
-//            }
-//            if isPasswordValid(password) == true {
-//                validationRulesLabel.textColor = .green
-//            } else {
-//                validationRulesLabel.textColor = .red
-//            }
-//        }
-//        return true
-//    }
-
-//TODO: проверить варианты ссылки с www.  и без.  ВАЛИДНЫЙ КОД НИЖЕ для ТФ4
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        if textField == linkTextField {
-//
-//            let link = linkTextField.text ?? ""
-//            func isLinkValid(_ link : String) -> Bool {
-//                let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
-//                return linkTest.evaluate(with: link)
-//            }
-//            if isLinkValid(link) {
-//                print("its valid LINK")
-//
-//                let delay : Double = 2.0 // 5.0
-//                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-//                    func startBrowser(_ sender: Any) {
-//                        if let urlString = self.linkTextField.text {
-//                            let url: URL?
-//                            if urlString.hasPrefix("http://") {
-//                                url = URL(string: urlString)
-//                            } else {
-//                                url = URL(string: "http://" + urlString)
-//                            }
-//                            if let url = url {
-//                                let sfViewController = SFSafariViewController(url: url)
-//                                self.present(sfViewController, animated: true, completion: nil)
-//                                print ("Now browsing in SFSafariViewController")
-//                            }
-//                        }
-//                    }
-//                    startBrowser(self.linkTextField)
-//                }
-//            } else {
-//                print("NOT valid link")
-//            }
-//        }
-//        return true
-//    }
-
-
-
-//MARK: constants
-enum Constants {
-    enum LabelsSettings {
-        static let lettersTextViewCornerRadius: CGFloat = 10
-    }
-    enum LabelsFonts {
-        static let mainLabelFont = UIFont(name: "Rubik", size: 34)
-        static let smallLabelFont = UIFont(name: "Rubik", size: 13)
-    }
-    enum LabelsTexts {
-        static let mainTitleLabeText = "Text Fields"
-        static let noDigitLabelText = "NO digit field"
-        static let inputLimitLabelText = "Input limit"
-        static let charactersCounterText = "0/10"
-        static let onlyCharectersLabelText = "Only characters"
-        static let linkLabelText = "Link"
-        static let validationLabelText = "Validation rules"
-        //            static let validationRulesLabelText = "Min length 8 characters,\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
-        
-        static let validationMinLengthLabelText = "Min length 8 characters,"
-        static let validationDigitLabelText = "Min 1 digit,"
-        static let validationLowerCaseLabelText = "Min 1 lowercase,"
-        static let validationCapitalCaseLabelText = "Min 1 capital required.\n"
-        
-        
-        
-        
-        static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
-        static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
-    }
-    enum LabelsBackgroundColors {
-        static let labelBackgoundColors = UIColor.white
-    }
-    enum TextFields {
-        static let lettersTextFieldPlaceholderText = "Type here"
-        static let onlyCharectersLabelPlaceholderText = "wwwww-ddddd"
-        static let linkTextFieldPlaceholderText = "www.example.com"
-        static let passwordTextFieldPlaceholderText = "Password"
-        static let textFieldFont = UIFont(name: "Rubik", size: 17)
-        static let textFieldTextColor = UIColor(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
-        static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
-        static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
-    }
-}
-
-//MARK: keyboard    - валидный код ниже
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        self.activeTextField = textField
-//    }
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        self.activeTextField = nil
-//    }
-//}
-
-
