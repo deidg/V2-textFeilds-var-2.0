@@ -425,6 +425,12 @@ final class ViewController: UIViewController {
         //        validationRulesLabel.attributedText = attributedString
     }
     
+    func containsMinimumLetters(_ value: String) -> Bool {
+        let reqularExpression = "^([0-9])$" //".*[0-9]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        return predicate.evaluate(with: value)
+    }
+    
     func containsDigit(_ value: String) -> Bool {
         let reqularExpression = "^([0-9])$" //".*[0-9]+.*"
         let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
@@ -432,6 +438,19 @@ final class ViewController: UIViewController {
     }
     
     
+    func containsLowerCase(_ value: String) -> Bool {
+        let reqularExpression = "^([a-z])$" //".*[0-9]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        return predicate.evaluate(with: value)
+    }
+    
+    
+    
+    func containsCapitalCase(_ value: String) -> Bool {
+        let reqularExpression = "^([A-Z])$" //".*[0-9]+.*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        return predicate.evaluate(with: value)
+    }
     
     
     
@@ -534,16 +553,41 @@ extension ViewController: UITextFieldDelegate {
             if let value = passwordTextField.text,
                let textRange = Range(range, in: value) {
                 let updatedText = value.replacingCharacters(in: textRange, with: string)
-            
-            //            return true
-            //        }
-            
-            let digitYes = containsDigit(updatedText)
-            if digitYes == true {
-                validationDigitLabel.textColor = .green
-            } else {
-                print("fuck!")
-            }
+                
+                
+                let passwordContainMinimumLetters = containsMinimumLetters(updatedText)
+                if passwordContainMinimumLetters == true {
+                    validationMinLengthLabel.textColor = .green
+                } else {
+                    print("Enter digit!")
+                }
+                
+                
+                let passwordContainDigit = containsDigit(updatedText)
+                if passwordContainDigit == true {
+                    validationDigitLabel.textColor = .green
+                } else {
+                    print("Enter digit!")
+                }
+                
+                
+                
+                let passwordContainLowerCase = containsLowerCase(updatedText)
+                if passwordContainLowerCase == true {
+                    validationLowerCaseLabel.textColor = .green
+                } else {
+                    print("Enter any capital letter!")
+                }
+                
+                
+                
+                let passwordContainCapitals = containsCapitalCase(updatedText)
+                if passwordContainCapitals == true {
+                    validationCapitalCaseLabel.textColor = .green
+                } else {
+                    print("Enter any capital letter!")
+                }
+                
             }
         }
         return true
