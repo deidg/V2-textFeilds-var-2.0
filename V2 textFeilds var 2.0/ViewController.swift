@@ -199,22 +199,34 @@ final class ViewController: UIViewController {
     
     let validationMinLengthLabel: UILabel = {
         let validationMinLengthLabel = UILabel()
-        validationMinLengthLabel.backgroundColor = .purple
+//        validationMinLengthLabel.backgroundColor = .purple
+        validationMinLengthLabel.text = Constants.LabelsTexts.validationMinLengthLabelText
+        validationMinLengthLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+        validationMinLengthLabel.font = Constants.LabelsFonts.smallLabelFont
         return validationMinLengthLabel
     }()
     let validationDigitLabel: UILabel = {
         let validationDigitLabel = UILabel()
-        validationDigitLabel.backgroundColor = .red
+        validationDigitLabel.text = Constants.LabelsTexts.validationDigitLabelText
+        validationDigitLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+        validationDigitLabel.font = Constants.LabelsFonts.smallLabelFont
+//        validationDigitLabel.backgroundColor = .red
         return validationDigitLabel
     }()
     let validationLowerCaseLabel: UILabel = {
         let validationLowerCaseLabel = UILabel()
-        validationLowerCaseLabel.backgroundColor = .green
+        validationLowerCaseLabel.text = Constants.LabelsTexts.validationLowerCaseLabelText
+        validationLowerCaseLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+        validationLowerCaseLabel.font = Constants.LabelsFonts.smallLabelFont
+//        validationLowerCaseLabel.backgroundColor = .green
         return validationLowerCaseLabel
     }()
     let validationCapitalCaseLabel: UILabel = {
         let validationCapitalCaseLabel = UILabel()
-        validationCapitalCaseLabel.backgroundColor = .link
+        validationCapitalCaseLabel.text = Constants.LabelsTexts.validationCapitalCaseLabelText
+        validationCapitalCaseLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+        validationCapitalCaseLabel.font = Constants.LabelsFonts.smallLabelFont
+//        validationCapitalCaseLabel.backgroundColor = .link
         return validationCapitalCaseLabel
     }()
     
@@ -367,32 +379,29 @@ final class ViewController: UIViewController {
         validationRulesView.addSubview(validationMinLengthLabel)
         validationMinLengthLabel.snp.makeConstraints{ make in
             make.top.equalTo(passwordTextView.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(15) //24
-            make.trailing.equalToSuperview().inset(215)
+            make.leading.equalToSuperview().inset(10) //24
+            make.trailing.equalToSuperview().inset(180)
             make.height.equalTo(15)
         }
-        
         validationRulesView.addSubview(validationDigitLabel)
         validationDigitLabel.snp.makeConstraints{ make in
             make.top.equalTo(validationMinLengthLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(15) //24
-            make.trailing.equalToSuperview().inset(215)
+            make.leading.equalToSuperview().inset(10) //24
+            make.trailing.equalToSuperview().inset(180)
             make.height.equalTo(15)
         }
-        
         validationRulesView.addSubview(validationLowerCaseLabel)
         validationLowerCaseLabel.snp.makeConstraints{ make in
             make.top.equalTo(validationDigitLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(15) //24
-            make.trailing.equalToSuperview().inset(215)
+            make.leading.equalToSuperview().inset(10) //24
+            make.trailing.equalToSuperview().inset(180)
             make.height.equalTo(15)
         }
-        
         validationRulesView.addSubview(validationCapitalCaseLabel)
         validationCapitalCaseLabel.snp.makeConstraints{ make in
             make.top.equalTo(validationLowerCaseLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(15) //24
-            make.trailing.equalToSuperview().inset(215)
+            make.leading.equalToSuperview().inset(10) //24
+            make.trailing.equalToSuperview().inset(180)
             make.height.equalTo(15)
         }
         
@@ -646,10 +655,10 @@ extension ViewController: UITextFieldDelegate {
             static let validationLabelText = "Validation rules"
 //            static let validationRulesLabelText = "Min length 8 characters,\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
             
-            static let validationRulesLabelText1 = "Min length 8 characters,"
-            static let validationRulesLabelText2 = "Min 1 digit,"
-            static let validationRulesLabelText3 = "Min 1 lowercase,"
-            static let validationRulesLabelText4 = "Min 1 capital required.\n"
+            static let validationMinLengthLabelText = "Min length 8 characters,"
+            static let validationDigitLabelText = "Min 1 digit,"
+            static let validationLowerCaseLabelText = "Min 1 lowercase,"
+            static let validationCapitalCaseLabelText = "Min 1 capital required.\n"
             
             
             
