@@ -7,6 +7,10 @@
 //  Created by Alex on 07.02.2023.
 //
 
+//в этом проекте который скачал - посмотреть еще раз как он это делал и повторить. кажется подходит.
+//ЛИБО можно сделать так - счётчик идёт до 8 и после отображается цветом валидный пароль или нет.
+
+
 import UIKit
 import SnapKit
 import SafariServices
@@ -187,15 +191,36 @@ final class ViewController: UIViewController {
         passwordTextField.font = Constants.TextFields.textFieldFont
         return passwordTextField
     }()
-    let validationRulesLabel: UILabel = {
-        let validationRulesLabel = UILabel()
-        validationRulesLabel.numberOfLines = 4
-        validationRulesLabel.backgroundColor = .white
-        validationRulesLabel.font = Constants.LabelsFonts.smallLabelFont
-        validationRulesLabel.text = Constants.LabelsTexts.validationRulesLabelText
-        validationRulesLabel.textColor = Constants.LabelsTexts.validationRulesLabelTextColor
-        return validationRulesLabel
+    let validationRulesView: UIView = {
+        let validationRulesView = UIView()
+        return validationRulesView
     }()
+    
+    
+    let validationMinLengthLabel: UILabel = {
+        let validationMinLengthLabel = UILabel()
+        validationMinLengthLabel.backgroundColor = .purple
+        return validationMinLengthLabel
+    }()
+    let validationDigitLabel: UILabel = {
+        let validationDigitLabel = UILabel()
+        validationDigitLabel.backgroundColor = .red
+        return validationDigitLabel
+    }()
+    let validationLowerCaseLabel: UILabel = {
+        let validationLowerCaseLabel = UILabel()
+        validationLowerCaseLabel.backgroundColor = .green
+        return validationLowerCaseLabel
+    }()
+    let validationCapitalCaseLabel: UILabel = {
+        let validationCapitalCaseLabel = UILabel()
+        validationCapitalCaseLabel.backgroundColor = .link
+        return validationCapitalCaseLabel
+    }()
+    
+    
+    
+    
     
     private func setupItemsOnView() {
         
@@ -332,12 +357,47 @@ final class ViewController: UIViewController {
             make.width.equalTo(200)
             make.height.equalTo(22)
         }
-        contentView.addSubview(validationRulesLabel)
-        validationRulesLabel.snp.makeConstraints{ make in
+        contentView.addSubview(validationRulesView)
+        validationRulesView.snp.makeConstraints{ make in
             make.top.equalTo(passwordTextView.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(120)
         }
+        
+        validationRulesView.addSubview(validationMinLengthLabel)
+        validationMinLengthLabel.snp.makeConstraints{ make in
+            make.top.equalTo(passwordTextView.snp.bottom).offset(8)
+            make.leading.equalToSuperview().inset(15) //24
+            make.trailing.equalToSuperview().inset(215)
+            make.height.equalTo(15)
+        }
+        
+        validationRulesView.addSubview(validationDigitLabel)
+        validationDigitLabel.snp.makeConstraints{ make in
+            make.top.equalTo(validationMinLengthLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().inset(15) //24
+            make.trailing.equalToSuperview().inset(215)
+            make.height.equalTo(15)
+        }
+        
+        validationRulesView.addSubview(validationLowerCaseLabel)
+        validationLowerCaseLabel.snp.makeConstraints{ make in
+            make.top.equalTo(validationDigitLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().inset(15) //24
+            make.trailing.equalToSuperview().inset(215)
+            make.height.equalTo(15)
+        }
+        
+        validationRulesView.addSubview(validationCapitalCaseLabel)
+        validationCapitalCaseLabel.snp.makeConstraints{ make in
+            make.top.equalTo(validationLowerCaseLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().inset(15) //24
+            make.trailing.equalToSuperview().inset(215)
+            make.height.equalTo(15)
+        }
+        
+        
+        
     }
     
     func defaultConfiguration() {
@@ -348,11 +408,12 @@ final class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineSpacing = 7.0
-        let attributedString = NSMutableAttributedString(string: "Min length 8 characters.\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n")
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraph, range: NSMakeRange(0, attributedString.length))
-        validationRulesLabel.attributedText = attributedString
+        //!!!код для выравнивания текста в лейбле!!!!
+//        let paragraph = NSMutableParagraphStyle()
+//        paragraph.lineSpacing = 7.0
+//        let attributedString = NSMutableAttributedString(string: "Min length 8 characters.\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n")
+//        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraph, range: NSMakeRange(0, attributedString.length))
+//        validationRulesLabel.attributedText = attributedString
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -446,57 +507,123 @@ extension ViewController: UITextFieldDelegate {
             ////            }
             //============
         } else if textField == passwordTextField {
-            let password = passwordTextField.text ?? ""
-            func isPasswordValid(_ password : String) -> Bool {
-                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-                return passwordTest.evaluate(with: password)
-            }
-            if isPasswordValid(password) == true {
-                validationRulesLabel.textColor = .green
-            } else {
-                validationRulesLabel.textColor = .red
-            }
-        }
-        return true
-    }
-    
-    //TODO: проверить варианты ссылки с www.  и без.
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == linkTextField {
             
-            let link = linkTextField.text ?? ""
-            func isLinkValid(_ link : String) -> Bool {
-                let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
-                return linkTest.evaluate(with: link)
-            }
-            if isLinkValid(link) {
-                print("its valid LINK")
-                
-                let delay : Double = 2.0 // 5.0
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    func startBrowser(_ sender: Any) {
-                        if let urlString = self.linkTextField.text {
-                            let url: URL?
-                            if urlString.hasPrefix("http://") {
-                                url = URL(string: urlString)
-                            } else {
-                                url = URL(string: "http://" + urlString)
-                            }
-                            if let url = url {
-                                let sfViewController = SFSafariViewController(url: url)
-                                self.present(sfViewController, animated: true, completion: nil)
-                                print ("Now browsing in SFSafariViewController")
-                            }
-                        }
-                    }
-                    startBrowser(self.linkTextField)
-                }
-            } else {
-                print("NOT valid link")
-            }
+            //===
+            /*
+             var value = passwordTextField.text ?? ""
+             func invalidPassword(_ value: String) -> String?
+             {
+             if value.count < 8
+             {
+             
+             return "Password must be at least 8 characters"
+             }
+             if containsDigit(value)
+             {
+             return "Password must contain at least 1 digit"
+             }
+             if containsLowerCase(value)
+             {
+             return "Password must contain at least 1 lowercase character"
+             }
+             if containsUpperCase(value)
+             {
+             return "Password must contain at least 1 uppercase character"
+             }
+             return nil
+             }
+             
+             func containsDigit(_ value: String) -> Bool
+             {
+             let reqularExpression = ".*[0-9]+.*"
+             let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+             return !predicate.evaluate(with: value)
+             }
+             
+             func containsLowerCase(_ value: String) -> Bool
+             {
+             let reqularExpression = ".*[a-z]+.*"
+             let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+             return !predicate.evaluate(with: value)
+             }
+             
+             func containsUpperCase(_ value: String) -> Bool
+             {
+             let reqularExpression = ".*[A-Z]+.*"
+             let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+             return !predicate.evaluate(with: value)
+             }
+             
+             
+             
+             
+             */
+            
+            
+            ////===
+            
+            return true
         }
-        return true
+        
+        //            let result = validatePassword(password)
+//    }
+            return true
+}
     }
+            
+            
+            //рабочий код для ТФ5
+//            let password = passwordTextField.text ?? ""
+//            func isPasswordValid(_ password : String) -> Bool {
+//                let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+//                return passwordTest.evaluate(with: password)
+//            }
+//            if isPasswordValid(password) == true {
+//                validationRulesLabel.textColor = .green
+//            } else {
+//                validationRulesLabel.textColor = .red
+//            }
+//        }
+//        return true
+//    }
+    
+    //TODO: проверить варианты ссылки с www.  и без.  ВАЛИДНЫЙ КОД НИЖЕ для ТФ4
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        if textField == linkTextField {
+//
+//            let link = linkTextField.text ?? ""
+//            func isLinkValid(_ link : String) -> Bool {
+//                let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
+//                return linkTest.evaluate(with: link)
+//            }
+//            if isLinkValid(link) {
+//                print("its valid LINK")
+//
+//                let delay : Double = 2.0 // 5.0
+//                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+//                    func startBrowser(_ sender: Any) {
+//                        if let urlString = self.linkTextField.text {
+//                            let url: URL?
+//                            if urlString.hasPrefix("http://") {
+//                                url = URL(string: urlString)
+//                            } else {
+//                                url = URL(string: "http://" + urlString)
+//                            }
+//                            if let url = url {
+//                                let sfViewController = SFSafariViewController(url: url)
+//                                self.present(sfViewController, animated: true, completion: nil)
+//                                print ("Now browsing in SFSafariViewController")
+//                            }
+//                        }
+//                    }
+//                    startBrowser(self.linkTextField)
+//                }
+//            } else {
+//                print("NOT valid link")
+//            }
+//        }
+//        return true
+//    }
     
     
     
@@ -517,7 +644,16 @@ extension ViewController: UITextFieldDelegate {
             static let onlyCharectersLabelText = "Only characters"
             static let linkLabelText = "Link"
             static let validationLabelText = "Validation rules"
-            static let validationRulesLabelText = "Min length 8 characters,\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
+//            static let validationRulesLabelText = "Min length 8 characters,\nMin 1 digit,\nMin 1 lowercase,\nMin 1 capital required.\n"
+            
+            static let validationRulesLabelText1 = "Min length 8 characters,"
+            static let validationRulesLabelText2 = "Min 1 digit,"
+            static let validationRulesLabelText3 = "Min 1 lowercase,"
+            static let validationRulesLabelText4 = "Min 1 capital required.\n"
+            
+            
+            
+            
             static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
             static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
         }
@@ -536,18 +672,13 @@ extension ViewController: UITextFieldDelegate {
         }
     }
     
-    //MARK: keyboard
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.activeTextField = textField
-    }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.activeTextField = nil
-    }
-    
-    //    func validateUrl() -> Bool {
-    //      let urlRegEx = "((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
-    //      return NSPredicate(format: "SELF MATCHES %@", urlRegEx).evaluate(with: self)
-    //    }
-}
+    //MARK: keyboard    - валидный код ниже
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        self.activeTextField = textField
+//    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        self.activeTextField = nil
+//    }
+//}
 
 
