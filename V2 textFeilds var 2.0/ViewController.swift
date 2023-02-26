@@ -426,7 +426,7 @@ final class ViewController: UIViewController {
     }
     
     func containsMinimumLetters(_ value: String) -> Bool {
-        let reqularExpression = "^([0-9])$" //".*[0-9]+.*"
+        let reqularExpression = "[a-zA-z\\d]{8,25}$" //"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{8,25}$" 
         let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
         return predicate.evaluate(with: value)
     }
@@ -559,7 +559,7 @@ extension ViewController: UITextFieldDelegate {
                 if passwordContainMinimumLetters == true {
                     validationMinLengthLabel.textColor = .green
                 } else {
-                    print("Enter digit!")
+                    print("Enter 8 characters!")
                 }
                 
                 
