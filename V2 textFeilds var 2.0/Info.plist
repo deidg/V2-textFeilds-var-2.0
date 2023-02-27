@@ -6,6 +6,7 @@
 	<array>
 		<string>Rubik-Regular.ttf</string>
 		<string>Rubik-SemiBold.ttf</string>
+		<string>Rubik-Medium.ttf</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string></string>

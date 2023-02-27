@@ -32,6 +32,7 @@ final class ViewController: UIViewController {
         characterTextField.delegate = self
         linkTextField.delegate = self
         passwordTextField.delegate = self
+        
     }
     
     //MARK: additional views
@@ -577,7 +578,7 @@ extension ViewController: UITextFieldDelegate {
             static let lettersTextViewCornerRadius: CGFloat = 10
         }
         enum LabelsFonts {
-            static let mainLabelFont = UIFont(name: "Rubik", size: 34)
+            static let mainLabelFont = UIFont(name: "Rubik-Medium", size: 34)
             static let smallLabelFont = UIFont(name: "Rubik", size: 13)
         }
         enum LabelsTexts {
