@@ -542,34 +542,13 @@ extension ViewController: UITextFieldDelegate {
             ////            }
             //============
         } else if textField == passwordTextField {
-            //TODO: Upper case  и CapitalCase - объединить (разные наименования)
-            //===
-            
-            //             let value = passwordTextField.text
-            
-            //            let str = passwordTextField.text ?? ""
-            //
-            //            let decimalCharacters = CharacterSet.decimalDigits
-            //
-            //            let decimalRange = str.rangeOfCharacter(from: decimalCharacters)
-            //
-            //            if decimalRange != nil {
-            //                validationDigitLabel.textColor = .green
-            //                print("/(passwordContainDigit) herr")
-            //            } else {
-            //                validationDigitLabel.textColor = .black
-            //                print("/(passwordContainDigit)  NOO herr")
-            //            }
-            
-            
+          
             var counter: Int = 0
             
             if let text = passwordTextField.text,
                let textRange = Range(range, in: text) {
                 let updatedText = text.replacingCharacters(in: textRange, with: string)
-                
-                
-                
+           
                 func counterFunc() -> Bool {
                     counter += 1
                     print(counter)
@@ -582,11 +561,7 @@ extension ViewController: UITextFieldDelegate {
                     counter = counter - 1
                 }
                 print(counter)
-                    //                repeat {
-                    
-                    
-                    
-                    
+           
                     let decimalCharacters = CharacterSet.decimalDigits
                     let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
                     if decimalRange != nil {
@@ -616,152 +591,17 @@ extension ViewController: UITextFieldDelegate {
                         validationCapitalCaseLabel.textColor = .black
                         print("Foo capitalized")
                     }
-                    
-//                    return counter
-//                }
-//                 counterFunc()
-                
-                
-                
-                    //                    var counter: Int = 0
-                    //                    if counter < 8 {
-                    //                        validationMinLengthLabel.textColor = .black
-                    //                        counter += 1
-                    //                        print(counter)
-                    //                    } else { validationMinLengthLabel.textColor = .green
-                    //
-                    //                    }
-                    
-//                } while
-//                validationMinLengthLabel.textColor == .green &&
-//                validationDigitLabel.textColor == .green &&
-//                validationLowerCaseLabel.textColor == .green &&
-//                validationCapitalCaseLabel.textColor == .green
-                
-                
-                
-                
+            
             }
             
-            
-            
-            
-            /* рабочий вариант, но почему то не дальше 2й цифры.
-             
-             let passwordContainDigit = containsDigit(updatedText)
-             let passwordContainLowerCase = containsLowerCase(updatedText)
-             let passwordContainCapitals = containsCapitalCase(updatedText)
-             let passwordContainMinimumLetters = containsMinimumLetters(updatedText)
-             
-             if  passwordContainDigit == true {
-             validationDigitLabel.textColor = .green
-             print("passwordContainDigit")
-             } else {
-             validationDigitLabel.textColor = .black
-             }
-             if passwordContainLowerCase == true {
-             validationLowerCaseLabel.textColor = .green
-             print("passwordContainLowerCase")
-             } else {
-             validationLowerCaseLabel.textColor = .black
-             //                    print(passwordContainLowerCase)
-             }
-             if passwordContainCapitals == true {
-             validationCapitalCaseLabel.textColor = .green
-             print("passwordContainCapitals")
-             
-             } else {
-             validationCapitalCaseLabel.textColor = .black
-             }
-             if  passwordContainMinimumLetters == true {
-             validationMinLengthLabel.textColor = .green
-             print("passwordContainMinimumLetters")
-             } else {
-             validationMinLengthLabel.textColor = .black
-             }
-             */
+  
         }
         
         return true
     }
-    //        return true
     
 }
 
-//        }
-//        return true
-//    }
-//
-//    }
-//}
-
-//            func invalidPassword(_ value: String) {// -> String?
-//                if value.count < 8 {
-//                    validationMinLengthLabel.textColor = .red
-////                    return "Password must be at least 8 characters"
-//                } else if containsDigit(value) {
-//                    validationDigitLabel.textColor = .green
-////                    return "Password must contain at least 1 digit"
-//                } else if containsLowerCase(value) {
-//                    validationLowerCaseLabel.textColor = .green
-////                    return "Password must contain at least 1 lowercase character"
-//                } else if containsUpperCase(value) {
-//                    validationCapitalCaseLabel.textColor = .green
-////                    return "Password must contain at least 1 uppercase character"
-//                }
-////                return nil
-//            }
-//            var result = invalidPassword(value)
-
-
-
-
-//            func containsLowerCase(_ value: String) -> Bool
-//            {
-//                let reqularExpression = ".*[a-z]+.*"
-//                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-//                return !predicate.evaluate(with: value)
-//            }
-////            containsLowerCase(value)
-//
-//            func containsUpperCase(_ value: String) -> Bool
-//            {
-//                let reqularExpression = ".*[A-Z]+.*"
-//                let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-//                return !predicate.evaluate(with: value)
-//            }
-////            containsLowerCase(value)
-
-//            switch value {
-//            case value.count < 8: //{
-//                    validationMinLengthLabel.textColor = .red
-////                    return "Password must be at least 8 characters"
-//            case digitYes: //{
-//                    validationDigitLabel.textColor = .green
-////                    return "Password must contain at least 1 digit"
-//            case containsLowerCase(value): //{
-//                    validationLowerCaseLabel.textColor = .green
-////                    return "Password must contain at least 1 lowercase character"
-//            case containsUpperCase(value): //{
-//                    validationCapitalCaseLabel.textColor = .green
-//                    return "Password must contain at least 1 uppercase character"
-//                }
-//                return nil
-//            }
-
-
-
-
-////===
-//
-//                        return true
-//        }
-
-//            let result = validatePassword(password)
-//    }
-//        return true
-//    }
-//}
 
 
 //рабочий код для ТФ5
