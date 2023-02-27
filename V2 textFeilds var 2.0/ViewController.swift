@@ -562,37 +562,50 @@ extension ViewController: UITextFieldDelegate {
             //            }
             
             
+            var counter: Int = 0
             
             if let text = passwordTextField.text,
                let textRange = Range(range, in: text) {
                 let updatedText = text.replacingCharacters(in: textRange, with: string)
                 
-//                var counter: Int = 0
                 
-                repeat {
+                
+                func counterFunc() -> Bool {
+                    counter += 1
+                    print(counter)
+                    return true
+                }
+                   var counterFuncResult = counterFunc()
+                if counterFuncResult == true {
+                    counter = counter + 1
+                } else  {
+                    counter = counter - 1
+                }
+                print(counter)
+                    //                repeat {
                     
                     
                     
                     
-                                        let decimalCharacters = CharacterSet.decimalDigits
-                                        let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
-                                        if decimalRange != nil {
-                                            validationDigitLabel.textColor = .green
-                                            print("Digits found")
-                                        } else {
-                                            validationDigitLabel.textColor = .black
-                                            print("Foo Digits")
-                                        }
+                    let decimalCharacters = CharacterSet.decimalDigits
+                    let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
+                    if decimalRange != nil {
+                        validationDigitLabel.textColor = .green
+                        print("Digits found")
+                    } else {
+                        validationDigitLabel.textColor = .black
+                        print("Foo Digits")
+                    }
                     
-                                        let lowercaseLetters = CharacterSet.lowercaseLetters
-                                        let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
-                                        if lowercaseLettersRange != nil {
-                                            validationLowerCaseLabel.textColor = .green
-                                            print("lower found")
-                                        } else {
-                                            validationLowerCaseLabel.textColor = .black
-                                            print("Foo lower")
-                                        }
+                    let lowercaseLetters = CharacterSet.lowercaseLetters
+                    let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
+                    if lowercaseLettersRange != nil {
+                        validationLowerCaseLabel.textColor = .green
+                        print("lower found")
+                    } else {
+                        validationLowerCaseLabel.textColor = .black
+                        print("Foo lower")
+                    }
                     
                     let capitalizedLetters = CharacterSet.uppercaseLetters
                     let capitalizedLettersRange = updatedText.rangeOfCharacter(from: capitalizedLetters)
@@ -604,22 +617,28 @@ extension ViewController: UITextFieldDelegate {
                         print("Foo capitalized")
                     }
                     
-//                    var counter: Int = 0
-//                    if counter < 8 {
-//                        validationMinLengthLabel.textColor = .black
-//                        counter += 1
-//                        print(counter)
-//                    } else { validationMinLengthLabel.textColor = .green
-//
-//                    }
+//                    return counter
+//                }
+//                 counterFunc()
                 
-            } while
-                validationMinLengthLabel.textColor == .green &&
-                    validationDigitLabel.textColor == .green &&
-                    validationLowerCaseLabel.textColor == .green &&
-                    validationCapitalCaseLabel.textColor == .green
+                
+                
+                    //                    var counter: Int = 0
+                    //                    if counter < 8 {
+                    //                        validationMinLengthLabel.textColor = .black
+                    //                        counter += 1
+                    //                        print(counter)
+                    //                    } else { validationMinLengthLabel.textColor = .green
+                    //
+                    //                    }
                     
-    
+//                } while
+//                validationMinLengthLabel.textColor == .green &&
+//                validationDigitLabel.textColor == .green &&
+//                validationLowerCaseLabel.textColor == .green &&
+//                validationCapitalCaseLabel.textColor == .green
+                
+                
                 
                 
             }
