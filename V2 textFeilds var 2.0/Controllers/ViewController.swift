@@ -32,7 +32,6 @@ final class ViewController: UIViewController {
         characterTextField.delegate = self
         linkTextField.delegate = self
         passwordTextField.delegate = self
-        
     }
     
     //MARK: additional views
@@ -44,8 +43,6 @@ final class ViewController: UIViewController {
         scrollView.showsVerticalScrollIndicator = false
         view.translatesAutoresizingMaskIntoConstraints = false
         scrollView = UIScrollView(frame: view.bounds)
-
-
         return scrollView
     }()
     private lazy var contentView: UIView = {
@@ -199,7 +196,6 @@ final class ViewController: UIViewController {
         let validationRulesView = UIView()
         return validationRulesView
     }()
-    
     
     let validationMinLengthLabel: UILabel = {
         let validationMinLengthLabel = UILabel()
@@ -411,27 +407,6 @@ final class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func containsDigit(_ value: String) -> Bool {
-        let reqularExpression = ".*[0-9]+.*"  //"^([0-9])$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-        return predicate.evaluate(with: value)
-    }
-    func containsLowerCase(_ value: String) -> Bool {
-        let reqularExpression = "^([a-z])$"  //".*[0-9]+.*"  //"^([a-z])$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-        return predicate.evaluate(with: value)
-    }
-    func containsCapitalCase(_ value: String) -> Bool {
-        let reqularExpression = "^([A-Z])$" // ".*[0-9]+.*"   //"^([A-Z])$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-        return predicate.evaluate(with: value)
-    }
-    func containsMinimumLetters(_ value: String) -> Bool {
-        let reqularExpression = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{8,25}$"  //"[a-zA-z\\d]{8,25}$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-        return predicate.evaluate(with: value)
-    }
-    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
@@ -529,7 +504,6 @@ extension ViewController: UITextFieldDelegate {
                 } else {
                     validationMinLengthLabel.textColor = .black
                 }
-                
             }
         }
         return true
