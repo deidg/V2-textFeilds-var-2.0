@@ -42,8 +42,7 @@ final class ViewController: UIViewController {
         scrollView.contentInsetAdjustmentBehavior = .automatic
         scrollView.showsVerticalScrollIndicator = false
         view.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView = UIScrollView(frame: view.bounds)
-
+        scrollView = UIScrollView(frame: view.bounds)
 
 
         return scrollView
@@ -609,6 +608,14 @@ extension ViewController: UITextFieldDelegate {
             static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
             static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeTextField = nil
     }
 }
 
