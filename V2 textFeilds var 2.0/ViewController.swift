@@ -542,64 +542,66 @@ extension ViewController: UITextFieldDelegate {
             ////            }
             //============
         } else if textField == passwordTextField {
-          
-            var counter: Int = 0
+            
+//            var counter: Int = 0
             
             if let text = passwordTextField.text,
                let textRange = Range(range, in: text) {
                 let updatedText = text.replacingCharacters(in: textRange, with: string)
-           
-                func counterFunc() -> Bool {
-                    counter += 1
-                    print(counter)
-                    return true
+                
+//                func counterFunc() -> Bool {
+//                    counter += 1
+//                    print(counter)
+//                    return true
+//                }
+//                var counterFuncResult = counterFunc()
+//                if counterFuncResult == true {
+//                    counter = counter + 1
+//                } else  {
+//                    counter = counter - 1
+//                }
+//                print(counter)
+                
+                let decimalCharacters = CharacterSet.decimalDigits
+                let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
+                if decimalRange != nil {
+                    validationDigitLabel.textColor = .green
+                    print("Digits found")
+                } else {
+                    validationDigitLabel.textColor = .black
+                    print("Foo Digits")
                 }
-                   var counterFuncResult = counterFunc()
-                if counterFuncResult == true {
-                    counter = counter + 1
-                } else  {
-                    counter = counter - 1
+                
+                let lowercaseLetters = CharacterSet.lowercaseLetters
+                let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
+                if lowercaseLettersRange != nil {
+                    validationLowerCaseLabel.textColor = .green
+                    print("lower found")
+                } else {
+                    validationLowerCaseLabel.textColor = .black
+                    print("Foo lower")
                 }
-                print(counter)
-           
-                    let decimalCharacters = CharacterSet.decimalDigits
-                    let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
-                    if decimalRange != nil {
-                        validationDigitLabel.textColor = .green
-                        print("Digits found")
-                    } else {
-                        validationDigitLabel.textColor = .black
-                        print("Foo Digits")
-                    }
-                    
-                    let lowercaseLetters = CharacterSet.lowercaseLetters
-                    let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
-                    if lowercaseLettersRange != nil {
-                        validationLowerCaseLabel.textColor = .green
-                        print("lower found")
-                    } else {
-                        validationLowerCaseLabel.textColor = .black
-                        print("Foo lower")
-                    }
-                    
-                    let capitalizedLetters = CharacterSet.uppercaseLetters
-                    let capitalizedLettersRange = updatedText.rangeOfCharacter(from: capitalizedLetters)
-                    if capitalizedLettersRange != nil {
-                        validationCapitalCaseLabel.textColor = .green
-                        print("capitalized found")
-                    } else {
-                        validationCapitalCaseLabel.textColor = .black
-                        print("Foo capitalized")
-                    }
-            
+                
+                let capitalizedLetters = CharacterSet.uppercaseLetters
+                let capitalizedLettersRange = updatedText.rangeOfCharacter(from: capitalizedLetters)
+                if capitalizedLettersRange != nil {
+                    validationCapitalCaseLabel.textColor = .green
+                    print("capitalized found")
+                } else {
+                    validationCapitalCaseLabel.textColor = .black
+                    print("Foo capitalized")
+                }
+                
+                if updatedText.count >= 8 {
+                    validationMinLengthLabel.textColor = .green 
+                } else {
+                    validationMinLengthLabel.textColor = .black
+                }
+                
             }
-            
-  
         }
-        
         return true
     }
-    
 }
 
 
