@@ -425,33 +425,28 @@ final class ViewController: UIViewController {
         //        validationRulesLabel.attributedText = attributedString
     }
     
-    func containsMinimumLetters(_ value: String) -> Bool {
-        let reqularExpression = "[a-zA-z\\d]{8,25}$" //"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{8,25}$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
-        return predicate.evaluate(with: value)
-    }
+    
     
     func containsDigit(_ value: String) -> Bool {
-        let reqularExpression = "^([0-9])$" //".*[0-9]+.*"
+        let reqularExpression = ".*[0-9]+.*"  //"^([0-9])$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
         return predicate.evaluate(with: value)
     }
-    
-    
     func containsLowerCase(_ value: String) -> Bool {
-        let reqularExpression = "^([a-z])$" //".*[0-9]+.*"
+        let reqularExpression =  ".*[0-9]+.*"  //"^([a-z])$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
         return predicate.evaluate(with: value)
     }
-    
-    
-    
     func containsCapitalCase(_ value: String) -> Bool {
-        let reqularExpression = "^([A-Z])$" //".*[0-9]+.*"
+        let reqularExpression =  ".*[0-9]+.*"   //"^([A-Z])$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
         return predicate.evaluate(with: value)
     }
-    
+    func containsMinimumLetters(_ value: String) -> Bool {
+        let reqularExpression = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{8,25}$"  //"[a-zA-z\\d]{8,25}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reqularExpression)
+        return predicate.evaluate(with: value)
+    }
     
     
     
@@ -550,43 +545,61 @@ extension ViewController: UITextFieldDelegate {
             //TODO: Upper case  и CapitalCase - объединить (разные наименования)
             //===
             
-            if let value = passwordTextField.text,
-               let textRange = Range(range, in: value) {
-                let updatedText = value.replacingCharacters(in: textRange, with: string)
-                
-                let passwordContainDigit = containsDigit(updatedText)
-                let passwordContainLowerCase = containsLowerCase(updatedText)
-                let passwordContainCapitals = containsCapitalCase(updatedText)
-                let passwordContainMinimumLetters = containsMinimumLetters(updatedText)
+//             let value = passwordTextField.text
 
+            
+                        if let text = passwordTextField.text,
+                           let textRange = Range(range, in: text) {
+                            let updatedText = text.replacingCharacters(in: textRange, with: string)
+                            
+                            
+//            func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//                if let text = passwordTextField.text,
+//                   let textRange = Range(range, in: text) {
+//                    let updatedText = text.replacingCharacters(in: textRange, with: string)
+                    
+                    let passwordContainDigit = containsDigit(updatedText)
+                    let passwordContainLowerCase = containsLowerCase(updatedText)
+                    let passwordContainCapitals = containsCapitalCase(updatedText)
+                    let passwordContainMinimumLetters = containsMinimumLetters(updatedText)
+                    
+                    
+                    
+                    if  passwordContainDigit == true {
+                        validationDigitLabel.textColor = .green
+                        print("/(passwordContainDigit) herr")
+                    } else {
+                        validationDigitLabel.textColor = .black
+                        print("/(passwordContainDigit)  NOO herr")
+                    }
+//
+                    if passwordContainLowerCase == true {
+                        validationLowerCaseLabel.textColor = .green
+                        print(passwordContainLowerCase)
+                    } else {
+                        validationLowerCaseLabel.textColor = .black
+                        print(passwordContainLowerCase)
+                    }
 
-          
-                if  passwordContainDigit == true {
-                    validationDigitLabel.textColor = .green
-                } else {
-                    validationDigitLabel.textColor = .black
+                    if passwordContainCapitals == true {
+                        validationCapitalCaseLabel.textColor = .green
+                        print("/(passwordContainCapitals) herr")
+                    } else {
+                        validationCapitalCaseLabel.textColor = .black
+                        print("/(passwordContainCapitals)  NOO herr")
+                    }
+
+                    if  passwordContainMinimumLetters == true {
+                        validationMinLengthLabel.textColor = .green
+                    } else {
+                        validationMinLengthLabel.textColor = .black
+                    }
+                    
                 }
-                
-                if passwordContainLowerCase == true {
-                    validationLowerCaseLabel.textColor = .green
-                } else {
-                    validationLowerCaseLabel.textColor = .black
-                }
-                
-                if passwordContainCapitals == true {
-                    validationCapitalCaseLabel.textColor = .green
-                } else {
-                    validationCapitalCaseLabel.textColor = .black
-                }
-                
-                if  passwordContainMinimumLetters == true {
-                    validationMinLengthLabel.textColor = .green
-                } else {
-                    validationMinLengthLabel.textColor = .black
-                }
-                
+//                return true
             }
-        }
+            
+//        }
         return true
     }
     //
