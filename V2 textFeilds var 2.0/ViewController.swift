@@ -36,9 +36,16 @@ final class ViewController: UIViewController {
     
     //MARK: additional views
     private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
+        var scrollView = UIScrollView()
         scrollView.frame = view.bounds
         scrollView.contentSize = contentSize
+        scrollView.contentInsetAdjustmentBehavior = .automatic
+        scrollView.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        scrollView = UIScrollView(frame: view.bounds)
+
+
+
         return scrollView
     }()
     private lazy var contentView: UIView = {
@@ -47,7 +54,7 @@ final class ViewController: UIViewController {
         return contentView
     }()
     private var contentSize: CGSize {
-        CGSize(width: view.frame.width, height: view.frame.height + 100)
+        CGSize(width: view.frame.width, height: view.frame.height) //  + 100
     }
     
     let titleLabel: UILabel = {
