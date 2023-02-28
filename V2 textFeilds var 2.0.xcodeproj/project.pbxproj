@@ -11,6 +11,7 @@
 		FA8B75A029AD27EF006AF17A /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA8B759F29AD27EF006AF17A /* Rubik-Medium.ttf */; };
 		FAAA6DB029A9161C00720EC5 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAA6DAE29A9161C00720EC5 /* Rubik-Regular.ttf */; };
 		FAAA6DB129A9161C00720EC5 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAA6DAF29A9161C00720EC5 /* Rubik-SemiBold.ttf */; };
+		FAAD619F29ADDD470087FBF3 /* NoDigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAD619E29ADDD470087FBF3 /* NoDigitsView.swift */; };
 		FAEE741E29A669DA0082B95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEE741D29A669DA0082B95F /* AppDelegate.swift */; };
 		FAEE742029A669DA0082B95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEE741F29A669DA0082B95F /* SceneDelegate.swift */; };
 		FAEE742229A669DA0082B95F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEE742129A669DA0082B95F /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 		FA8B759F29AD27EF006AF17A /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		FAAA6DAE29A9161C00720EC5 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		FAAA6DAF29A9161C00720EC5 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
+		FAAD619E29ADDD470087FBF3 /* NoDigitsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDigitsView.swift; sourceTree = "<group>"; };
 		FAEE741A29A669DA0082B95F /* V2 textFeilds var 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "V2 textFeilds var 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEE741D29A669DA0082B95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAEE741F29A669DA0082B95F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		FAAD619D29ADD2930087FBF3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FAAD619E29ADDD470087FBF3 /* NoDigitsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAEE742229A669DA0082B95F /* ViewController.swift in Sources */,
+				FAAD619F29ADDD470087FBF3 /* NoDigitsView.swift in Sources */,
 				FAEE741E29A669DA0082B95F /* AppDelegate.swift in Sources */,
 				FAEE742029A669DA0082B95F /* SceneDelegate.swift in Sources */,
 			);

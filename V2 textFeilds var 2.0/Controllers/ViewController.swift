@@ -29,6 +29,8 @@ final class ViewController: UIViewController {
         setupItemsOnView()
         defaultConfiguration()
         
+        let NoDigitsView: UIView = NoDigitsView()
+        
         lettersTextField.delegate = self
         limitTextField.delegate = self
         characterTextField.delegate = self
@@ -66,7 +68,14 @@ final class ViewController: UIViewController {
     }()
     
     //MARK: 1 field 1
-    
+    let NoDigitsView: UIView = {
+       let NoDigitsView = UIView()
+        lettersTextView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
+        
+        
+        return NoDigitsView
+    }()
+
     
     //MARK:  2 field 2
     let inputLimitLabel: UILabel = {
