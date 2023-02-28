@@ -114,7 +114,6 @@
 		FA8B75A229AD2AAC006AF17A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FAEE742829A669DC0082B95F /* LaunchScreen.storyboard */,
 				FAEE742129A669DA0082B95F /* ViewController.swift */,
 			);
 			path = Controllers;
@@ -123,6 +122,7 @@
 		FA8B75A329AD2ADA006AF17A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				FAEE742829A669DC0082B95F /* LaunchScreen.storyboard */,
 				FAEE742629A669DC0082B95F /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -137,6 +137,13 @@
 			);
 			name = fonts;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		FAAD619D29ADD2930087FBF3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FAEE741129A669DA0082B95F = {
@@ -167,6 +174,7 @@
 				FAAA6DAD29A915F500720EC5 /* fonts */,
 				FA8B75A129AD2A96006AF17A /* Delegates */,
 				FA8B75A229AD2AAC006AF17A /* Controllers */,
+				FAAD619D29ADD2930087FBF3 /* Views */,
 				FA8B75A329AD2ADA006AF17A /* Assets */,
 				FAEE742B29A669DC0082B95F /* Info.plist */,
 			);

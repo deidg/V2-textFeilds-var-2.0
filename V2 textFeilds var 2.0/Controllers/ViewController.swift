@@ -15,6 +15,8 @@ import JMMaskTextField_Swift
 
 final class ViewController: UIViewController {
     
+    let noDigitsView = NoDigitsView()
+    
     var activeTextField : UITextField? = nil
     
     let inputDigitRegex: String = "^([0-9]){5}$"
@@ -42,7 +44,7 @@ final class ViewController: UIViewController {
         scrollView.contentInsetAdjustmentBehavior = .automatic
         scrollView.showsVerticalScrollIndicator = false
         view.translatesAutoresizingMaskIntoConstraints = false
-        scrollView = UIScrollView(frame: view.bounds)
+//        scrollView = UIScrollView(frame: view.bounds)
         return scrollView
     }()
     private lazy var contentView: UIView = {
@@ -64,32 +66,7 @@ final class ViewController: UIViewController {
     }()
     
     //MARK: 1 field 1
-    let noDigitLabel: UILabel = {
-        let noDigitLabel = UILabel()
-        noDigitLabel.text = Constants.LabelsTexts.noDigitLabelText
-        noDigitLabel.backgroundColor = Constants.LabelsBackgroundColors.labelBackgoundColors
-        noDigitLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        noDigitLabel.font = Constants.LabelsFonts.smallLabelFont
-        
-        return noDigitLabel
-    }()
-    let lettersTextView: UIView = {
-        let lettersTextView = UIView()
-        lettersTextView.backgroundColor = Constants.TextFields.viewBackgroundColor
-        lettersTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
-        return lettersTextView
-    }()
     
-    let lettersTextField: UITextField = {
-        let lettersTextField = UITextField()
-        lettersTextField.placeholder = Constants.TextFields.lettersTextFieldPlaceholderText
-        lettersTextField.textColor = Constants.TextFields.textFieldTextColor
-        lettersTextField.font = Constants.TextFields.textFieldFont
-        lettersTextField.isEnabled = true
-        lettersTextField.keyboardType = .alphabet
-        lettersTextField.becomeFirstResponder()
-        return lettersTextField
-    }()
     
     //MARK:  2 field 2
     let inputLimitLabel: UILabel = {
@@ -227,6 +204,11 @@ final class ViewController: UIViewController {
     }()
    
     private func setupItemsOnView() {
+        view.addSubview(noDigitsView)
+        noDigitsView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel).offset(25)
+            make.leading.equalToSuperview().inset(16)
+        }
         
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints{ make in
@@ -444,9 +426,7 @@ extension String {
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == lettersTextField {
-            let allowedCharacters = CharacterSet.decimalDigits.inverted
-            let charSet = CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: charSet)
+            
         } else if textField == limitTextField {
             let currentText = textField.text ?? ""
             guard let stringRange = Range(range, in: currentText) else { return false }
