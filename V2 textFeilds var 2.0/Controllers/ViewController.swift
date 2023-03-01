@@ -29,9 +29,11 @@ final class ViewController: UIViewController {
         setupItemsOnView()
         defaultConfiguration()
         
-        let NoDigitsView: UIView = NoDigitsView()
+//        let noDigitsView = NoDigitsView
+
+//        let NoDigitsView: UIView = NoDigitsView()
         
-        lettersTextField.delegate = self
+//        lettersTextField.delegate = self
         limitTextField.delegate = self
         characterTextField.delegate = self
         linkTextField.delegate = self
@@ -68,12 +70,12 @@ final class ViewController: UIViewController {
     }()
     
     //MARK: 1 field 1
-    let NoDigitsView: UIView = {
-       let NoDigitsView = UIView()
-        lettersTextView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
-        
-        
-        return NoDigitsView
+    let noDigitsView2: UIView = {
+       let noDigitsView = UIView()
+        noDigitsView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
+
+
+        return noDigitsView
     }()
 
     
@@ -213,11 +215,11 @@ final class ViewController: UIViewController {
     }()
    
     private func setupItemsOnView() {
-        view.addSubview(noDigitsView)
-        noDigitsView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel).offset(25)
-            make.leading.equalToSuperview().inset(16)
-        }
+//        view.addSubview(noDigitsView)
+//        noDigitsView.snp.makeConstraints { make in
+//            make.top.equalTo(titleLabel).offset(25)
+//            make.leading.equalToSuperview().inset(16)
+//        }
         
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints{ make in
@@ -238,44 +240,35 @@ final class ViewController: UIViewController {
             make.height.equalTo(41)
         }
         // 1 field 1
-        contentView.addSubview(noDigitLabel)
-        noDigitLabel.snp.makeConstraints{ make in
+        
+        contentView.addSubview(noDigitsView)
+        noDigitsView.snp.makeConstraints{make in
             make.top.equalToSuperview().offset(163)
-            make.leading.equalToSuperview().inset(16)
-            make.width.equalTo(100)
-            make.height.equalTo(20)
-        }
-        contentView.addSubview(lettersTextView)
-        lettersTextView.snp.makeConstraints{make in
-            make.top.equalTo(noDigitLabel.snp.bottom).offset(4)
+            
+            //make.top.equalTo(noDigitLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(36)
+            make.height.equalTo(60)
         }
-        lettersTextView.addSubview(lettersTextField)
-        lettersTextField.snp.makeConstraints{ make in
-            make.leading.equalTo(lettersTextView).inset(8)
-            make.top.equalTo(lettersTextView.snp.top).inset(7)
-            make.bottom.equalTo(lettersTextView.snp.bottom).inset(7)
-            make.height.equalTo(22)
-        }
+        
+
         // 2 field 2
         contentView.addSubview(inputLimitLabel)
         inputLimitLabel.snp.makeConstraints{ make in
             make.width.equalTo(78)
             make.height.equalTo(20)
-            make.top.equalTo(lettersTextView.snp.bottom).offset(30)
+            make.top.equalTo(noDigitsView.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(16)
         }
         contentView.addSubview(charactersCounter)
         charactersCounter.snp.makeConstraints{ make in
             make.width.equalTo(45)
             make.height.equalTo(22)
-            make.top.equalTo(lettersTextView.snp.bottom).offset(25)
+            make.top.equalTo(noDigitsView.snp.bottom).offset(25)
             make.trailing.equalToSuperview().inset(16)
         }
         contentView.addSubview(limitTextView)
         limitTextView.snp.makeConstraints{ make in
-            make.top.equalTo(lettersTextView.snp.bottom).offset(54)
+            make.top.equalTo(noDigitsView.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(36)
         }
@@ -433,70 +426,70 @@ extension String {
 
 //MARK: extension ViewController
 extension ViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == lettersTextField {
-            
-        } else if textField == limitTextField {
-            let currentText = textField.text ?? ""
-            guard let stringRange = Range(range, in: currentText) else { return false }
-            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-            let lengthToAdd = updatedText.count
-            charactersCounter.text = "\(lengthToAdd)/10"
-            if lengthToAdd <= 10 {
-                charactersCounter.textColor = .black
-            } else {
-                charactersCounter.textColor = .red
-                charactersCounter.text = "10/10"
-            }
-            return lengthToAdd <= 10
-        } else if textField == linkTextField {
-            //
-        } else if textField == passwordTextField {
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if textField == lettersTextField {
+//
+//        } else if textField == limitTextField {
+//            let currentText = textField.text ?? ""
+//            guard let stringRange = Range(range, in: currentText) else { return false }
+//            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+//            let lengthToAdd = updatedText.count
+//            charactersCounter.text = "\(lengthToAdd)/10"
+//            if lengthToAdd <= 10 {
+//                charactersCounter.textColor = .black
+//            } else {
+//                charactersCounter.textColor = .red
+//                charactersCounter.text = "10/10"
+//            }
+//            return lengthToAdd <= 10
+//        } else if textField == linkTextField {
+//            //
+//        } else if textField == passwordTextField {
    
-            if let text = passwordTextField.text,
-               let textRange = Range(range, in: text) {
-                let updatedText = text.replacingCharacters(in: textRange, with: string)
-                
-                
-                let decimalCharacters = CharacterSet.decimalDigits
-                let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
-                if decimalRange != nil {
-                    validationDigitLabel.textColor = .green
-                    print("Digits found")
-                } else {
-                    validationDigitLabel.textColor = .black
-                    print("Foo Digits")
-                }
-                
-                let lowercaseLetters = CharacterSet.lowercaseLetters
-                let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
-                if lowercaseLettersRange != nil {
-                    validationLowerCaseLabel.textColor = .green
-                    print("lower found")
-                } else {
-                    validationLowerCaseLabel.textColor = .black
-                    print("Foo lower")
-                }
-                
-                let capitalizedLetters = CharacterSet.uppercaseLetters
-                let capitalizedLettersRange = updatedText.rangeOfCharacter(from: capitalizedLetters)
-                if capitalizedLettersRange != nil {
-                    validationCapitalCaseLabel.textColor = .green
-                    print("capitalized found")
-                } else {
-                    validationCapitalCaseLabel.textColor = .black
-                    print("Foo capitalized")
-                }
-                
-                if updatedText.count >= 8 {
-                    validationMinLengthLabel.textColor = .green
-                } else {
-                    validationMinLengthLabel.textColor = .black
-                }
-            }
-        }
-        return true
-    }
+//            if let text = passwordTextField.text,
+//               let textRange = Range(range, in: text) {
+//                let updatedText = text.replacingCharacters(in: textRange, with: string)
+//
+//
+//                let decimalCharacters = CharacterSet.decimalDigits
+//                let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
+//                if decimalRange != nil {
+//                    validationDigitLabel.textColor = .green
+//                    print("Digits found")
+//                } else {
+//                    validationDigitLabel.textColor = .black
+//                    print("Foo Digits")
+//                }
+//
+//                let lowercaseLetters = CharacterSet.lowercaseLetters
+//                let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
+//                if lowercaseLettersRange != nil {
+//                    validationLowerCaseLabel.textColor = .green
+//                    print("lower found")
+//                } else {
+//                    validationLowerCaseLabel.textColor = .black
+//                    print("Foo lower")
+//                }
+//
+//                let capitalizedLetters = CharacterSet.uppercaseLetters
+//                let capitalizedLettersRange = updatedText.rangeOfCharacter(from: capitalizedLetters)
+//                if capitalizedLettersRange != nil {
+//                    validationCapitalCaseLabel.textColor = .green
+//                    print("capitalized found")
+//                } else {
+//                    validationCapitalCaseLabel.textColor = .black
+//                    print("Foo capitalized")
+//                }
+//
+//                if updatedText.count >= 8 {
+//                    validationMinLengthLabel.textColor = .green
+//                } else {
+//                    validationMinLengthLabel.textColor = .black
+//                }
+//            }
+//        }
+//        return true
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == linkTextField {
