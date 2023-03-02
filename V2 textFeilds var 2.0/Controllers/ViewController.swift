@@ -16,7 +16,7 @@ import JMMaskTextField_Swift
 final class ViewController: UIViewController {
     
     let noDigitsView = NoDigitsView()
-//    let noDigitsView = CounterView()
+//    let CounterView = CounterView()
     
     
     var activeTextField : UITextField? = nil
@@ -80,6 +80,14 @@ final class ViewController: UIViewController {
 
     
     //MARK:  2 field 2
+    
+//    let CounterView: UIView = {
+//       let CounterView = UIView()
+//        CounterView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
+//        return CounterView
+//    }()
+    
+    
     let inputLimitLabel: UILabel = {
             let inputLimitLabel = UILabel()
             inputLimitLabel.text = Constants.LabelsTexts.inputLimitLabelText
@@ -252,6 +260,18 @@ final class ViewController: UIViewController {
         
 
         // 2 field 2
+        
+//        contentView.addSubview(CounterView)
+//        CounterView.snp.makeConstraints{make in
+//            make.top.equalToSuperview().offset(200) //163
+//
+////            make.top.equalTo(noDigitsView2.snp.bottom).offset(4)
+//            make.leading.trailing.equalToSuperview().inset(16)
+//            make.height.equalTo(60)
+//        }
+        
+        
+        
         contentView.addSubview(inputLimitLabel)
                inputLimitLabel.snp.makeConstraints{ make in
                    make.width.equalTo(78)
@@ -289,7 +309,7 @@ final class ViewController: UIViewController {
         }
         contentView.addSubview(characterTextView)
         characterTextView.snp.makeConstraints{ make in
-            make.top.equalTo(limitTextView.snp.bottom).offset(54)
+            make.top.equalTo(limitTextView.snp.bottom).offset(54)   //54
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(36)
         }
