@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
     let counterView = CounterView()
     let maskView = MaskView()
     let linkView = LinkView()
-    
+    let passwordView = PasswordView()
     
     var activeTextField : UITextField? = nil
     
@@ -39,11 +39,8 @@ final class ViewController: UIViewController {
 
 //        let NoDigitsView: UIView = NoDigitsView()
         
-//        lettersTextField.delegate = self
-//        limitTextField.delegate = self
-//        characterTextField.delegate = self
-//        linkTextField.delegate = self
-        passwordTextField.delegate = self
+
+//        passwordTextField.delegate = self
     }
     
     //MARK: additional views
@@ -100,26 +97,6 @@ final class ViewController: UIViewController {
         return maskView
     }()
     
-//    let onlyCharectersLabel: UILabel = {
-//        let onlyCharectersLabel = UILabel()
-//        onlyCharectersLabel.text = Constants.LabelsTexts.onlyCharectersLabelText
-//        onlyCharectersLabel.backgroundColor = .white
-//        onlyCharectersLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-//        onlyCharectersLabel.font = Constants.LabelsFonts.smallLabelFont
-//        return onlyCharectersLabel
-//    }()
-//    let characterTextView: UIView = {
-//        let characterTextView = UIView()
-//        characterTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
-//        characterTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
-//        return characterTextView
-//    }()
-//    let characterTextField: JMMaskTextField = {
-//        let characterTextField = JMMaskTextField(frame:CGRect.zero)
-//        characterTextField.maskString = "AAAAA-00000"
-//        characterTextField.placeholder = "wwwww-ddddd"
-//        return characterTextField
-//    }()
     
     //MARK:  4 field 4  LINK
     
@@ -129,58 +106,43 @@ final class ViewController: UIViewController {
         return linkView
     }()
     
-    
-    
-    
-//    let linkLabel: UILabel = {
-//        let linkLabel = UILabel()
-//        linkLabel.text = Constants.LabelsTexts.linkLabelText
-//        linkLabel.backgroundColor = .white
-//        linkLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-//        linkLabel.font = Constants.LabelsFonts.smallLabelFont
-//        return linkLabel
-//    }()
-//    let linkTextView: UIView = {
-//        let linkTextView = UIView()
-//        linkTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
-//        linkTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
-//        return linkTextView
-//    }()
-//    let linkTextField: UITextField = {
-//        let linkTextField = UITextField()
-//        linkTextField.placeholder = Constants.TextFields.linkTextFieldPlaceholderText
-//        linkTextField.textColor = Constants.TextFields.textFieldTextColor
-//        linkTextField.font = Constants.TextFields.textFieldFont
-//        linkTextField.keyboardType = .URL
-//        return linkTextField
-//    }()
+
     
     //MARK:  5 field 5  PASSWORDS
-    let validationLabel: UILabel = {
-        let validationLabel = UILabel()
-        validationLabel.text = Constants.LabelsTexts.validationLabelText
-        validationLabel.backgroundColor = .white
-        validationLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        validationLabel.font = Constants.LabelsFonts.smallLabelFont
-        return validationLabel
+    
+    let passwordView2: UIView = {
+       let passwordView = UIView()
+        passwordView.backgroundColor = .magenta //Constants.TextFields.viewBackgroundColor
+        return passwordView
     }()
-    let passwordTextView: UIView = {
-        let passwordTextView = UIView()
-        passwordTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
-        passwordTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
-        return passwordTextView
-    }()
-    let passwordTextField: UITextField = {
-        let passwordTextField = UITextField()
-        passwordTextField.placeholder = Constants.TextFields.passwordTextFieldPlaceholderText
-        passwordTextField.textColor = Constants.TextFields.textFieldTextColor
-        passwordTextField.font = Constants.TextFields.textFieldFont
-        return passwordTextField
-    }()
-    let validationRulesView: UIView = {
-        let validationRulesView = UIView()
-        return validationRulesView
-    }()
+    
+    
+    
+//    let validationLabel: UILabel = {
+//        let validationLabel = UILabel()
+//        validationLabel.text = Constants.LabelsTexts.validationLabelText
+//        validationLabel.backgroundColor = .white
+//        validationLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+//        validationLabel.font = Constants.LabelsFonts.smallLabelFont
+//        return validationLabel
+//    }()
+//    let passwordTextView: UIView = {
+//        let passwordTextView = UIView()
+//        passwordTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
+//        passwordTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
+//        return passwordTextView
+//    }()
+//    let passwordTextField: UITextField = {
+//        let passwordTextField = UITextField()
+//        passwordTextField.placeholder = Constants.TextFields.passwordTextFieldPlaceholderText
+//        passwordTextField.textColor = Constants.TextFields.textFieldTextColor
+//        passwordTextField.font = Constants.TextFields.textFieldFont
+//        return passwordTextField
+//    }()
+//    let validationRulesView: UIView = {
+//        let validationRulesView = UIView()
+//        return validationRulesView
+//    }()
     
     let validationMinLengthLabel: UILabel = {
         let validationMinLengthLabel = UILabel()
@@ -272,31 +234,6 @@ final class ViewController: UIViewController {
             make.height.equalTo(60)
         }
         
-        
-        
-        
-//        contentView.addSubview(onlyCharectersLabel)
-//        onlyCharectersLabel.snp.makeConstraints{ make in
-//            make.width.equalTo(130)
-//            make.height.equalTo(20)
-//            make.top.equalTo(counterView.snp.bottom).offset(30)
-//            make.leading.equalToSuperview().inset(16)
-//        }
-//        contentView.addSubview(characterTextView)
-//        characterTextView.snp.makeConstraints{ make in
-//            make.top.equalTo(counterView.snp.bottom).offset(54)   //54
-//            make.leading.trailing.equalToSuperview().inset(16)
-//            make.height.equalTo(36)
-//        }
-//        characterTextView.addSubview(characterTextField)
-//        characterTextField.snp.makeConstraints{ make in
-//            make.leading.equalTo(characterTextView).inset(8)
-//            make.top.equalTo(characterTextView.snp.top).inset(7)
-//            make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
-//            make.width.equalTo(200)
-//            make.height.equalTo(22)
-//        }
-        
         // 4 field 4 LINK
         
         contentView.addSubview(linkView)
@@ -309,86 +246,63 @@ final class ViewController: UIViewController {
         }
         
         
-        
-        
-//        contentView.addSubview(linkLabel)
-//        linkLabel.snp.makeConstraints{ make in
-//            make.width.equalTo(34)
+        // 5 field 5  PASSWORDS
+//        contentView.addSubview(validationLabel)
+//        validationLabel.snp.makeConstraints{ make in
+//            make.width.equalTo(120)
 //            make.height.equalTo(20)
-//            make.top.equalTo(maskView.snp.bottom).offset(30)
+//            make.top.equalTo(linkView.snp.bottom).offset(29)
 //            make.leading.equalToSuperview().inset(16)
 //        }
-//        contentView.addSubview(linkTextView)
-//        linkTextView.snp.makeConstraints{ make in
-//            make.top.equalTo(maskView.snp.bottom).offset(54)
+//        contentView.addSubview(passwordTextView)
+//        passwordTextView.snp.makeConstraints{ make in
+//            make.top.equalTo(linkView.snp.bottom).offset(53)
 //            make.leading.trailing.equalToSuperview().inset(16)
 //            make.height.equalTo(36)
 //        }
-//        linkTextView.addSubview(linkTextField)
-//        linkTextField.snp.makeConstraints{ make in
-//            make.leading.equalTo(linkTextView).inset(8)
-//            make.top.equalTo(linkTextView.snp.top).inset(7)
-//            make.bottom.equalTo(linkTextView.snp.bottom).inset(7)
+//        passwordTextView.addSubview(passwordTextField)
+//        passwordTextField.snp.makeConstraints{ make in
+//            make.leading.equalTo(passwordTextView).inset(8)
+//            make.top.equalTo(passwordTextView.snp.top).inset(7)
+//            make.bottom.equalTo(passwordTextView.snp.bottom).inset(7)
 //            make.width.equalTo(200)
 //            make.height.equalTo(22)
 //        }
-        // 5 field 5  PASSWORDS
-        contentView.addSubview(validationLabel)
-        validationLabel.snp.makeConstraints{ make in
-            make.width.equalTo(120)
-            make.height.equalTo(20)
-            make.top.equalTo(linkView.snp.bottom).offset(29)
-            make.leading.equalToSuperview().inset(16)
-        }
-        contentView.addSubview(passwordTextView)
-        passwordTextView.snp.makeConstraints{ make in
-            make.top.equalTo(linkView.snp.bottom).offset(53)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(36)
-        }
-        passwordTextView.addSubview(passwordTextField)
-        passwordTextField.snp.makeConstraints{ make in
-            make.leading.equalTo(passwordTextView).inset(8)
-            make.top.equalTo(passwordTextView.snp.top).inset(7)
-            make.bottom.equalTo(passwordTextView.snp.bottom).inset(7)
-            make.width.equalTo(200)
-            make.height.equalTo(22)
-        }
-        contentView.addSubview(validationRulesView)
-        validationRulesView.snp.makeConstraints{ make in
-            make.top.equalTo(passwordTextView.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(120)
-        }
-        
-        validationRulesView.addSubview(validationMinLengthLabel)
-        validationMinLengthLabel.snp.makeConstraints{ make in
-            make.top.equalTo(passwordTextView.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(10) //24
-            make.trailing.equalToSuperview().inset(180)
-            make.height.equalTo(15)
-        }
-        validationRulesView.addSubview(validationDigitLabel)
-        validationDigitLabel.snp.makeConstraints{ make in
-            make.top.equalTo(validationMinLengthLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(10) //24
-            make.trailing.equalToSuperview().inset(180)
-            make.height.equalTo(15)
-        }
-        validationRulesView.addSubview(validationLowerCaseLabel)
-        validationLowerCaseLabel.snp.makeConstraints{ make in
-            make.top.equalTo(validationDigitLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(10) //24
-            make.trailing.equalToSuperview().inset(180)
-            make.height.equalTo(15)
-        }
-        validationRulesView.addSubview(validationCapitalCaseLabel)
-        validationCapitalCaseLabel.snp.makeConstraints{ make in
-            make.top.equalTo(validationLowerCaseLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(10) //24
-            make.trailing.equalToSuperview().inset(180)
-            make.height.equalTo(15)
-        }
+//        contentView.addSubview(validationRulesView)
+//        validationRulesView.snp.makeConstraints{ make in
+//            make.top.equalTo(passwordTextView.snp.bottom).offset(8)
+//            make.leading.trailing.equalToSuperview().inset(24)
+//            make.height.equalTo(120)
+//        }
+//
+//        validationRulesView.addSubview(validationMinLengthLabel)
+//        validationMinLengthLabel.snp.makeConstraints{ make in
+//            make.top.equalTo(passwordTextView.snp.bottom).offset(8)
+//            make.leading.equalToSuperview().inset(10) //24
+//            make.trailing.equalToSuperview().inset(180)
+//            make.height.equalTo(15)
+//        }
+//        validationRulesView.addSubview(validationDigitLabel)
+//        validationDigitLabel.snp.makeConstraints{ make in
+//            make.top.equalTo(validationMinLengthLabel.snp.bottom).offset(8)
+//            make.leading.equalToSuperview().inset(10) //24
+//            make.trailing.equalToSuperview().inset(180)
+//            make.height.equalTo(15)
+//        }
+//        validationRulesView.addSubview(validationLowerCaseLabel)
+//        validationLowerCaseLabel.snp.makeConstraints{ make in
+//            make.top.equalTo(validationDigitLabel.snp.bottom).offset(8)
+//            make.leading.equalToSuperview().inset(10) //24
+//            make.trailing.equalToSuperview().inset(180)
+//            make.height.equalTo(15)
+//        }
+//        validationRulesView.addSubview(validationCapitalCaseLabel)
+//        validationCapitalCaseLabel.snp.makeConstraints{ make in
+//            make.top.equalTo(validationLowerCaseLabel.snp.bottom).offset(8)
+//            make.leading.equalToSuperview().inset(10) //24
+//            make.trailing.equalToSuperview().inset(180)
+//            make.height.equalTo(15)
+//        }
     }
     
     func defaultConfiguration() {
