@@ -26,6 +26,7 @@ class NoDigitsView: UIView {
         lettersTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
         return lettersTextView
     }()
+    
     let lettersTextField: UITextField = {
         let lettersTextField = UITextField()
         lettersTextField.placeholder = Constants.TextFields.lettersTextFieldPlaceholderText
@@ -65,9 +66,10 @@ class NoDigitsView: UIView {
         addSubview(lettersTextField)
         lettersTextField.snp.makeConstraints { make in
             make.top.equalTo(lettersTextView.snp.top).offset(7)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(22)
         }
+
     }
     
     private func defaultConfiguration() {

@@ -16,6 +16,8 @@ import JMMaskTextField_Swift
 final class ViewController: UIViewController {
     
     let noDigitsView = NoDigitsView()
+//    let noDigitsView = CounterView()
+    
     
     var activeTextField : UITextField? = nil
     
@@ -34,7 +36,7 @@ final class ViewController: UIViewController {
 //        let NoDigitsView: UIView = NoDigitsView()
         
 //        lettersTextField.delegate = self
-        limitTextField.delegate = self
+//        limitTextField.delegate = self
         characterTextField.delegate = self
         linkTextField.delegate = self
         passwordTextField.delegate = self
@@ -73,44 +75,42 @@ final class ViewController: UIViewController {
     let noDigitsView2: UIView = {
        let noDigitsView = UIView()
         noDigitsView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
-
-
         return noDigitsView
     }()
 
     
     //MARK:  2 field 2
     let inputLimitLabel: UILabel = {
-        let inputLimitLabel = UILabel()
-        inputLimitLabel.text = Constants.LabelsTexts.inputLimitLabelText
-        inputLimitLabel.backgroundColor = .white
-        inputLimitLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        inputLimitLabel.font = Constants.LabelsFonts.smallLabelFont
-        return inputLimitLabel
-    }()
-    var charactersCounter: UILabel = {
-        let charactersCounter = UILabel()
-        charactersCounter.backgroundColor = .white
-        charactersCounter.textAlignment = .right
-        charactersCounter.textColor = Constants.LabelsTexts.smallLabelTextColor
-        charactersCounter.font = Constants.LabelsFonts.smallLabelFont
-        charactersCounter.text = Constants.LabelsTexts.charactersCounterText
-        return charactersCounter
-    }()
-    let limitTextView: UIView = {
-        let limitTextView = UIView()
-        limitTextView.backgroundColor = .yellow
-        limitTextView.backgroundColor = Constants.TextFields.viewBackgroundColor
-        limitTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
-        return limitTextView
-    }()
-    let limitTextField: UITextField = {
-        let limitTextField = UITextField()
-        limitTextField.placeholder = Constants.TextFields.lettersTextFieldPlaceholderText
-        limitTextField.textColor = Constants.TextFields.textFieldTextColor
-        limitTextField.font = Constants.TextFields.textFieldFont
-        return limitTextField
-    }()
+            let inputLimitLabel = UILabel()
+            inputLimitLabel.text = Constants.LabelsTexts.inputLimitLabelText
+            inputLimitLabel.backgroundColor = .white
+            inputLimitLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+            inputLimitLabel.font = Constants.LabelsFonts.smallLabelFont
+            return inputLimitLabel
+        }()
+        var charactersCounter: UILabel = {
+            let charactersCounter = UILabel()
+            charactersCounter.backgroundColor = .white
+            charactersCounter.textAlignment = .right
+            charactersCounter.textColor = Constants.LabelsTexts.smallLabelTextColor
+            charactersCounter.font = Constants.LabelsFonts.smallLabelFont
+            charactersCounter.text = Constants.LabelsTexts.charactersCounterText
+            return charactersCounter
+        }()
+        let limitTextView: UIView = {
+            let limitTextView = UIView()
+            limitTextView.backgroundColor = .yellow
+            limitTextView.backgroundColor = Constants.TextFields.viewBackgroundColor
+            limitTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
+            return limitTextView
+        }()
+        let limitTextField: UITextField = {
+            let limitTextField = UITextField()
+            limitTextField.placeholder = Constants.TextFields.lettersTextFieldPlaceholderText
+            limitTextField.textColor = Constants.TextFields.textFieldTextColor
+            limitTextField.font = Constants.TextFields.textFieldFont
+            return limitTextField
+        }()
     
     //MARK:  3 field 3
     let onlyCharectersLabel: UILabel = {
@@ -253,31 +253,32 @@ final class ViewController: UIViewController {
 
         // 2 field 2
         contentView.addSubview(inputLimitLabel)
-        inputLimitLabel.snp.makeConstraints{ make in
-            make.width.equalTo(78)
-            make.height.equalTo(20)
-            make.top.equalTo(noDigitsView.snp.bottom).offset(30)
-            make.leading.equalToSuperview().inset(16)
-        }
-        contentView.addSubview(charactersCounter)
-        charactersCounter.snp.makeConstraints{ make in
-            make.width.equalTo(45)
-            make.height.equalTo(22)
-            make.top.equalTo(noDigitsView.snp.bottom).offset(25)
-            make.trailing.equalToSuperview().inset(16)
-        }
-        contentView.addSubview(limitTextView)
-        limitTextView.snp.makeConstraints{ make in
-            make.top.equalTo(noDigitsView.snp.bottom).offset(54)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(36)
-        }
-        limitTextView.addSubview(limitTextField)
-        limitTextField.snp.makeConstraints{ make in
-            make.leading.equalTo(limitTextView).inset(8)
-            make.top.equalTo(limitTextView.snp.top).inset(7)
-            make.bottom.equalTo(limitTextView.snp.bottom).inset(7)
-        }
+               inputLimitLabel.snp.makeConstraints{ make in
+                   make.width.equalTo(78)
+                   make.height.equalTo(20)
+                   make.top.equalTo(noDigitsView.snp.bottom).offset(30)
+                   make.leading.equalToSuperview().inset(16)
+               }
+               contentView.addSubview(charactersCounter)
+               charactersCounter.snp.makeConstraints{ make in
+                   make.width.equalTo(45)
+                   make.height.equalTo(22)
+                   make.top.equalTo(noDigitsView.snp.bottom).offset(25)
+                   make.trailing.equalToSuperview().inset(16)
+               }
+               contentView.addSubview(limitTextView)
+               limitTextView.snp.makeConstraints{ make in
+                   make.top.equalTo(noDigitsView.snp.bottom).offset(54)
+                   make.leading.trailing.equalToSuperview().inset(16)
+                   make.height.equalTo(36)
+               }
+               limitTextView.addSubview(limitTextField)
+               limitTextField.snp.makeConstraints{ make in
+                   make.leading.equalTo(limitTextView).inset(8)
+                   make.top.equalTo(limitTextView.snp.top).inset(7)
+                   make.bottom.equalTo(limitTextView.snp.bottom).inset(7)
+               }
+        
         // 3 field 3
         contentView.addSubview(onlyCharectersLabel)
         onlyCharectersLabel.snp.makeConstraints{ make in
