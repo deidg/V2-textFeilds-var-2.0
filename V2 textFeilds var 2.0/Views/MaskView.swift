@@ -1,48 +1,44 @@
 //
-//  CounterView.swift
+//  MaskView.swift
 //  V2 textFeilds var 2.0
 //
-//  Created by Alex on 01.03.2023.
+//  Created by Alex on 02.03.2023.
 //
 
 import UIKit
 import SnapKit
+import JMMaskTextField_Swift
 
-class CounterView: UIView {
+class MaskView: UIView {
 
     //MARK: UI Elements
 
-    let inputLimitLabel: UILabel = {
-        let inputLimitLabel = UILabel()
-        inputLimitLabel.text = Constants.LabelsTexts.inputLimitLabelText
-        inputLimitLabel.backgroundColor = .white
-        inputLimitLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        inputLimitLabel.font = Constants.LabelsFonts.smallLabelFont
-        return inputLimitLabel
-    }()
-    var charactersCounter: UILabel = {
-        let charactersCounter = UILabel()
-        charactersCounter.backgroundColor = .white
-        charactersCounter.textAlignment = .right
-        charactersCounter.textColor = Constants.LabelsTexts.smallLabelTextColor
-        charactersCounter.font = Constants.LabelsFonts.smallLabelFont
-        charactersCounter.text = Constants.LabelsTexts.charactersCounterText
-        return charactersCounter
-    }()
-    let limitTextView: UIView = {
-        let limitTextView = UIView()
-        limitTextView.backgroundColor = .yellow
-        limitTextView.backgroundColor = Constants.TextFields.viewBackgroundColor
-        limitTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
-        return limitTextView
-    }()
-    let limitTextField: UITextField = {
-        let limitTextField = UITextField()
-        limitTextField.placeholder = Constants.TextFields.lettersTextFieldPlaceholderText
-        limitTextField.textColor = Constants.TextFields.textFieldTextColor
-        limitTextField.font = Constants.TextFields.textFieldFont
-        return limitTextField
-    }()
+
+let onlyCharectersLabel: UILabel = {
+    let onlyCharectersLabel = UILabel()
+    onlyCharectersLabel.text = Constants.LabelsTexts.onlyCharectersLabelText
+    onlyCharectersLabel.backgroundColor = .white
+    onlyCharectersLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+    onlyCharectersLabel.font = Constants.LabelsFonts.smallLabelFont
+    return onlyCharectersLabel
+}()
+let characterTextView: UIView = {
+    let characterTextView = UIView()
+    characterTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
+    characterTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
+    return characterTextView
+}()
+let characterTextField: JMMaskTextField = {
+    let characterTextField = JMMaskTextField(frame:CGRect.zero)
+    characterTextField.maskString = "AAAAA-00000"
+    characterTextField.placeholder = "wwwww-ddddd"
+    return characterTextField
+}()
+
+
+
+
+
 
 
     //MARK: Initialization
@@ -57,34 +53,24 @@ class CounterView: UIView {
     }
     //MARK: Methods
     private func setupUI() {
-        addSubview(inputLimitLabel)
-        inputLimitLabel.snp.makeConstraints { make in
+        addSubview(onlyCharectersLabel)
+        onlyCharectersLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(20)
         }
-        
-        
-        //TODO:  проверить отступ справа. По цифрам вроде норм, а вот смотретися плохо.
-        addSubview(charactersCounter)
-        charactersCounter.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-//            make.top.equalTo(lettersTextView.snp.bottom).offset(25)
-            make.trailing.equalToSuperview().inset(16)
-            //           make.leading.trailing.equalToSuperview()
-            make.height.equalTo(22)
-        }
-        
-        addSubview(limitTextView)
-        limitTextView.snp.makeConstraints { make in
-            make.top.equalTo(inputLimitLabel.snp.bottom).offset(4)
+
+
+        addSubview(characterTextView)
+        characterTextView.snp.makeConstraints { make in
+            make.top.equalTo(onlyCharectersLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(36)
         }
-        
-        addSubview(limitTextField)
-        limitTextField.snp.makeConstraints { make in
-            make.top.equalTo(limitTextView.snp.top).offset(7)
+
+        addSubview(characterTextField)
+        characterTextField.snp.makeConstraints { make in
+            make.top.equalTo(characterTextView.snp.top).offset(7)
             make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(22)
         }
@@ -95,7 +81,7 @@ class CounterView: UIView {
     }
 }
 
-extension  CounterView: UITextFieldDelegate  {
+extension  MaskView: UITextFieldDelegate  {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits.inverted
         let charSet = CharacterSet(charactersIn: string)
@@ -141,4 +127,5 @@ extension  CounterView: UITextFieldDelegate  {
         }
     }
 }
+
 

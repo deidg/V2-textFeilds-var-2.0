@@ -19,6 +19,7 @@ final class ViewController: UIViewController {
     // переменные с маленькой буквы!!!
     let noDigitsView = NoDigitsView()
     let counterView = CounterView()
+    let maskView = MaskView()
     
     
     var activeTextField : UITextField? = nil
@@ -39,7 +40,7 @@ final class ViewController: UIViewController {
         
 //        lettersTextField.delegate = self
 //        limitTextField.delegate = self
-        characterTextField.delegate = self
+//        characterTextField.delegate = self
         linkTextField.delegate = self
         passwordTextField.delegate = self
     }
@@ -84,33 +85,40 @@ final class ViewController: UIViewController {
     //MARK:  2 field 2
     
     let counterView2: UIView = {
-       let CounterView = UIView()
-        CounterView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
-        return CounterView
+       let counterView = UIView()
+        counterView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
+        return counterView
     }()
 
     
     //MARK:  3 field 3
-    let onlyCharectersLabel: UILabel = {
-        let onlyCharectersLabel = UILabel()
-        onlyCharectersLabel.text = Constants.LabelsTexts.onlyCharectersLabelText
-        onlyCharectersLabel.backgroundColor = .white
-        onlyCharectersLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        onlyCharectersLabel.font = Constants.LabelsFonts.smallLabelFont
-        return onlyCharectersLabel
+    
+    let maskView2: UIView = {
+       let maskView = UIView()
+        maskView.backgroundColor = .magenta //Constants.TextFields.viewBackgroundColor
+        return maskView
     }()
-    let characterTextView: UIView = {
-        let characterTextView = UIView()
-        characterTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
-        characterTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
-        return characterTextView
-    }()
-    let characterTextField: JMMaskTextField = {
-        let characterTextField = JMMaskTextField(frame:CGRect.zero)
-        characterTextField.maskString = "AAAAA-00000"
-        characterTextField.placeholder = "wwwww-ddddd"
-        return characterTextField
-    }()
+    
+//    let onlyCharectersLabel: UILabel = {
+//        let onlyCharectersLabel = UILabel()
+//        onlyCharectersLabel.text = Constants.LabelsTexts.onlyCharectersLabelText
+//        onlyCharectersLabel.backgroundColor = .white
+//        onlyCharectersLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+//        onlyCharectersLabel.font = Constants.LabelsFonts.smallLabelFont
+//        return onlyCharectersLabel
+//    }()
+//    let characterTextView: UIView = {
+//        let characterTextView = UIView()
+//        characterTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
+//        characterTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
+//        return characterTextView
+//    }()
+//    let characterTextField: JMMaskTextField = {
+//        let characterTextField = JMMaskTextField(frame:CGRect.zero)
+//        characterTextField.maskString = "AAAAA-00000"
+//        characterTextField.placeholder = "wwwww-ddddd"
+//        return characterTextField
+//    }()
     
     //MARK:  4 field 4  LINK
     let linkLabel: UILabel = {
@@ -243,39 +251,52 @@ final class ViewController: UIViewController {
 
         
         // 3 field 3
-        contentView.addSubview(onlyCharectersLabel)
-        onlyCharectersLabel.snp.makeConstraints{ make in
-            make.width.equalTo(130)
-            make.height.equalTo(20)
+        
+        contentView.addSubview(maskView)
+        maskView.snp.makeConstraints{make in
+//            make.top.equalToSuperview().offset(200) //163
+
             make.top.equalTo(counterView.snp.bottom).offset(30)
-            make.leading.equalToSuperview().inset(16)
-        }
-        contentView.addSubview(characterTextView)
-        characterTextView.snp.makeConstraints{ make in
-            make.top.equalTo(counterView.snp.bottom).offset(54)   //54
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(36)
+            make.height.equalTo(60)
         }
-        characterTextView.addSubview(characterTextField)
-        characterTextField.snp.makeConstraints{ make in
-            make.leading.equalTo(characterTextView).inset(8)
-            make.top.equalTo(characterTextView.snp.top).inset(7)
-            make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
-            make.width.equalTo(200)
-            make.height.equalTo(22)
-        }
+        
+        
+        
+        
+//        contentView.addSubview(onlyCharectersLabel)
+//        onlyCharectersLabel.snp.makeConstraints{ make in
+//            make.width.equalTo(130)
+//            make.height.equalTo(20)
+//            make.top.equalTo(counterView.snp.bottom).offset(30)
+//            make.leading.equalToSuperview().inset(16)
+//        }
+//        contentView.addSubview(characterTextView)
+//        characterTextView.snp.makeConstraints{ make in
+//            make.top.equalTo(counterView.snp.bottom).offset(54)   //54
+//            make.leading.trailing.equalToSuperview().inset(16)
+//            make.height.equalTo(36)
+//        }
+//        characterTextView.addSubview(characterTextField)
+//        characterTextField.snp.makeConstraints{ make in
+//            make.leading.equalTo(characterTextView).inset(8)
+//            make.top.equalTo(characterTextView.snp.top).inset(7)
+//            make.bottom.equalTo(characterTextView.snp.bottom).inset(7)
+//            make.width.equalTo(200)
+//            make.height.equalTo(22)
+//        }
         
         // 4 field 4 LINK
         contentView.addSubview(linkLabel)
         linkLabel.snp.makeConstraints{ make in
             make.width.equalTo(34)
             make.height.equalTo(20)
-            make.top.equalTo(characterTextView.snp.bottom).offset(30)
+            make.top.equalTo(maskView.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(16)
         }
         contentView.addSubview(linkTextView)
         linkTextView.snp.makeConstraints{ make in
-            make.top.equalTo(characterTextView.snp.bottom).offset(54)
+            make.top.equalTo(maskView.snp.bottom).offset(54)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(36)
         }
