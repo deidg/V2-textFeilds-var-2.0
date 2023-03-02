@@ -144,35 +144,35 @@ final class ViewController: UIViewController {
 //        return validationRulesView
 //    }()
     
-    let validationMinLengthLabel: UILabel = {
-        let validationMinLengthLabel = UILabel()
-        validationMinLengthLabel.text = Constants.LabelsTexts.validationMinLengthLabelText
-        validationMinLengthLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        validationMinLengthLabel.font = Constants.LabelsFonts.smallLabelFont
-        return validationMinLengthLabel
-    }()
-    let validationDigitLabel: UILabel = {
-        let validationDigitLabel = UILabel()
-        validationDigitLabel.text = Constants.LabelsTexts.validationDigitLabelText
-        validationDigitLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        validationDigitLabel.font = Constants.LabelsFonts.smallLabelFont
-        return validationDigitLabel
-    }()
-    let validationLowerCaseLabel: UILabel = {
-        let validationLowerCaseLabel = UILabel()
-        validationLowerCaseLabel.text = Constants.LabelsTexts.validationLowerCaseLabelText
-        validationLowerCaseLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        validationLowerCaseLabel.font = Constants.LabelsFonts.smallLabelFont
-        return validationLowerCaseLabel
-    }()
-    let validationCapitalCaseLabel: UILabel = {
-        let validationCapitalCaseLabel = UILabel()
-        validationCapitalCaseLabel.text = Constants.LabelsTexts.validationCapitalCaseLabelText
-        validationCapitalCaseLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-        validationCapitalCaseLabel.font = Constants.LabelsFonts.smallLabelFont
-        return validationCapitalCaseLabel
-    }()
-   
+//    let validationMinLengthLabel: UILabel = {
+//        let validationMinLengthLabel = UILabel()
+//        validationMinLengthLabel.text = Constants.LabelsTexts.validationMinLengthLabelText
+//        validationMinLengthLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+//        validationMinLengthLabel.font = Constants.LabelsFonts.smallLabelFont
+//        return validationMinLengthLabel
+//    }()
+//    let validationDigitLabel: UILabel = {
+//        let validationDigitLabel = UILabel()
+//        validationDigitLabel.text = Constants.LabelsTexts.validationDigitLabelText
+//        validationDigitLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+//        validationDigitLabel.font = Constants.LabelsFonts.smallLabelFont
+//        return validationDigitLabel
+//    }()
+//    let validationLowerCaseLabel: UILabel = {
+//        let validationLowerCaseLabel = UILabel()
+//        validationLowerCaseLabel.text = Constants.LabelsTexts.validationLowerCaseLabelText
+//        validationLowerCaseLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+//        validationLowerCaseLabel.font = Constants.LabelsFonts.smallLabelFont
+//        return validationLowerCaseLabel
+//    }()
+//    let validationCapitalCaseLabel: UILabel = {
+//        let validationCapitalCaseLabel = UILabel()
+//        validationCapitalCaseLabel.text = Constants.LabelsTexts.validationCapitalCaseLabelText
+//        validationCapitalCaseLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+//        validationCapitalCaseLabel.font = Constants.LabelsFonts.smallLabelFont
+//        return validationCapitalCaseLabel
+//    }()
+//
     private func setupItemsOnView() {
 //        view.addSubview(noDigitsView)
 //        noDigitsView.snp.makeConstraints { make in
@@ -247,6 +247,17 @@ final class ViewController: UIViewController {
         
         
         // 5 field 5  PASSWORDS
+        
+        contentView.addSubview(passwordView)
+        passwordView.snp.makeConstraints{make in
+//            make.top.equalToSuperview().offset(200) //163
+
+            make.top.equalTo(linkView.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(60)
+        }
+        
+        
 //        contentView.addSubview(validationLabel)
 //        validationLabel.snp.makeConstraints{ make in
 //            make.width.equalTo(120)
