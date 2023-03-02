@@ -74,16 +74,19 @@ class NoDigitsView: UIView {
     
     private func defaultConfiguration() {
         backgroundColor = .white
+        lettersTextField.delegate = self
     }
 }
 
 extension  NoDigitsView: UITextFieldDelegate  {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = CharacterSet.decimalDigits.inverted
-        let charSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: charSet)
-    }
+            let allowedCharacters = CharacterSet.decimalDigits.inverted
+            let charSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: charSet)
+        }
+
     
+    //MARK: constants
     enum Constants {
         enum LabelsSettings {
             static let lettersTextViewCornerRadius: CGFloat = 10

@@ -40,7 +40,6 @@ final class ViewController: UIViewController {
 //        let NoDigitsView: UIView = NoDigitsView()
         
 
-//        passwordTextField.delegate = self
     }
     
     //MARK: additional views
@@ -174,12 +173,7 @@ final class ViewController: UIViewController {
 //    }()
 //
     private func setupItemsOnView() {
-//        view.addSubview(noDigitsView)
-//        noDigitsView.snp.makeConstraints { make in
-//            make.top.equalTo(titleLabel).offset(25)
-//            make.leading.equalToSuperview().inset(16)
-//        }
-        
+
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints{ make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -199,47 +193,30 @@ final class ViewController: UIViewController {
             make.height.equalTo(41)
         }
         // 1 field 1
-        
         contentView.addSubview(noDigitsView)
         noDigitsView.snp.makeConstraints{make in
             make.top.equalToSuperview().offset(163)
-            
-            //make.top.equalTo(noDigitLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
-        
-
         // 2 field 2
-        
         contentView.addSubview(counterView)
         counterView.snp.makeConstraints{make in
-//            make.top.equalToSuperview().offset(200) //163
-
             make.top.equalTo(noDigitsView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
-        
-
-        
         // 3 field 3
-        
         contentView.addSubview(maskView)
         maskView.snp.makeConstraints{make in
-//            make.top.equalToSuperview().offset(200) //163
-
             make.top.equalTo(counterView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
         
         // 4 field 4 LINK
-        
         contentView.addSubview(linkView)
         linkView.snp.makeConstraints{make in
-//            make.top.equalToSuperview().offset(200) //163
-
             make.top.equalTo(maskView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
@@ -247,73 +224,12 @@ final class ViewController: UIViewController {
         
         
         // 5 field 5  PASSWORDS
-        
         contentView.addSubview(passwordView)
         passwordView.snp.makeConstraints{make in
-//            make.top.equalToSuperview().offset(200) //163
-
             make.top.equalTo(linkView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
-        
-        
-//        contentView.addSubview(validationLabel)
-//        validationLabel.snp.makeConstraints{ make in
-//            make.width.equalTo(120)
-//            make.height.equalTo(20)
-//            make.top.equalTo(linkView.snp.bottom).offset(29)
-//            make.leading.equalToSuperview().inset(16)
-//        }
-//        contentView.addSubview(passwordTextView)
-//        passwordTextView.snp.makeConstraints{ make in
-//            make.top.equalTo(linkView.snp.bottom).offset(53)
-//            make.leading.trailing.equalToSuperview().inset(16)
-//            make.height.equalTo(36)
-//        }
-//        passwordTextView.addSubview(passwordTextField)
-//        passwordTextField.snp.makeConstraints{ make in
-//            make.leading.equalTo(passwordTextView).inset(8)
-//            make.top.equalTo(passwordTextView.snp.top).inset(7)
-//            make.bottom.equalTo(passwordTextView.snp.bottom).inset(7)
-//            make.width.equalTo(200)
-//            make.height.equalTo(22)
-//        }
-//        contentView.addSubview(validationRulesView)
-//        validationRulesView.snp.makeConstraints{ make in
-//            make.top.equalTo(passwordTextView.snp.bottom).offset(8)
-//            make.leading.trailing.equalToSuperview().inset(24)
-//            make.height.equalTo(120)
-//        }
-//
-//        validationRulesView.addSubview(validationMinLengthLabel)
-//        validationMinLengthLabel.snp.makeConstraints{ make in
-//            make.top.equalTo(passwordTextView.snp.bottom).offset(8)
-//            make.leading.equalToSuperview().inset(10) //24
-//            make.trailing.equalToSuperview().inset(180)
-//            make.height.equalTo(15)
-//        }
-//        validationRulesView.addSubview(validationDigitLabel)
-//        validationDigitLabel.snp.makeConstraints{ make in
-//            make.top.equalTo(validationMinLengthLabel.snp.bottom).offset(8)
-//            make.leading.equalToSuperview().inset(10) //24
-//            make.trailing.equalToSuperview().inset(180)
-//            make.height.equalTo(15)
-//        }
-//        validationRulesView.addSubview(validationLowerCaseLabel)
-//        validationLowerCaseLabel.snp.makeConstraints{ make in
-//            make.top.equalTo(validationDigitLabel.snp.bottom).offset(8)
-//            make.leading.equalToSuperview().inset(10) //24
-//            make.trailing.equalToSuperview().inset(180)
-//            make.height.equalTo(15)
-//        }
-//        validationRulesView.addSubview(validationCapitalCaseLabel)
-//        validationCapitalCaseLabel.snp.makeConstraints{ make in
-//            make.top.equalTo(validationLowerCaseLabel.snp.bottom).offset(8)
-//            make.leading.equalToSuperview().inset(10) //24
-//            make.trailing.equalToSuperview().inset(180)
-//            make.height.equalTo(15)
-//        }
     }
     
     func defaultConfiguration() {

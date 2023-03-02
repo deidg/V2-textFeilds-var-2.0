@@ -11,37 +11,39 @@ import SnapKit
 import SafariServices
 
 class PasswordView: UIView {
-
-let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
-
-
+    
+    
+    
+    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
+    
+    
     //MARK: UI Elements
-
-        let validationLabel: UILabel = {
-            let validationLabel = UILabel()
-            validationLabel.text = Constants.LabelsTexts.validationLabelText
-            validationLabel.backgroundColor = .white
-            validationLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
-            validationLabel.font = Constants.LabelsFonts.smallLabelFont
-            return validationLabel
-        }()
-        let passwordTextView: UIView = {
-            let passwordTextView = UIView()
-            passwordTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
-            passwordTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
-            return passwordTextView
-        }()
-        let passwordTextField: UITextField = {
-            let passwordTextField = UITextField()
-            passwordTextField.placeholder = Constants.TextFields.passwordTextFieldPlaceholderText
-            passwordTextField.textColor = Constants.TextFields.textFieldTextColor
-            passwordTextField.font = Constants.TextFields.textFieldFont
-            return passwordTextField
-        }()
-        let validationRulesView: UIView = {
-            let validationRulesView = UIView()
-            return validationRulesView
-        }()
+    
+    let validationLabel: UILabel = {
+        let validationLabel = UILabel()
+        validationLabel.text = Constants.LabelsTexts.validationLabelText
+        validationLabel.backgroundColor = .white
+        validationLabel.textColor = Constants.LabelsTexts.smallLabelTextColor
+        validationLabel.font = Constants.LabelsFonts.smallLabelFont
+        return validationLabel
+    }()
+    let passwordTextView: UIView = {
+        let passwordTextView = UIView()
+        passwordTextView.backgroundColor = Constants.TextFields.textFieldBackgroundColor
+        passwordTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
+        return passwordTextView
+    }()
+    let passwordTextField: UITextField = {
+        let passwordTextField = UITextField()
+        passwordTextField.placeholder = Constants.TextFields.passwordTextFieldPlaceholderText
+        passwordTextField.textColor = Constants.TextFields.textFieldTextColor
+        passwordTextField.font = Constants.TextFields.textFieldFont
+        return passwordTextField
+    }()
+    let validationRulesView: UIView = {
+        let validationRulesView = UIView()
+        return validationRulesView
+    }()
     
     let validationMinLengthLabel: UILabel = {
         let validationMinLengthLabel = UILabel()
@@ -71,19 +73,19 @@ let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
         validationCapitalCaseLabel.font = Constants.LabelsFonts.smallLabelFont
         return validationCapitalCaseLabel
     }()
-   
     
     
     
     
-
+    
+    
     //MARK: Initialization
     init() {
         super.init(frame: .zero)
         setupUI()
         defaultConfiguration()
     }
-
+    
     required init?(coder: NSCoder) {
         return nil
     }
@@ -95,89 +97,84 @@ let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(20)
         }
-
+        
         addSubview(passwordTextView)
         passwordTextView.snp.makeConstraints { make in
             make.top.equalTo(validationLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(36)
         }
-
+        
         addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordTextView.snp.top).offset(7)
             make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(22)
         }
-
-
-
-            addSubview(validationRulesView)
+        
+        
+        
+        addSubview(validationRulesView)
         validationRulesView.snp.makeConstraints { make in
-         // make.top.equalTo(passwordTextView.snp.bottom).offset(8)
-        //  make.leading.trailing.equalToSuperview()
+            // make.top.equalTo(passwordTextView.snp.bottom).offset(8)
+            //  make.leading.trailing.equalToSuperview()
             make.top.equalTo(passwordTextView.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(120)
         }
-
-//микролейблы
-//микролейбл1
-validationRulesView.addSubview(validationMinLengthLabel)
-validationMinLengthLabel.snp.makeConstraints{ make in
-    make.top.equalTo(validationRulesView.snp.top).offset(8)
-    make.leading.equalToSuperview()//.inset() //24
-    make.trailing.equalToSuperview()//.inset(200)
-    make.height.equalTo(15)
-}
-
-
-//микролейбл2
-validationRulesView.addSubview(validationDigitLabel)
-validationDigitLabel.snp.makeConstraints{ make in
-    make.top.equalTo(validationMinLengthLabel.snp.bottom).offset(8)
-    make.leading.equalToSuperview()//.inset() //24
-    make.trailing.equalToSuperview()//.inset(200)
-    make.height.equalTo(15)
-}
-
-//микролейбл3
-validationRulesView.addSubview(validationLowerCaseLabel)
-validationLowerCaseLabel.snp.makeConstraints{ make in
-    make.top.equalTo(validationDigitLabel.snp.bottom).offset(8)
-    make.leading.equalToSuperview()//.inset() //24
-    make.trailing.equalToSuperview()//.inset(200)
-    make.height.equalTo(15)
-}
-
-//микролейбл4
-validationRulesView.addSubview(validationCapitalCaseLabel)
-validationCapitalCaseLabel.snp.makeConstraints{ make in
-    make.top.equalTo(validationLowerCaseLabel.snp.bottom).offset(8)
-    make.leading.equalToSuperview()//.inset() //24
-    make.trailing.equalToSuperview()//.inset(200)
-    make.height.equalTo(15)
-}
-
-
-
+        
+        //микролейблы
+        //микролейбл1
+        validationRulesView.addSubview(validationMinLengthLabel)
+        validationMinLengthLabel.snp.makeConstraints{ make in
+            make.top.equalTo(validationRulesView.snp.top).offset(8)
+            make.leading.equalToSuperview()//.inset() //24
+            make.trailing.equalToSuperview()//.inset(200)
+            make.height.equalTo(15)
+        }
+        //микролейбл2
+        validationRulesView.addSubview(validationDigitLabel)
+        validationDigitLabel.snp.makeConstraints{ make in
+            make.top.equalTo(validationMinLengthLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview()//.inset() //24
+            make.trailing.equalToSuperview()//.inset(200)
+            make.height.equalTo(15)
+        }
+        //микролейбл3
+        validationRulesView.addSubview(validationLowerCaseLabel)
+        validationLowerCaseLabel.snp.makeConstraints{ make in
+            make.top.equalTo(validationDigitLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview()//.inset() //24
+            make.trailing.equalToSuperview()//.inset(200)
+            make.height.equalTo(15)
+        }
+        //микролейбл4
+        validationRulesView.addSubview(validationCapitalCaseLabel)
+        validationCapitalCaseLabel.snp.makeConstraints{ make in
+            make.top.equalTo(validationLowerCaseLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview()//.inset() //24
+            make.trailing.equalToSuperview()//.inset(200)
+            make.height.equalTo(15)
+        }
     }
-
+    
     private func defaultConfiguration() {
         backgroundColor = .white
+//        passwordTextField.delegate = self
+
     }
 }
 
 
 extension  PasswordView: UITextFieldDelegate  {
-
-
+    
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits.inverted
         let charSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: charSet)
     }
-
+    
     enum Constants {
         enum LabelsSettings {
             static let lettersTextViewCornerRadius: CGFloat = 10
@@ -186,7 +183,7 @@ extension  PasswordView: UITextFieldDelegate  {
             static let mainLabelFont = UIFont(name: "Rubik-Medium", size: 34)
             static let smallLabelFont = UIFont(name: "Rubik", size: 13)
         }
-
+        
         enum LabelsTexts {
             static let mainTitleLabeText = "Text Fields"
             static let noDigitLabelText = "NO digit field"
