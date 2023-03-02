@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 
 class CounterView: UIView {
-
+    
     //MARK: UI Elements
-
+    
     let inputLimitLabel: UILabel = {
         let inputLimitLabel = UILabel()
         inputLimitLabel.text = Constants.LabelsTexts.inputLimitLabelText
@@ -43,15 +43,15 @@ class CounterView: UIView {
         limitTextField.font = Constants.TextFields.textFieldFont
         return limitTextField
     }()
-
-
+    
+    
     //MARK: Initialization
     init() {
         super.init(frame: .zero)
         setupUI()
         defaultConfiguration()
     }
-
+    
     required init?(coder: NSCoder) {
         return nil
     }
@@ -69,7 +69,7 @@ class CounterView: UIView {
         addSubview(charactersCounter)
         charactersCounter.snp.makeConstraints { make in
             make.top.equalToSuperview()
-//            make.top.equalTo(lettersTextView.snp.bottom).offset(25)
+            //            make.top.equalTo(lettersTextView.snp.bottom).offset(25)
             make.trailing.equalToSuperview().inset(16)
             //           make.leading.trailing.equalToSuperview()
             make.height.equalTo(22)
@@ -89,19 +89,31 @@ class CounterView: UIView {
             make.height.equalTo(22)
         }
     }
-
+    
     private func defaultConfiguration() {
         backgroundColor = .white
+        limitTextField.delegate = self
     }
 }
 
 extension  CounterView: UITextFieldDelegate  {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = CharacterSet.decimalDigits.inverted
-        let charSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: charSet)
+        
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        let lengthToAdd = updatedText.count
+        charactersCounter.text = "\(lengthToAdd)/10"
+        if lengthToAdd <= 10 {
+            charactersCounter.textColor = .black
+        } else {
+            charactersCounter.textColor = .red
+            charactersCounter.text = "10/10"
+        }
+        return lengthToAdd <= 10
+    
     }
-
+    
     enum Constants {
         enum LabelsSettings {
             static let lettersTextViewCornerRadius: CGFloat = 10
@@ -110,7 +122,7 @@ extension  CounterView: UITextFieldDelegate  {
             static let mainLabelFont = UIFont(name: "Rubik-Medium", size: 34)
             static let smallLabelFont = UIFont(name: "Rubik", size: 13)
         }
-
+        
         enum LabelsTexts {
             static let mainTitleLabeText = "Text Fields"
             static let noDigitLabelText = "NO digit field"
