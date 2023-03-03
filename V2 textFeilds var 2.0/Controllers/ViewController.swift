@@ -13,7 +13,11 @@ import SnapKit
 import SafariServices
 import JMMaskTextField_Swift
 
+
+
+
 final class ViewController: UIViewController {
+    
     
     
     // переменные с маленькой буквы!!!
@@ -39,6 +43,7 @@ final class ViewController: UIViewController {
 
 //        let NoDigitsView: UIView = NoDigitsView()
         
+        linkView.delegate = self
 
     }
     
@@ -211,6 +216,9 @@ final class ViewController: UIViewController {
     }
 }
 
+
+
+
 extension String {
     var containsValidCharacter: Bool {
         guard self != "" else { return true }
@@ -220,13 +228,42 @@ extension String {
     }
 }
 
+extension ViewController: LinkViewDelegate {
+    func openURL(url: URL) {
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        
+        let sfViewController = SFSafariViewController(url: url, configuration: config)
+        self.present(sfViewController, animated: true)
+        
+        
+    }
+    
+    
+    
+}
+
 //MARK: extension ViewController
 extension ViewController: UITextFieldDelegate {
+    
+    
+    
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //        if textField == lettersTextField {
 //
 //        } else if textField == limitTextField {
-//         
+//            let currentText = textField.text ?? ""
+//            guard let stringRange = Range(range, in: currentText) else { return false }
+//            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+//            let lengthToAdd = updatedText.count
+//            charactersCounter.text = "\(lengthToAdd)/10"
+//            if lengthToAdd <= 10 {
+//                charactersCounter.textColor = .black
+//            } else {
+//                charactersCounter.textColor = .red
+//                charactersCounter.text = "10/10"
+//            }
+//            return lengthToAdd <= 10
 //        } else if textField == linkTextField {
 //            //
 //        } else if textField == passwordTextField {

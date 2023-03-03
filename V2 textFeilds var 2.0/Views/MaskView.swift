@@ -37,10 +37,6 @@ let characterTextField: JMMaskTextField = {
 
 
 
-
-
-
-
     //MARK: Initialization
     init() {
         super.init(frame: .zero)

@@ -10,8 +10,14 @@ import UIKit
 import SnapKit
 import SafariServices
 
-class LinkView: UIView {
+protocol LinkViewDelegate: AnyObject {
+    func openURL(url: URL)
+}
 
+class LinkView: UIView {
+    weak var delegate: LinkViewDelegate?
+    
+    
     let linkRegex: String = "((?:http|https)://)?(?:www\\.)?(?:Www\\.)?(?:WWW\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
     
     //MARK: UI Elements
@@ -75,56 +81,51 @@ let linkTextField: UITextField = {
 
     private func defaultConfiguration() {
         backgroundColor = .white
+        linkTextField.delegate = self
+
     }
 }
 
 
 extension  LinkView: UITextFieldDelegate  {
 
-func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField == linkTextField {
-
-        let link = linkTextField.text ?? ""
-        func isLinkValid(_ link : String) -> Bool {
-            let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
-            return linkTest.evaluate(with: link)
-        }
-        if isLinkValid(link) {
-            print("its valid LINK")
-
-            //НУЖНЫЙ КОД 0 откладывает открытие ссылки
-//            let delay : Double = 2.0 // 5.0
-//            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-//                func startBrowser(_ sender: Any) {
-//                    if let urlString = self.linkTextField.text {
-//                        let url: URL?
-//                        if urlString.hasPrefix("http://") {
-//                            url = URL(string: urlString)
-//                        } else {
-//                            url = URL(string: "http://" + urlString)
-//                        }
-//                        if let url = url {
-//                            let sfViewController = SFSafariViewController(url: url)
-//                            self.present(sfViewController, animated: true, completion: nil)
-//                            print ("Now browsing in SFSafariViewController")
-//                        }
-//                    }
-//                }
-//                startBrowser(self.linkTextField)
-//            }
-        } else {
-            print("NOT valid link")
-        }
-    }
-    return true
-}
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           if textField == linkTextField {
+   
+               let link = linkTextField.text ?? ""
+               func isLinkValid(_ link : String) -> Bool {
+                   let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
+                   return linkTest.evaluate(with: link)
+               }
+               if isLinkValid(link) {
+                   print("its valid LINK")
+   
+                   let delay : Double = 2.0 // 5.0
+                   DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                       func startBrowser(_ sender: Any) {
+                           if let urlString = self.linkTextField.text {
+                               let url: URL?
+                               if urlString.hasPrefix("http://") {
+                                   url = URL(string: urlString)
+                               } else {
+                                   url = URL(string: "http://" + urlString)
+                               }
+                               if let url = url {
+                                   self.delegate?.openURL(url: url)
+                               }
+                           }
+                       }
+                       startBrowser(self.linkTextField)
+                   }
+               } else {
+                   print("NOT valid link")
+               }
+           }
+           return true
+       }
 
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = CharacterSet.decimalDigits.inverted
-        let charSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: charSet)
-    }
+ 
 
     enum Constants {
         enum LabelsSettings {
