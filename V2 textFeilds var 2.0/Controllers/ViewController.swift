@@ -13,13 +13,8 @@ import SnapKit
 import SafariServices
 import JMMaskTextField_Swift
 
-
-
-
 final class ViewController: UIViewController {
-    
-    
-    
+   
     // переменные с маленькой буквы!!!
     let noDigitsView = NoDigitsView()
     let counterView = CounterView()
@@ -28,21 +23,13 @@ final class ViewController: UIViewController {
     let passwordView = PasswordView()
     
     var activeTextField : UITextField? = nil
-    
-    let inputDigitRegex: String = "^([0-9]){5}$"
-//    let linkRegex: String = "((?:http|https)://)?(?:www\\.)?(?:Www\\.)?(?:WWW\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
-    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
-    let inputTextRegex: String = "^([a-zA-Z]{5})[-]([\\d]{5})$"
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupItemsOnView()
         defaultConfiguration()
-        
-
-        
+      
         linkView.delegate = self
-
     }
     
     //MARK: additional views
@@ -80,49 +67,36 @@ final class ViewController: UIViewController {
         noDigitsView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
         return noDigitsView
     }()
-
-    
+   
     //MARK:  2 field 2
-    
     let counterView2: UIView = {
        let counterView = UIView()
         counterView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
         return counterView
     }()
-
-    
+   
     //MARK:  3 field 3
-    
     let maskView2: UIView = {
        let maskView = UIView()
         maskView.backgroundColor = .magenta //Constants.TextFields.viewBackgroundColor
         return maskView
     }()
-    
-    
+  
     //MARK:  4 field 4  LINK
-    
     let linkView2: UIView = {
        let linkView = UIView()
         linkView.backgroundColor = .magenta //Constants.TextFields.viewBackgroundColor
         return linkView
     }()
-    
-
-    
+  
     //MARK:  5 field 5  PASSWORDS
-    
     let passwordView2: UIView = {
        let passwordView = UIView()
         passwordView.backgroundColor = .magenta //Constants.TextFields.viewBackgroundColor
         return passwordView
     }()
-    
- 
 
-//
     private func setupItemsOnView() {
-
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints{ make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -170,8 +144,7 @@ final class ViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
-        
-        
+     
         // 5 field 5  PASSWORDS
         contentView.addSubview(passwordView)
         passwordView.snp.makeConstraints{make in
@@ -233,120 +206,14 @@ extension ViewController: LinkViewDelegate {
         
         let sfViewController = SFSafariViewController(url: url, configuration: config)
         self.present(sfViewController, animated: true)
-        
-        
+     
     }
-    
-    
-    
+  
 }
 
 //MARK: extension ViewController
 extension ViewController: UITextFieldDelegate {
-    
-    
-    
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if textField == lettersTextField {
-//
-//        } else if textField == limitTextField {
-//            let currentText = textField.text ?? ""
-//            guard let stringRange = Range(range, in: currentText) else { return false }
-//            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-//            let lengthToAdd = updatedText.count
-//            charactersCounter.text = "\(lengthToAdd)/10"
-//            if lengthToAdd <= 10 {
-//                charactersCounter.textColor = .black
-//            } else {
-//                charactersCounter.textColor = .red
-//                charactersCounter.text = "10/10"
-//            }
-//            return lengthToAdd <= 10
-//        } else if textField == linkTextField {
-//            //
-//        } else if textField == passwordTextField {
-   
-//            if let text = passwordTextField.text,
-//               let textRange = Range(range, in: text) {
-//                let updatedText = text.replacingCharacters(in: textRange, with: string)
-//
-//
-//                let decimalCharacters = CharacterSet.decimalDigits
-//                let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
-//                if decimalRange != nil {
-//                    validationDigitLabel.textColor = .green
-//                    print("Digits found")
-//                } else {
-//                    validationDigitLabel.textColor = .black
-//                    print("Foo Digits")
-//                }
-//
-//                let lowercaseLetters = CharacterSet.lowercaseLetters
-//                let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
-//                if lowercaseLettersRange != nil {
-//                    validationLowerCaseLabel.textColor = .green
-//                    print("lower found")
-//                } else {
-//                    validationLowerCaseLabel.textColor = .black
-//                    print("Foo lower")
-//                }
-//
-//                let capitalizedLetters = CharacterSet.uppercaseLetters
-//                let capitalizedLettersRange = updatedText.rangeOfCharacter(from: capitalizedLetters)
-//                if capitalizedLettersRange != nil {
-//                    validationCapitalCaseLabel.textColor = .green
-//                    print("capitalized found")
-//                } else {
-//                    validationCapitalCaseLabel.textColor = .black
-//                    print("Foo capitalized")
-//                }
-//
-//                if updatedText.count >= 8 {
-//                    validationMinLengthLabel.textColor = .green
-//                } else {
-//                    validationMinLengthLabel.textColor = .black
-//                }
-//            }
-//        }
-//        return true
-//    }
-    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        if textField == linkTextField {
-//
-//            let link = linkTextField.text ?? ""
-//            func isLinkValid(_ link : String) -> Bool {
-//                let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
-//                return linkTest.evaluate(with: link)
-//            }
-//            if isLinkValid(link) {
-//                print("its valid LINK")
-//
-//                let delay : Double = 2.0 // 5.0
-//                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-//                    func startBrowser(_ sender: Any) {
-//                        if let urlString = self.linkTextField.text {
-//                            let url: URL?
-//                            if urlString.hasPrefix("http://") {
-//                                url = URL(string: urlString)
-//                            } else {
-//                                url = URL(string: "http://" + urlString)
-//                            }
-//                            if let url = url {
-//                                let sfViewController = SFSafariViewController(url: url)
-//                                self.present(sfViewController, animated: true, completion: nil)
-//                                print ("Now browsing in SFSafariViewController")
-//                            }
-//                        }
-//                    }
-//                    startBrowser(self.linkTextField)
-//                }
-//            } else {
-//                print("NOT valid link")
-//            }
-//        }
-//        return true
-//    }
+
     
     //MARK: constants
     enum Constants {
