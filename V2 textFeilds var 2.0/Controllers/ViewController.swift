@@ -39,9 +39,7 @@ final class ViewController: UIViewController {
         setupItemsOnView()
         defaultConfiguration()
         
-//        let noDigitsView = NoDigitsView
 
-//        let NoDigitsView: UIView = NoDigitsView()
         
         linkView.delegate = self
 
