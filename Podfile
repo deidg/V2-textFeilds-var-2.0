@@ -7,5 +7,6 @@ target 'V2 textFeilds var 2.0' do
 
 pod 'SnapKit', '~> 5.6.0'
 pod 'JMMaskTextField-Swift'
+pod 'IQKeyboardManagerSwift'
 
 end
