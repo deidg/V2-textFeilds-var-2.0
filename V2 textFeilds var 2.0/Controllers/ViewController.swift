@@ -41,7 +41,7 @@ final class ViewController: UIViewController {
         scrollView.contentInsetAdjustmentBehavior = .automatic
         scrollView.showsVerticalScrollIndicator = false
         view.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView = UIScrollView(frame: view.bounds)
+        scrollView = UIScrollView(frame: view.bounds)
         return scrollView
     }()
     private lazy var contentView: UIView = {
