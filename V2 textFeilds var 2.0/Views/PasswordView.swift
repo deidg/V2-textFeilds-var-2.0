@@ -5,20 +5,12 @@
 //  Created by Alex on 02.03.2023.
 //
 
-
 import UIKit
 import SnapKit
 import SafariServices
 
 class PasswordView: UIView {
-    
-    
-    
-    let passwordRegex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d]{7,25}"
-    
-    
     //MARK: UI Elements
-    
     let validationLabel: UILabel = {
         let validationLabel = UILabel()
         validationLabel.text = Constants.LabelsTexts.validationLabelText
@@ -44,7 +36,6 @@ class PasswordView: UIView {
         let validationRulesView = UIView()
         return validationRulesView
     }()
-    
     let validationMinLengthLabel: UILabel = {
         let validationMinLengthLabel = UILabel()
         validationMinLengthLabel.text = Constants.LabelsTexts.validationMinLengthLabelText
@@ -73,12 +64,7 @@ class PasswordView: UIView {
         validationCapitalCaseLabel.font = Constants.LabelsFonts.smallLabelFont
         return validationCapitalCaseLabel
     }()
-    
-    
-    
-    
-    
-    
+   
     //MARK: Initialization
     init() {
         super.init(frame: .zero)
@@ -97,63 +83,51 @@ class PasswordView: UIView {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(20)
         }
-        
         addSubview(passwordTextView)
         passwordTextView.snp.makeConstraints { make in
             make.top.equalTo(validationLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(36)
         }
-        
         addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordTextView.snp.top).offset(7)
             make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(22)
         }
-        
-        
-        
         addSubview(validationRulesView)
         validationRulesView.snp.makeConstraints { make in
-            // make.top.equalTo(passwordTextView.snp.bottom).offset(8)
-            //  make.leading.trailing.equalToSuperview()
             make.top.equalTo(passwordTextView.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(120)
         }
         
-        //микролейблы
-        //микролейбл1
         validationRulesView.addSubview(validationMinLengthLabel)
         validationMinLengthLabel.snp.makeConstraints{ make in
             make.top.equalTo(validationRulesView.snp.top).offset(8)
-            make.leading.equalToSuperview()//.inset() //24
-            make.trailing.equalToSuperview()//.inset(200)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.equalTo(15)
         }
-        //микролейбл2
         validationRulesView.addSubview(validationDigitLabel)
         validationDigitLabel.snp.makeConstraints{ make in
             make.top.equalTo(validationMinLengthLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview()//.inset() //24
-            make.trailing.equalToSuperview()//.inset(200)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.equalTo(15)
         }
-        //микролейбл3
         validationRulesView.addSubview(validationLowerCaseLabel)
         validationLowerCaseLabel.snp.makeConstraints{ make in
             make.top.equalTo(validationDigitLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview()//.inset() //24
-            make.trailing.equalToSuperview()//.inset(200)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.equalTo(15)
         }
-        //микролейбл4
         validationRulesView.addSubview(validationCapitalCaseLabel)
         validationCapitalCaseLabel.snp.makeConstraints{ make in
             make.top.equalTo(validationLowerCaseLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview()//.inset() //24
-            make.trailing.equalToSuperview()//.inset(200)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.equalTo(15)
         }
     }
@@ -161,19 +135,14 @@ class PasswordView: UIView {
     private func defaultConfiguration() {
         backgroundColor = .white
         passwordTextField.delegate = self
-
     }
 }
 
-
 extension  PasswordView: UITextFieldDelegate  {
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     if let text = passwordTextField.text,
                  let textRange = Range(range, in: text) {
                   let updatedText = text.replacingCharacters(in: textRange, with: string)
-  
-  
                   let decimalCharacters = CharacterSet.decimalDigits
                   let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
                   if decimalRange != nil {
@@ -212,27 +181,6 @@ extension  PasswordView: UITextFieldDelegate  {
               }
         return true
           }
-          
-//      }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let allowedCharacters = CharacterSet.decimalDigits.inverted
-//        let charSet = CharacterSet(charactersIn: string)
-//        return allowedCharacters.isSuperset(of: charSet)
-//    }
-    
-    
     
     enum Constants {
         enum LabelsSettings {

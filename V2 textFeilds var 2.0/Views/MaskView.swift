@@ -10,10 +10,7 @@ import SnapKit
 import JMMaskTextField_Swift
 
 class MaskView: UIView {
-
     //MARK: UI Elements
-
-
 let onlyCharectersLabel: UILabel = {
     let onlyCharectersLabel = UILabel()
     onlyCharectersLabel.text = Constants.LabelsTexts.onlyCharectersLabelText
@@ -35,15 +32,12 @@ let characterTextField: JMMaskTextField = {
     return characterTextField
 }()
 
-
-
     //MARK: Initialization
     init() {
         super.init(frame: .zero)
         setupUI()
         defaultConfiguration()
     }
-
     required init?(coder: NSCoder) {
         return nil
     }
@@ -55,15 +49,12 @@ let characterTextField: JMMaskTextField = {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(20)
         }
-
-
         addSubview(characterTextView)
         characterTextView.snp.makeConstraints { make in
             make.top.equalTo(onlyCharectersLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(36)
         }
-
         addSubview(characterTextField)
         characterTextField.snp.makeConstraints { make in
             make.top.equalTo(characterTextView.snp.top).offset(7)
@@ -71,7 +62,6 @@ let characterTextField: JMMaskTextField = {
             make.height.equalTo(22)
         }
     }
-
     private func defaultConfiguration() {
         backgroundColor = .white
     }

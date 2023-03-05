@@ -4,8 +4,6 @@
 //
 //  Created by Alex on 02.03.2023.
 //
-
-
 import UIKit
 import SnapKit
 import SafariServices
@@ -22,7 +20,6 @@ class LinkView: UIView {
     let linkRegex: String = "((?:http|https)://)?(?:www\\.)?(?:Www\\.)?(?:WWW\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
     
     //MARK: UI Elements
-
 let linkLabel: UILabel = {
     let linkLabel = UILabel()
     linkLabel.text = Constants.LabelsTexts.linkLabelText
@@ -64,14 +61,12 @@ let linkTextField: UITextField = {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(20)
         }
-
         addSubview(linkTextView)
         linkTextView.snp.makeConstraints { make in
             make.top.equalTo(linkLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(36)
         }
-
         addSubview(linkTextField)
         linkTextField.snp.makeConstraints { make in
             make.top.equalTo(linkTextView.snp.top).offset(7)
@@ -84,28 +79,18 @@ let linkTextField: UITextField = {
         backgroundColor = .white
         linkTextField.delegate = self
     }
-    
-//    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-//        controller.dismiss(animated: true, completion: nil)
-//    }
-    
-    
 }
 
 extension  LinkView: UITextFieldDelegate  {
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
            if textField == linkTextField {
                let link = linkTextField.text ?? ""
                func isLinkValid(_ link : String) -> Bool {
                    let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
-//                   link.delegate = self
-                   
                    return linkTest.evaluate(with: link)
                }
                if isLinkValid(link) {
                    print("its valid LINK")
-                   
                    let delay : Double = 2.0 // 5.0
                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                        
@@ -134,9 +119,6 @@ extension  LinkView: UITextFieldDelegate  {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
             }
-//    
-
- 
 
     enum Constants {
         enum LabelsSettings {

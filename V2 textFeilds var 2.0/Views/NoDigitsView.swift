@@ -11,7 +11,6 @@ import SnapKit
 class NoDigitsView: UIView {
     
     //MARK: UI Elements
-    
     let noDigitLabel: UILabel = {
         let noDigitLabel = UILabel()
         noDigitLabel.text = Constants.LabelsTexts.noDigitLabelText
@@ -26,7 +25,6 @@ class NoDigitsView: UIView {
         lettersTextView.layer.cornerRadius = Constants.LabelsSettings.lettersTextViewCornerRadius
         return lettersTextView
     }()
-    
     let lettersTextField: UITextField = {
         let lettersTextField = UITextField()
         lettersTextField.placeholder = Constants.TextFields.lettersTextFieldPlaceholderText
@@ -37,7 +35,6 @@ class NoDigitsView: UIView {
         lettersTextField.becomeFirstResponder()
         return lettersTextField
     }()
-    
     
     //MARK: Initialization
     init() {
@@ -85,7 +82,6 @@ extension  NoDigitsView: UITextFieldDelegate  {
             return allowedCharacters.isSuperset(of: charSet)
         }
 
-    
     //MARK: constants
     enum Constants {
         enum LabelsSettings {

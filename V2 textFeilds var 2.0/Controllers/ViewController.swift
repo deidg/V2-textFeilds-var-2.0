@@ -27,9 +27,7 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         setupItemsOnView()
         defaultConfiguration()
-      
-//        self.tabBarController?.dele/gate = self
-        
+              
         linkView.delegate = self
     }
     
@@ -65,35 +63,30 @@ final class ViewController: UIViewController {
     //MARK: 1 field 1
     let noDigitsView2: UIView = {
        let noDigitsView = UIView()
-        noDigitsView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
         return noDigitsView
     }()
    
     //MARK:  2 field 2
     let counterView2: UIView = {
        let counterView = UIView()
-        counterView.backgroundColor = .cyan  //Constants.TextFields.viewBackgroundColor
         return counterView
     }()
    
     //MARK:  3 field 3
     let maskView2: UIView = {
        let maskView = UIView()
-        maskView.backgroundColor = .magenta //Constants.TextFields.viewBackgroundColor
         return maskView
     }()
   
     //MARK:  4 field 4  LINK
     let linkView2: UIView = {
        let linkView = UIView()
-        linkView.backgroundColor = .magenta //Constants.TextFields.viewBackgroundColor
         return linkView
     }()
   
     //MARK:  5 field 5  PASSWORDS
     let passwordView2: UIView = {
        let passwordView = UIView()
-        passwordView.backgroundColor = .magenta //Constants.TextFields.viewBackgroundColor
         return passwordView
     }()
 
@@ -137,7 +130,6 @@ final class ViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
-        
         // 4 field 4 LINK
         contentView.addSubview(linkView)
         linkView.snp.makeConstraints{make in
@@ -145,7 +137,6 @@ final class ViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
-     
         // 5 field 5  PASSWORDS
         contentView.addSubview(passwordView)
         passwordView.snp.makeConstraints{make in
@@ -188,46 +179,24 @@ final class ViewController: UIViewController {
     }
 }
 
-
-
-//extension ViewController: TabBarControllerProtocol {}
-
-
-
-
-
-
-extension String {
-    var containsValidCharacter: Bool {
-        guard self != "" else { return true }
-        let hexSet = CharacterSet(charactersIn: "1234567890")
-        let newSet = CharacterSet(charactersIn: self)
-        return hexSet.isSuperset(of: newSet)
-    }
-}
-
+//MARK: extension ViewController
 extension ViewController: LinkViewDelegate {
    
     func openURL(url: URL) {
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
-        
         let sfViewController = SFSafariViewController(url: url, configuration: config)
         self.present(sfViewController, animated: true)
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
           let sfVC = self
-        
         sfVC.dismiss(animated: true, completion: nil)
     }
   
 }
 
-//MARK: extension ViewController
 extension ViewController: UITextFieldDelegate {
-    
-    
     //MARK: constants
     enum Constants {
         enum LabelsSettings {
@@ -266,22 +235,21 @@ extension ViewController: UITextFieldDelegate {
             static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
         }
     }
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
     }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.activeTextField = nil
     }
 }
 
-//    extension ViewController: SFSafariViewControllerDelegate {
-//        func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-//            
-//        }
+extension String {
+    var containsValidCharacter: Bool {
+        guard self != "" else { return true }
+        let hexSet = CharacterSet(charactersIn: "1234567890")
+        let newSet = CharacterSet(charactersIn: self)
+        return hexSet.isSuperset(of: newSet)
+    }
+}
 
-//    }
-    
-//}
 

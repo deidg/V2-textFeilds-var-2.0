@@ -9,9 +9,7 @@ import UIKit
 import SnapKit
 
 class CounterView: UIView {
-    
     //MARK: UI Elements
-    
     let inputLimitLabel: UILabel = {
         let inputLimitLabel = UILabel()
         inputLimitLabel.text = Constants.LabelsTexts.inputLimitLabelText
@@ -44,14 +42,12 @@ class CounterView: UIView {
         return limitTextField
     }()
     
-    
     //MARK: Initialization
     init() {
         super.init(frame: .zero)
         setupUI()
         defaultConfiguration()
     }
-    
     required init?(coder: NSCoder) {
         return nil
     }
@@ -63,25 +59,18 @@ class CounterView: UIView {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(20)
         }
-        
-        
-        //TODO:  проверить отступ справа. По цифрам вроде норм, а вот смотретися плохо.
         addSubview(charactersCounter)
         charactersCounter.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            //            make.top.equalTo(lettersTextView.snp.bottom).offset(25)
             make.trailing.equalToSuperview().inset(16)
-            //           make.leading.trailing.equalToSuperview()
             make.height.equalTo(22)
         }
-        
         addSubview(limitTextView)
         limitTextView.snp.makeConstraints { make in
             make.top.equalTo(inputLimitLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(36)
         }
-        
         addSubview(limitTextField)
         limitTextField.snp.makeConstraints { make in
             make.top.equalTo(limitTextView.snp.top).offset(7)
