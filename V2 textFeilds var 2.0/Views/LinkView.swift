@@ -12,11 +12,12 @@ import SafariServices
 
 protocol LinkViewDelegate: AnyObject {
     func openURL(url: URL)
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController)
 }
 
 class LinkView: UIView {
     weak var delegate: LinkViewDelegate?
-    
     
     let linkRegex: String = "((?:http|https)://)?(?:www\\.)?(?:Www\\.)?(?:WWW\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
     
@@ -82,26 +83,32 @@ let linkTextField: UITextField = {
     private func defaultConfiguration() {
         backgroundColor = .white
         linkTextField.delegate = self
-
     }
+    
+//    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+//        controller.dismiss(animated: true, completion: nil)
+//    }
+    
+    
 }
-
 
 extension  LinkView: UITextFieldDelegate  {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
            if textField == linkTextField {
-   
                let link = linkTextField.text ?? ""
                func isLinkValid(_ link : String) -> Bool {
                    let linkTest = NSPredicate(format: "SELF MATCHES %@", linkRegex)
+//                   link.delegate = self
+                   
                    return linkTest.evaluate(with: link)
                }
                if isLinkValid(link) {
                    print("its valid LINK")
-   
+                   
                    let delay : Double = 2.0 // 5.0
                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                       
                        func startBrowser(_ sender: Any) {
                            if let urlString = self.linkTextField.text {
                                let url: URL?
@@ -124,6 +131,10 @@ extension  LinkView: UITextFieldDelegate  {
            return true
        }
 
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+            }
+//    
 
  
 

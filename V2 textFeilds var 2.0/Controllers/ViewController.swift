@@ -15,7 +15,6 @@ import JMMaskTextField_Swift
 
 final class ViewController: UIViewController {
    
-    // переменные с маленькой буквы!!!
     let noDigitsView = NoDigitsView()
     let counterView = CounterView()
     let maskView = MaskView()
@@ -29,6 +28,8 @@ final class ViewController: UIViewController {
         setupItemsOnView()
         defaultConfiguration()
       
+//        self.tabBarController?.dele/gate = self
+        
         linkView.delegate = self
     }
     
@@ -189,6 +190,12 @@ final class ViewController: UIViewController {
 
 
 
+//extension ViewController: TabBarControllerProtocol {}
+
+
+
+
+
 
 extension String {
     var containsValidCharacter: Bool {
@@ -200,20 +207,26 @@ extension String {
 }
 
 extension ViewController: LinkViewDelegate {
+   
     func openURL(url: URL) {
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
         
         let sfViewController = SFSafariViewController(url: url, configuration: config)
         self.present(sfViewController, animated: true)
-     
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+          let sfVC = self
+        
+        sfVC.dismiss(animated: true, completion: nil)
     }
   
 }
 
 //MARK: extension ViewController
 extension ViewController: UITextFieldDelegate {
-
+    
     
     //MARK: constants
     enum Constants {
@@ -262,4 +275,13 @@ extension ViewController: UITextFieldDelegate {
         self.activeTextField = nil
     }
 }
+
+//    extension ViewController: SFSafariViewControllerDelegate {
+//        func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+//            
+//        }
+
+//    }
+    
+//}
 
