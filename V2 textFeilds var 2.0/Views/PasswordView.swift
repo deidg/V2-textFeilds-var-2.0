@@ -64,7 +64,7 @@ class PasswordView: UIView {
         validationCapitalCaseLabel.font = Constants.LabelsFonts.smallLabelFont
         return validationCapitalCaseLabel
     }()
-   
+    
     //MARK: Initialization
     init() {
         super.init(frame: .zero)
@@ -140,47 +140,41 @@ class PasswordView: UIView {
 
 extension  PasswordView: UITextFieldDelegate  {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    if let text = passwordTextField.text,
-                 let textRange = Range(range, in: text) {
-                  let updatedText = text.replacingCharacters(in: textRange, with: string)
-                  let decimalCharacters = CharacterSet.decimalDigits
-                  let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
-                  if decimalRange != nil {
-                      validationDigitLabel.textColor = .green
-                      print("Digits found")
-                  } else {
-                      validationDigitLabel.textColor = .black
-                      print("Foo Digits")
-                  }
-  
-                  let lowercaseLetters = CharacterSet.lowercaseLetters
-                  let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
-                  if lowercaseLettersRange != nil {
-                      validationLowerCaseLabel.textColor = .green
-                      print("lower found")
-                  } else {
-                      validationLowerCaseLabel.textColor = .black
-                      print("Foo lower")
-                  }
-  
-                  let capitalizedLetters = CharacterSet.uppercaseLetters
-                  let capitalizedLettersRange = updatedText.rangeOfCharacter(from: capitalizedLetters)
-                  if capitalizedLettersRange != nil {
-                      validationCapitalCaseLabel.textColor = .green
-                      print("capitalized found")
-                  } else {
-                      validationCapitalCaseLabel.textColor = .black
-                      print("Foo capitalized")
-                  }
-  
-                  if updatedText.count >= 8 {
-                      validationMinLengthLabel.textColor = .green
-                  } else {
-                      validationMinLengthLabel.textColor = .black
-                  }
-              }
+        if let text = passwordTextField.text,
+           let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            let decimalCharacters = CharacterSet.decimalDigits
+            let decimalRange = updatedText.rangeOfCharacter(from: decimalCharacters)
+            if decimalRange != nil {
+                validationDigitLabel.textColor = .green
+            } else {
+                validationDigitLabel.textColor = .black
+            }
+            
+            let lowercaseLetters = CharacterSet.lowercaseLetters
+            let lowercaseLettersRange = updatedText.rangeOfCharacter(from: lowercaseLetters)
+            if lowercaseLettersRange != nil {
+                validationLowerCaseLabel.textColor = .green
+            } else {
+                validationLowerCaseLabel.textColor = .black
+            }
+            
+            let capitalizedLetters = CharacterSet.uppercaseLetters
+            let capitalizedLettersRange = updatedText.rangeOfCharacter(from: capitalizedLetters)
+            if capitalizedLettersRange != nil {
+                validationCapitalCaseLabel.textColor = .green
+            } else {
+                validationCapitalCaseLabel.textColor = .black
+            }
+            
+            if updatedText.count >= 8 {
+                validationMinLengthLabel.textColor = .green
+            } else {
+                validationMinLengthLabel.textColor = .black
+            }
+        }
         return true
-          }
+    }
     
     enum Constants {
         enum LabelsSettings {
@@ -192,12 +186,6 @@ extension  PasswordView: UITextFieldDelegate  {
         }
         
         enum LabelsTexts {
-            static let mainTitleLabeText = "Text Fields"
-            static let noDigitLabelText = "NO digit field"
-            static let inputLimitLabelText = "Input limit"
-            static let charactersCounterText = "0/10"
-            static let onlyCharectersLabelText = "Only characters"
-            static let linkLabelText = "Link"
             static let validationLabelText = "Validation rules"
             static let validationMinLengthLabelText = "Min length 8 characters,"
             static let validationDigitLabelText = "Min 1 digit,"
@@ -206,17 +194,10 @@ extension  PasswordView: UITextFieldDelegate  {
             static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
             static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
         }
-        enum LabelsBackgroundColors {
-            static let labelBackgoundColors = UIColor.white
-        }
         enum TextFields {
-            static let lettersTextFieldPlaceholderText = "Type here"
-            static let onlyCharectersLabelPlaceholderText = "wwwww-ddddd"
-            static let linkTextFieldPlaceholderText = "www.example.com"
             static let passwordTextFieldPlaceholderText = "Password"
             static let textFieldFont = UIFont(name: "Rubik", size: 17)
             static let textFieldTextColor = UIColor(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
-            static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
             static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
         }
     }

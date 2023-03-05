@@ -14,7 +14,7 @@ import SafariServices
 import JMMaskTextField_Swift
 
 final class ViewController: UIViewController {
-   
+    
     let noDigitsView = NoDigitsView()
     let counterView = CounterView()
     let maskView = MaskView()
@@ -22,12 +22,12 @@ final class ViewController: UIViewController {
     let passwordView = PasswordView()
     
     var activeTextField : UITextField? = nil
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupItemsOnView()
         defaultConfiguration()
-              
+        
         linkView.delegate = self
     }
     
@@ -60,36 +60,6 @@ final class ViewController: UIViewController {
         return titleLabel
     }()
     
-    //MARK: 1 field 1
-    let noDigitsView2: UIView = {
-       let noDigitsView = UIView()
-        return noDigitsView
-    }()
-   
-    //MARK:  2 field 2
-    let counterView2: UIView = {
-       let counterView = UIView()
-        return counterView
-    }()
-   
-    //MARK:  3 field 3
-    let maskView2: UIView = {
-       let maskView = UIView()
-        return maskView
-    }()
-  
-    //MARK:  4 field 4  LINK
-    let linkView2: UIView = {
-       let linkView = UIView()
-        return linkView
-    }()
-  
-    //MARK:  5 field 5  PASSWORDS
-    let passwordView2: UIView = {
-       let passwordView = UIView()
-        return passwordView
-    }()
-
     private func setupItemsOnView() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints{ make in
@@ -181,74 +151,35 @@ final class ViewController: UIViewController {
 
 //MARK: extension ViewController
 extension ViewController: LinkViewDelegate {
-   
+    
     func openURL(url: URL) {
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
         let sfViewController = SFSafariViewController(url: url, configuration: config)
         self.present(sfViewController, animated: true)
     }
-    
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-          let sfVC = self
+        let sfVC = self
         sfVC.dismiss(animated: true, completion: nil)
     }
-  
 }
 
 extension ViewController: UITextFieldDelegate {
     //MARK: constants
     enum Constants {
-        enum LabelsSettings {
-            static let lettersTextViewCornerRadius: CGFloat = 10
-        }
         enum LabelsFonts {
             static let mainLabelFont = UIFont(name: "Rubik-Medium", size: 34)
-            static let smallLabelFont = UIFont(name: "Rubik", size: 13)
         }
         enum LabelsTexts {
             static let mainTitleLabeText = "Text Fields"
-            static let noDigitLabelText = "NO digit field"
-            static let inputLimitLabelText = "Input limit"
-            static let charactersCounterText = "0/10"
-            static let onlyCharectersLabelText = "Only characters"
-            static let linkLabelText = "Link"
-            static let validationLabelText = "Validation rules"
-            static let validationMinLengthLabelText = "Min length 8 characters,"
-            static let validationDigitLabelText = "Min 1 digit,"
-            static let validationLowerCaseLabelText = "Min 1 lowercase,"
-            static let validationCapitalCaseLabelText = "Min 1 capital required.\n"
-            static let smallLabelTextColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1)
-            static let validationRulesLabelTextColor = UIColor(red: 87/255, green: 87/255, blue: 87/255, alpha: 1)
-        }
-        enum LabelsBackgroundColors {
-            static let labelBackgoundColors = UIColor.white
-        }
-        enum TextFields {
-            static let lettersTextFieldPlaceholderText = "Type here"
-            static let onlyCharectersLabelPlaceholderText = "wwwww-ddddd"
-            static let linkTextFieldPlaceholderText = "www.example.com"
-            static let passwordTextFieldPlaceholderText = "Password"
-            static let textFieldFont = UIFont(name: "Rubik", size: 17)
-            static let textFieldTextColor = UIColor(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
-            static let viewBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
-            static let textFieldBackgroundColor = UIColor(red: 118/255, green: 118/255, blue: 128/255, alpha: 0.12)
         }
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.activeTextField = nil
-    }
-}
-
-extension String {
-    var containsValidCharacter: Bool {
-        guard self != "" else { return true }
-        let hexSet = CharacterSet(charactersIn: "1234567890")
-        let newSet = CharacterSet(charactersIn: self)
-        return hexSet.isSuperset(of: newSet)
     }
 }
 
